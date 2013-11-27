@@ -35,6 +35,11 @@ class AppController extends Controller {
 	public $uses = array('User');
     public $components = array(
         'Session',
+    	'Auth' => array(
+    		'authenticate' => array('Ldap'),
+    		'loginRedirect' => array('controller' => 'users', 'action' => 'index'),
+    		'logoutRedirect' => array('controller' => 'users', 'action' => 'login')
+    		),    		
 		'DebugKit.Toolbar' => array('panels' => array()),
     );
 }

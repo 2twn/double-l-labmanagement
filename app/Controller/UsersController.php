@@ -3,7 +3,24 @@ class UsersController extends AppController {
 	public $uses = array('Department', 'User');
     public $helpers = array('Html', 'Form', 'Session');
     public $components = array('Session', 'Formfunc', 'Userfunc');
-
+    
+    public function login() {
+    	if ($this->request->is('post')) {
+    		if ($this->Auth->login()) {
+    			$this->redirect('/users/index');
+    		}
+    		$this->Session->setFlash(__('Invalid username or password, try again'));
+    	}
+    }
+    
+    public function logout() {
+    	return $this->redirect($this->Auth->logout());
+    }
+    
+    public function index(){
+    	var_dump($this->Auth->user('username'));
+    }
+    
     public function dep_list() {
         $this->set('items', $this->Department->find('all', array('order' => 'Department.valid DESC, Department.id')));
     }
