@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `departments` (
 --
 
 INSERT INTO `departments` (`id`, `dep_name`, `valid`, `create_time`, `modi_time`) VALUES
-(1, 'HQ', 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+(1, 'HQ', 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 -- --------------------------------------------------------
 
@@ -100,8 +100,67 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- 轉存資料表中的資料 `user`
 --
 
-INSERT INTO `users` (`id`, `department_id`, `email`, `name`, `username`,`valid`,`craete_time`, `modi_time`) VALUES
-(1, 1, 'admin@mail.com', 'Administrator', 'admin', 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+INSERT INTO `users` (`id`, `department_id`, `email`, `name`, `username`,`valid`,`create_time`, `modi_time`) VALUES
+(1, 1, 'admin@mail.com', 'Administrator', 'admin', 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+
+DROP TABLE IF EXISTS `equip_bookings`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `equip_bookings` (
+  `id` int(11) NOT NULL,
+  `equipment_id` int(11) NOT NULL,
+  `project_id` varchar(20) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `start_date` char(8) NOT NULL,
+  `start_time` char(5) NOT NULL,
+  `end_date` char(8) NOT NULL,
+  `end_time` char(5) NOT NULL,
+  `booking_desc` varchar(255) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `modi_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `equip_maintains`
+--
+
+DROP TABLE IF EXISTS `equip_maintains`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `equip_maintains` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `equipment_id` varchar(8) NOT NULL,
+  `maintain_time` datetime NOT NULL,
+  `maintain_result` varchar(255) DEFAULT NULL,
+  `maintain_status` char(1) NOT NULL DEFAULT 'N',
+  `create_time` datetime NOT NULL,
+  `modi_time` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `equipments`
+--
+
+DROP TABLE IF EXISTS `equipments`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `equipments` (
+  `id` varchar(8) NOT NULL,
+  `equip_name` varchar(30) NOT NULL,
+  `location` varchar(45) DEFAULT NULL,
+  `status` char(1) NOT NULL DEFAULT '0',
+  `equip_desc` varchar(45) DEFAULT NULL,
+  `maintain_time` date NOT NULL,
+  `create_time` datetime NOT NULL,
+  `modi_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
