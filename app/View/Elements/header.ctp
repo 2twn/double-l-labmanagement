@@ -17,6 +17,7 @@
 		echo $this->Html->script('jquery-1.9.1'); // Include jQuery library
 		echo $this->Html->script('jquery-ui-1.10.3.custom');
 		echo $this->Html->css('cupertino/jquery-ui-1.10.3.custom');
+		echo $this->Html->css('menu');
 	?>
 </head>
 <body>
