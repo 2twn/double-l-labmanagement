@@ -16,5 +16,10 @@
 			<li><?php echo $this->html->link('會議室列表', array('controller' => 'meetingrooms', 'action' => 'mr_list')); ?></li>
 		</ul>
 	</li>
+	<li><?php echo $this->html->link('儀器管理', '#'); ?>
+		<ul class="second-level">
+			<li><?php echo $this->html->link('儀器列表', array('controller' => 'equipments', 'action' => 'equip_list')); ?></li>
+		</ul>
+	</li>
 </ul>
 </div>

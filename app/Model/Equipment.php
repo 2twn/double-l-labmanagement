@@ -1,11 +1,12 @@
 <?php
-class Department extends AppModel {
-    public $name = 'Department';
+class Equipment extends AppModel {
+    public $name = 'Equipment';
+	public $useTable = 'equipments';
     public $validate = array(
-        'dep_name' => array(
+        'equip_name' => array(
             'required' => array(
                 'rule' => array('notEmpty'),
-                'message' => 'A Departmrnt name is required'
+                'message' => 'A Equipment name is required'
             )
         ),  		
     );

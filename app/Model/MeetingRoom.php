@@ -26,3 +26,4 @@ class MeetingRoom extends AppModel {
 		return true;
 	}
 }
+?>
