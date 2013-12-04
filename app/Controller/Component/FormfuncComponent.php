@@ -15,11 +15,8 @@
 			return $rt;
 		}
 		
-		public function book_status() {
-			return array(0=>"購買中",1=>"在庫",2=>"借出",3=>"已歸還",4=>"整理中",5=>"運送中", 6=>"預約中");
-		}
-		public function is_lends(){
-			return array("Y"=>"Y","N"=>"N");
+		public function equip_status() {
+			return array(0=>"正常使用",1=>"暫停預約");
 		}
 		
 		public function person_gender() {

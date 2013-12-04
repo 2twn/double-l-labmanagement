@@ -7,17 +7,29 @@
     <tr>
         <th>儀器代號</th>
         <th>儀器名稱</th>
+		<th>下次校正日期</th>
+		<th>位置說明</th>
         <th>建立時間</th>
+        <th>使用狀態</th>
         <th><?php echo $this->Html->link('新增儀器', array('action' => 'equip_edit'), array('class' => 'button')); ?></th>
     </tr>
     <?php foreach ($items as $item): ?>
     <tr>
         <td><?php echo $item['Equipment']['id']; ?></td>
         <td>
-            <?php echo $item['Equipment']['prj_name']; ?>
+            <?php echo $item['Equipment']['equip_name']; ?>
+        </td>
+        <td>
+            <?php echo $item['Equipment']['maintain_time']; ?>
+        </td>
+        <td>
+            <?php echo $item['Equipment']['location']; ?>
         </td>
         <td>
             <?php echo $item['Equipment']['create_time']; ?>
+        </td>
+        <td>
+            <?php echo $equip_status[$item['Equipment']['status']]; ?>
         </td>
         <td>
             <?php 

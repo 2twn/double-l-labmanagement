@@ -5,11 +5,13 @@ class EquipmentsController extends AppController {
     public $components = array('Session', 'Formfunc', 'Userfunc');
 
  	public function equip_list() {
+		$this->set('equip_status', $this->Formfunc->equip_status());
         $this->set('items', $this->Equipment->find('all', array('order' => 'id')));
     }
 	
 	public function equip_edit($id = null) {
 		$this->Equipment->id = $id;
+		$this->set('equip_status', $this->Formfunc->equip_status());
 		if ($this->request->is('get')) {
 			$this->request->data = $this->Equipment->read();
 		} else {
@@ -18,7 +20,7 @@ class EquipmentsController extends AppController {
 			}
 			if ($this->Equipment->save($this->request->data)) {
 				$this->Session->setFlash('儲存成功.');
-				$this->redirect(array('action' => 'prj_list'));
+				$this->redirect(array('action' => 'equip_list'));
 			} else {
 				$this->Session->setFlash('儲存失敗.');
 			}
@@ -33,8 +35,8 @@ class EquipmentsController extends AppController {
 			throw new MethodNotAllowedException();
 		}
 		if ($this->Equipment->save($this->request->data)) {
-			$this->Session->setFlash('部門狀態已變更.');
-			$this->redirect(array('action' => 'prj_list'));
+			$this->Session->setFlash('儀器狀態已變更.');
+			$this->redirect(array('action' => 'equip_list'));
 		} else {
 			$this->Session->setFlash('作業失敗.');
 		}	
