@@ -41,5 +41,29 @@ class EquipmentsController extends AppController {
 			$this->Session->setFlash('作業失敗.');
 		}	
 	}
+	
+	public function equip_booking($id = null) {
+	var_Dump($this->post);
+		// $this->Equipment->id = $id;
+		// $this->set('equip_status', $this->Formfunc->equip_status());
+		// if ($this->request->is('get')) {
+			// $this->request->data = $this->Equipment->read();
+		// } else {
+			// if ($this->Equipment->id == null){
+				// $this->request->data['Equipment']['create_time'] = date('Y-m-d H:i:s');
+			// }
+			// if ($this->Equipment->save($this->request->data)) {
+				// $this->Session->setFlash('儲存成功.');
+				// $this->redirect(array('action' => 'equip_list'));
+			// } else {
+				// $this->Session->setFlash('儲存失敗.');
+			// }
+		// }
+	}
+	
+	public function is_equip_book($equip_id, $) {
+		$result = false;
+		return $result;
+	}
 }
 ?>
