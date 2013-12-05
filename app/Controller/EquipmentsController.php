@@ -1,6 +1,6 @@
 <?php
 class EquipmentsController extends AppController {
-	public $uses = array('Equipment');
+	public $uses = array('Equipment', 'EquipBooking');
     public $helpers = array('Html', 'Form', 'Session');
     public $components = array('Session', 'Formfunc', 'Userfunc');
 
@@ -42,7 +42,7 @@ class EquipmentsController extends AppController {
 		}	
 	}
 	
-	public function equip_booking($id = null) {
+	public function equip_booking_action($id = null) {
 	var_Dump($this->post);
 		// $this->Equipment->id = $id;
 		// $this->set('equip_status', $this->Formfunc->equip_status());
@@ -61,7 +61,7 @@ class EquipmentsController extends AppController {
 		// }
 	}
 	
-	public function is_equip_book($equip_id, $) {
+	public function is_equip_book($equip_id, $start_date, $start_time, $end_date, $end_time) {
 		$result = false;
 		return $result;
 	}
