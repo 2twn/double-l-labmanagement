@@ -1,7 +1,6 @@
 <?php
 class Equipment extends AppModel {
     public $name = 'Equipment';
-	public $useTable = 'equipments';
     public $validate = array(
         'id' => array(
             'required' => array(

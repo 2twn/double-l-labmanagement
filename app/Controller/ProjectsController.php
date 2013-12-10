@@ -33,7 +33,7 @@ class ProjectsController extends AppController {
 			throw new MethodNotAllowedException();
 		}
 		if ($this->Project->save($this->request->data)) {
-			$this->Session->setFlash('部門狀態已變更.');
+			$this->Session->setFlash('專案狀態已變更.');
 			$this->redirect(array('action' => 'prj_list'));
 		} else {
 			$this->Session->setFlash('作業失敗.');

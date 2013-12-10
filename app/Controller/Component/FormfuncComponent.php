@@ -16,7 +16,7 @@
 		}
 		
 		public function equip_status() {
-			return array(0=>"正常使用",1=>"暫停預約");
+			return array(1=>"正常使用",0=>"暫停預約");
 		}
 		
 		public function person_gender() {
