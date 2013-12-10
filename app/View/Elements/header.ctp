@@ -22,6 +22,9 @@
 </head>
 <body>
 	<div id="container">
-		<div id="header">
-			<h1><?php echo $this->Html->link($cakeDescription, 'http://cakephp.org'); ?></h1>
+		<div id="header" sytle="clear:left; float:left; background: #6494CD; ">
+		<?php
+			if($this->Session->read('Auth.User'))	
+				echo $this->element('user_menu');
+		?>
 		</div>

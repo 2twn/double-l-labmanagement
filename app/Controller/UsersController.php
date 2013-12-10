@@ -7,6 +7,7 @@ class UsersController extends AppController {
     public function login() {
     	if ($this->request->is('post')) {
     		if ($this->Auth->login()) {
+    			//$this->Session->write('user',$this->Auth->user());
     			$this->redirect('/users/index');
     		}
     		$this->Session->setFlash(__('Invalid username or password, try again'));
@@ -14,11 +15,12 @@ class UsersController extends AppController {
     }
     
     public function logout() {
+    	$this->Session->destroy();
     	return $this->redirect($this->Auth->logout());
     }
     
     public function index(){
-    	var_dump($this->Auth->user('username'));
+    	//var_dump($this->Session->read('user.name'));
     }
     
     public function dep_list() {

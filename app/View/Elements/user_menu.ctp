@@ -21,5 +21,6 @@
 			<li><?php echo $this->html->link('儀器列表', array('controller' => 'equipments', 'action' => 'equip_list')); ?></li>
 		</ul>
 	</li>
+	<li><?php echo $this->html->link('登出', array('controller' => 'users', 'action' => 'logout')); ?>
 </ul>
 </div>

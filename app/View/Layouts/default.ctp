@@ -20,7 +20,6 @@
 $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework');
 ?>
 <?php echo $this->element('header', array("cakeDescription" => $cakeDescription)); ?>
-<?php echo $this->element('user_menu'); ?>
 		<div id="content">
 
 			<?php echo $this->Session->flash(); ?>
