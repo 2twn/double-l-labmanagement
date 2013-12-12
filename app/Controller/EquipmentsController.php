@@ -54,21 +54,25 @@ class EquipmentsController extends AppController {
 			if($this->request->data === false) {
 				if ($sel_date != null) {
 					$this->request->data['EquipBooking']['start_date'] = $sel_date;
-					$this->request->data['EquipBooking']['end_date'] = $sel_date;
 				}
 				else {
 					$this->request->data['EquipBooking']['start_date'] = date('Y-m-d');
-					$this->request->data['EquipBooking']['end_date'] = date('Y-m-d');
 				}
 			}
+			else {
+				$this->request->data['EquipBooking']['start_time'] = date('H:i',strtotime($this->request->data['EquipBooking']['book_start_time']));
+				$this->request->data['EquipBooking']['end_time'] = date('H:i', strtotime($this->request->data['EquipBooking']['book_end_time']));
+				$this->request->data['EquipBooking']['start_date'] = date('Y-m-d',strtotime($this->request->data['EquipBooking']['book_start_time']));
+			}
 		} else {
-			$this->request->data['EquipBooking']['end_date'] = $this->request->data['EquipBooking']['start_date'];
+			$this->request->data['EquipBooking']['book_end_time'] = $this->request->data['EquipBooking']['start_date']." ".$this->request->data['EquipBooking']['end_time'].":00";
+			$this->request->data['EquipBooking']['book_start_time'] = $this->request->data['EquipBooking']['start_date']." ".$this->request->data['EquipBooking']['start_time'].":00";
 			if ($this->EquipBooking->id == null){
 				$this->request->data['EquipBooking']['create_time'] = date('Y-m-d H:i:s');
 			}
 			if ($this->EquipBooking->save($this->request->data)) {
 				$this->Session->setFlash('儲存成功.');
-				$this->redirect(array('action' => 'equipbook_list'));
+				//$this->redirect(array('action' => 'equipbook_list'));
 			} else {
 				$this->Session->setFlash('儲存失敗.');
 			}

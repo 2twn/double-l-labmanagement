@@ -28,5 +28,8 @@ class EquipBooking extends AppModel {
 		}
 		return true;
 	}
+	public $belongsTo = 'Equipment';
+	public $belongsTo = 'Project';
+	public $belongsTo = 'User';
 }
 ?>

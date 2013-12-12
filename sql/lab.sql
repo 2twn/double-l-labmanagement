@@ -107,20 +107,19 @@ INSERT INTO `users` (`id`, `department_id`, `email`, `name`, `username`,`valid`,
 DROP TABLE IF EXISTS `equip_bookings`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `equip_bookings` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `equip_bookings` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `equipment_id` int(11) NOT NULL,
   `project_id` varchar(20) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `start_date` char(8) NOT NULL,
-  `start_time` char(5) NOT NULL,
-  `end_date` char(8) NOT NULL,
-  `end_time` char(5) NOT NULL,
+  `book_start_time` datetime NOT NULL,
+  `book_end_time` datetime NOT NULL,
   `booking_desc` varchar(255) DEFAULT NULL,
+  `valid` char(1) NOT NULL DEFAULT '1',
   `create_time` datetime DEFAULT NULL,
   `modi_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
