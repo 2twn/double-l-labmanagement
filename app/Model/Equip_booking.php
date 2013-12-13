@@ -21,15 +21,15 @@ class EquipBooking extends AppModel {
             )
         ),
     );
+
+	public $belongsTo = array('Equipment', 'Project');
 	
 	public function beforeSave($options = array()) {
 		if (!isset($this->data[$this->alias]['id'])) {
 			$this->data[$this->alias]['create_time'] = date();
 		}
 		return true;
-	}
-	public $belongsTo = 'Equipment';
-	public $belongsTo = 'Project';
-	public $belongsTo = 'User';
+	};
+	
 }
 ?>

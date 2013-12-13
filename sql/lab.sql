@@ -145,10 +145,10 @@ CREATE TABLE `equip_maintains` (
 -- Table structure for table `equipments`
 --
 
-DROP TABLE IF EXISTS `equipments`;
+DROP TABLE IF EXISTS `equipment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `equipments` (
+CREATE TABLE `equipment` (
   `id` varchar(8) NOT NULL,
   `equip_name` varchar(30) NOT NULL,
   `location` varchar(45) DEFAULT NULL,

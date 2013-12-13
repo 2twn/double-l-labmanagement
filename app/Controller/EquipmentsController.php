@@ -1,6 +1,6 @@
 <?php
 class EquipmentsController extends AppController {
-	public $uses = array('Equipment', 'EquipBooking', 'Project');
+	public $uses = array('Equipment', 'EquipBooking', 'Project', 'User');
     public $helpers = array('Html', 'Form', 'Session');
     public $components = array('Session', 'Formfunc', 'Userfunc');
 
@@ -15,7 +15,8 @@ class EquipmentsController extends AppController {
 		if ($this->request->is('get')) {
 			$this->request->data = $this->Equipment->read();
 		} else {
-			if ($this->Equipment->id == null){
+			if ($id == null) {
+				$this->Equipment->id == null;
 				$this->request->data['Equipment']['create_time'] = date('Y-m-d H:i:s');
 			}
 			if ($this->Equipment->save($this->request->data)) {
@@ -72,12 +73,16 @@ class EquipmentsController extends AppController {
 			}
 			if ($this->EquipBooking->save($this->request->data)) {
 				$this->Session->setFlash('儲存成功.');
-				//$this->redirect(array('action' => 'equipbook_list'));
+				$this->redirect(array('action' => 'equipbook_list'));
 			} else {
 				$this->Session->setFlash('儲存失敗.');
 			}
 		}
 	}
+
+ 	public function equipbook_list() {
+        $this->set('items', $this->EquipBooking->find('all', array('order' => array('equipment_id', 'book_start_time desc'))));
+    }
 	
 	public function is_equip_book($equip_id, $start_date, $start_time, $end_date, $end_time) {
 		$result = false;
