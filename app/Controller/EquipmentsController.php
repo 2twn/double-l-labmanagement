@@ -80,7 +80,7 @@ class EquipmentsController extends AppController {
 		}
 	}
 
- 	public function equipbook_list() {
+ 	public function equip_book_list() {
         $this->set('items', $this->EquipBooking->find('all', array('order' => array('equipment_id', 'book_start_time desc'))));
     }
 	

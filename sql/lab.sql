@@ -155,6 +155,7 @@ CREATE TABLE `equips` (
   `status` char(1) NOT NULL DEFAULT '0',
   `equip_desc` varchar(45) DEFAULT NULL,
   `maintain_time` date NOT NULL,
+  `valid` char(1) NOT NULL DEFAULT '1',
   `create_time` datetime NOT NULL,
   `modi_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)

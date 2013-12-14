@@ -15,7 +15,7 @@
 	position: relative; /* 使子選單依照母選單的座標顯示 */
 	padding: 0px;
 	margin: 0px;
-	width: 80px;
+	width: 120px;
 }
 #cakephp-global-navigation > ul > li {
   display: inline-block; /* 使一級選單排成一橫列 */

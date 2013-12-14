@@ -19,8 +19,8 @@
 	<li><?php echo $this->html->link('儀器管理', '#'); ?>
 		<ul class="second-level">
 			<li><?php echo $this->html->link('儀器列表', array('controller' => 'equipments', 'action' => 'equip_list')); ?></li>
-			<li><?php echo $this->html->link('儀器預約', array('controller' => 'equipments', 'action' => 'equip_booking')); ?></li>
-			<li><?php echo $this->html->link('儀器預約列表', array('controller' => 'equipments', 'action' => 'equip_list')); ?></li>
+			<li><?php echo $this->html->link('儀器預約', array('controller' => 'equipments', 'action' => 'equip_booking_action')); ?></li>
+			<li><?php echo $this->html->link('儀器預約列表', array('controller' => 'equipments', 'action' => 'equip_book_list')); ?></li>
 		</ul>
 	</li>
 	<li><?php echo $this->html->link('登出', array('controller' => 'users', 'action' => 'logout')); ?>
