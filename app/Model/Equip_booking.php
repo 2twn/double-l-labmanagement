@@ -15,14 +15,23 @@ class EquipBooking extends AppModel {
             ),
 		),
         'booking_desc' => array(
-			'between' => array(
+			'maxLength' => array(
                 'rule'    => array('maxLength', 60),
                 'message' => '簡述不可超過30字元'
             )
         ),
     );
 
-	public $belongsTo = array('Equip', 'Project');
+	public $belongsTo = array(
+        'Equip' => array(
+            'className' => 'Equip',
+            'foreignKey' => 'equip_id'
+        ),
+		'Project' => array(
+            'className' => 'Project',
+            'foreignKey' => 'project_id'
+        )
+    );
 	
 	public function beforeSave($options = array()) {
 		if (!isset($this->data[$this->alias]['id'])) {

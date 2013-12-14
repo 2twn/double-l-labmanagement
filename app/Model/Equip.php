@@ -32,6 +32,12 @@ class Equip extends AppModel {
                 'message' => '儀器名稱不可超過30字元'
             )
         ),
+		'maintain_time' => array(
+            'required' => array(
+                'rule' => array('notEmpty'),
+                'message' => '下次校正日期不可空白'
+            ),
+		),
         'location' => array(
 			'maxLength' => array(
                 'rule'    => array('maxLength', '60'),
@@ -39,7 +45,7 @@ class Equip extends AppModel {
             )
         ),
         'equip_desc' => array(
-			'between' => array(
+			'maxLength' => array(
                 'rule'    => array('maxLength', '60'),
                 'message' => '儀器名稱不可超過30中文字元'
             )

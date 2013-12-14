@@ -44,10 +44,10 @@ class EquipmentsController extends AppController {
 	}
 	
 	public function equip_booking_action($id = null, $sel_date = null) {
-		$this->set('equips', $this->Equip->find('all', array('conditions' => array('valid' => 1, 'status' => 1), 'fields' => array('id','equip_name'))));
+		$this->set('equips', $this->Equip->find('list', array('conditions' => array('valid' => 1, 'status' => 1), 'fields' => array('id','equip_name'))));
 		$this->set('start_periods', $this->book_periods());
 		$this->set('end_periods', $this->book_periods());
-		$this->set('projects', $this->Project->find('all', array('conditions' => array('valid' => 1), 'fields' => array('id','prj_name'))));
+		$this->set('projects', $this->Project->find('list', array('conditions' => array('valid' => 1), 'fields' => array('id','prj_name'))));
 		$this->EquipBooking->id = $id;
 		// $this->set('equip_status', $this->Formfunc->equip_status());
 		if ($this->request->is('get')) {
@@ -66,26 +66,67 @@ class EquipmentsController extends AppController {
 				$this->request->data['EquipBooking']['start_date'] = date('Y-m-d',strtotime($this->request->data['EquipBooking']['book_start_time']));
 			}
 		} else {
-			$this->request->data['EquipBooking']['book_end_time'] = $this->request->data['EquipBooking']['start_date']." ".$this->request->data['EquipBooking']['end_time'].":00";
-			$this->request->data['EquipBooking']['book_start_time'] = $this->request->data['EquipBooking']['start_date']." ".$this->request->data['EquipBooking']['start_time'].":00";
-			if ($this->EquipBooking->id == null){
-				$this->request->data['EquipBooking']['create_time'] = date('Y-m-d H:i:s');
-			}
-			if ($this->EquipBooking->save($this->request->data)) {
+			$error_msg = $this->insert_book_record($this->request->data['EquipBooking']);
+			if ($error_msg == ''){
 				$this->Session->setFlash('儲存成功.');
-				$this->redirect(array('action' => 'equipbook_list'));
-			} else {
-				$this->Session->setFlash('儲存失敗.');
+				$this->redirect(array('action' => 'equip_book_list'));
+			}
+			else {
+				$this->Session->setFlash($error_msg);
 			}
 		}
 	}
 
  	public function equip_book_list() {
-        $this->set('items', $this->EquipBooking->find('all', array('order' => array('equipment_id', 'book_start_time desc'))));
+        $this->set('items', $this->EquipBooking->query("Select *
+		                                        from equip_bookings EquipBooking,
+												     equips Equip,
+													 projects Project
+											   where EquipBooking.equip_id = Equip.id
+											     and EquipBooking.project_id = Project.id
+											     and EquipBooking.valid = 1
+											   order by Equip.equip_name, EquipBooking.book_start_time desc;"));
     }
 	
-	public function is_equip_book($equip_id, $start_time, $end_time) {
-		$result = true;
+	public function insert_book_record($book_data) {
+		$book_data['book_end_time'] = $book_data['start_date']." ".$book_data['end_time'].":00";
+		$book_data['book_start_time'] = $book_data['start_date']." ".$book_data['start_time'].":00";
+		if (($book_data['id'] == null) || ($book_data['id'] == "")){
+			$book_data['create_time'] = date('Y-m-d H:i:s');
+			$book_id = 0;
+		}
+		else {
+			$book_id = $book_data['id'];
+		}
+		$error_msg = $this->is_equip_book($book_data['equip_id'], $book_data['book_start_time'], $book_data['book_end_time'], $book_id);
+		if ($error_msg == ''){
+			if (!$this->EquipBooking->save($book_data)) {
+				$error_msg = '儲存失敗.';
+			}
+		}
+        
+		return $error_msg;
+	}
+	
+	public function is_equip_book($equip_id, $start_time, $end_time, $id=0) {
+		$result = '';
+		$rlt = $this->EquipBooking->query("Select count(*) as cnt 
+		                                        from equip_bookings 
+											   where equip_id = '$equip_id' 
+											     and valid = 1
+												 and id <> $id
+											     and ((book_start_time = '$start_time') 
+		                                           or (book_end_time = '$end_time')
+												   or ((book_start_time < '$start_time') and (book_end_time > '$start_time')) 
+												   or ((book_start_time < '$end_time') and (book_end_time > '$end_time')) 
+												      );");
+		$rlt = $rlt[0][0]['cnt'];
+		if ($rlt > 0) {
+			$result = '預約衝突';
+		}
+		if ($start_time >= $end_time) {
+			$result = '預約時間有誤';
+		}
 		return $result;
 	}
 	

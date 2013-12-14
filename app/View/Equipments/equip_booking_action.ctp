@@ -7,16 +7,18 @@
 <div class="pagemenu_div"><?php 
   	echo $this->Html->link('回上一頁', "javascript:history.back();", array('class' => 'button')); 
 ?></div>
-<?php if ((!isset($this->request->data['EquipBooking']['valid'])) && ($this->request->data['EquipBooking']['valid'] == 1)): ?>
+<?php if ((!isset($this->request->data['EquipBooking']['valid'])) || ($this->request->data['EquipBooking']['valid'] <> 0)): ?>
 <?php echo $this->Form->create('EquipBooking', array('div'=>false, 'inputDefaults' => array('label' => false,'div' => false))); ?>
 	<table>
 		<tr>
 			<td>儀器編號：
 				<?php 
+					echo $this->Form->hidden('id');
 					if ((!isset($this->request->data['EquipBooking']['equip_id'])) || ($this->request->data['EquipBooking']['equip_id'] == null)) {
 						echo $this->Form->select('equip_id', $equips, array('empty'=>false));
 					} else {
 						echo $this->Form->select('equip_id', $equips, array('empty'=>false, 'disabled' => true));
+						echo $this->Form->hidden('equip_id');
 					}
 				?>
 			</td>
