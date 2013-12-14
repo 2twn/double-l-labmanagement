@@ -46,7 +46,7 @@ class EquipmentsController extends AppController {
 	public function equip_booking_action($id = null, $sel_date = null) {
 		$this->set('equips', $this->Equip->find('list', array('conditions' => array('valid' => 1, 'status' => 1), 'fields' => array('id','equip_name'))));
 		$this->set('start_periods', $this->book_periods());
-		$this->set('end_periods', $this->book_periods());
+		$this->set('end_periods', $this->book_periods(1));
 		$this->set('projects', $this->Project->find('list', array('conditions' => array('valid' => 1), 'fields' => array('id','prj_name'))));
 		$this->EquipBooking->id = $id;
 		// $this->set('equip_status', $this->Formfunc->equip_status());
@@ -90,6 +90,7 @@ class EquipmentsController extends AppController {
 	
 	public function insert_book_record($book_data) {
 		$book_data['book_end_time'] = $book_data['start_date']." ".$book_data['end_time'].":00";
+		$book_data['book_end_time'] = date('Y-m-d H:i:s', strtotime($book_data['book_end_time']));
 		$book_data['book_start_time'] = $book_data['start_date']." ".$book_data['start_time'].":00";
 		if (($book_data['id'] == null) || ($book_data['id'] == "")){
 			$book_data['create_time'] = date('Y-m-d H:i:s');
@@ -130,7 +131,7 @@ class EquipmentsController extends AppController {
 		return $result;
 	}
 	
-	public function book_periods($minutes=240) {
+	public function book_periods($type=0,$minutes=240) {
 		$result = array();
 		$add_minutes = 0; 
 		$period_tmp = mktime(0, 0, 0, 1, 1, 2000);
@@ -138,6 +139,10 @@ class EquipmentsController extends AppController {
 			$period_tmp = mktime(0, $add_minutes, 0, 1, 1, 2000);
 			$result[date('H:i',$period_tmp)] = date('H:i',$period_tmp); 
 			$add_minutes = $add_minutes + $minutes;
+		}
+		if ($type == 1) {
+			$result['24:00'] = '24:00'; 
+			unset($result['00:00']);
 		}
 		return $result;
 	}
