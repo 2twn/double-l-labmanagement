@@ -321,14 +321,14 @@ input, textarea {
 }
 select {
 	clear: both;
-	font-size: 120%;
+	font-size: 110%;
 	vertical-align: text-bottom;
 }
 select[multiple=multiple] {
 	width: 100%;
 }
 option {
-	font-size: 120%;
+	font-size: 110%;
 	padding: 0 3px;
 }
 input[type=checkbox] {
