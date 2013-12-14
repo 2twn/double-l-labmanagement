@@ -18,10 +18,10 @@
     <tr>
         <td><?php echo $item['EquipBooking']['id']; ?></td>
         <td>
-            <?php echo $item['Equipment']['equip_name']; ?>
+            <?php echo $item['Equip']['equip_name']; ?>
         </td>
         <td>
-            <?php echo $item['Equipment']['location']; ?>
+            <?php echo $item['Equip']['location']; ?>
         </td>
         <td>
             <?php echo $item['Project']['prj_name']; ?>

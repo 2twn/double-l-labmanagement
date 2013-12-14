@@ -13,10 +13,10 @@
 		<tr>
 			<td>儀器編號：
 				<?php 
-					if ((!isset($this->request->data['EquipBooking']['equipment_id'])) || ($this->request->data['EquipBooking']['equipment_id'] == null)) {
-						echo $this->Form->select('equipment_id', $equips, array('empty'=>false));
+					if ((!isset($this->request->data['EquipBooking']['equip_id'])) || ($this->request->data['EquipBooking']['equip_id'] == null)) {
+						echo $this->Form->select('equip_id', $equips, array('empty'=>false));
 					} else {
-						echo $this->Form->select('equipment_id', $equips, array('empty'=>false, 'disabled' => true));
+						echo $this->Form->select('equip_id', $equips, array('empty'=>false, 'disabled' => true));
 					}
 				?>
 			</td>

@@ -15,25 +15,25 @@
     </tr>
     <?php foreach ($items as $item): ?>
     <tr>
-        <td><?php echo $item['Equipment']['id']; ?></td>
+        <td><?php echo $item['Equip']['id']; ?></td>
         <td>
-            <?php echo $item['Equipment']['equip_name']; ?>
+            <?php echo $item['Equip']['equip_name']; ?>
         </td>
         <td>
-            <?php echo $item['Equipment']['maintain_time']; ?>
+            <?php echo $item['Equip']['maintain_time']; ?>
         </td>
         <td>
-            <?php echo $item['Equipment']['location']; ?>
+            <?php echo $item['Equip']['location']; ?>
         </td>
         <td>
-            <?php echo $item['Equipment']['create_time']; ?>
+            <?php echo $item['Equip']['create_time']; ?>
         </td>
         <td>
-            <?php echo $equip_status[$item['Equipment']['status']]; ?>
+            <?php echo $equip_status[$item['Equip']['status']]; ?>
         </td>
         <td>
             <?php 
-				echo $this->Html->link('修改', array('action' => 'equip_edit', $item['Equipment']['id']), array('class' => 'button'));
+				echo $this->Html->link('修改', array('action' => 'equip_edit', $item['Equip']['id']), array('class' => 'button'));
             ?>
         </td>
     </tr>

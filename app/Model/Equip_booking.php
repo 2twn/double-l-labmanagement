@@ -2,7 +2,7 @@
 class EquipBooking extends AppModel {
     public $name = 'EquipBooking';
     public $validate = array(
-        'equipment_id' => array(
+        'equip_id' => array(
             'required' => array(
                 'rule' => array('notEmpty'),
                 'message' => '儀器編號不可空白'
@@ -22,7 +22,7 @@ class EquipBooking extends AppModel {
         ),
     );
 
-	public $belongsTo = array('Equipment', 'Project');
+	public $belongsTo = array('Equip', 'Project');
 	
 	public function beforeSave($options = array()) {
 		if (!isset($this->data[$this->alias]['id'])) {

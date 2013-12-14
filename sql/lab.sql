@@ -109,7 +109,7 @@ DROP TABLE IF EXISTS `equip_bookings`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE IF NOT EXISTS `equip_bookings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `equipment_id` int(11) NOT NULL,
+  `equip_id` varchar(8) NOT NULL,
   `project_id` varchar(20) NOT NULL,
   `user_id` int(11) NOT NULL,
   `book_start_time` datetime NOT NULL,
@@ -131,7 +131,7 @@ DROP TABLE IF EXISTS `equip_maintains`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `equip_maintains` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `equipment_id` varchar(8) NOT NULL,
+  `equip_id` varchar(8) NOT NULL,
   `maintain_time` datetime NOT NULL,
   `maintain_result` varchar(255) DEFAULT NULL,
   `maintain_status` char(1) NOT NULL DEFAULT 'N',
@@ -142,13 +142,13 @@ CREATE TABLE `equip_maintains` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `equipments`
+-- Table structure for table `equips`
 --
 
-DROP TABLE IF EXISTS `equipment`;
+DROP TABLE IF EXISTS `equips`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `equipment` (
+CREATE TABLE `equips` (
   `id` varchar(8) NOT NULL,
   `equip_name` varchar(30) NOT NULL,
   `location` varchar(45) DEFAULT NULL,

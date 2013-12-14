@@ -1,25 +1,25 @@
 <?php
 class EquipmentsController extends AppController {
-	public $uses = array('Equipment', 'EquipBooking', 'Project', 'User');
+	public $uses = array('Equip', 'EquipBooking', 'Project', 'User');
     public $helpers = array('Html', 'Form', 'Session');
     public $components = array('Session', 'Formfunc', 'Userfunc');
 
  	public function equip_list() {
 		$this->set('equip_status', $this->Formfunc->equip_status());
-        $this->set('items', $this->Equipment->find('all', array('order' => 'id')));
+        $this->set('items', $this->Equip->find('all', array('order' => 'id')));
     }
 	
 	public function equip_edit($id = null) {
-		$this->Equipment->id = $id;
+		$this->Equip->id = $id;
 		$this->set('equip_status', $this->Formfunc->equip_status());
 		if ($this->request->is('get')) {
-			$this->request->data = $this->Equipment->read();
+			$this->request->data = $this->Equip->read();
 		} else {
 			if ($id == null) {
-				$this->Equipment->id == null;
-				$this->request->data['Equipment']['create_time'] = date('Y-m-d H:i:s');
+				$this->Equip->id == null;
+				$this->request->data['Equip']['create_time'] = date('Y-m-d H:i:s');
 			}
-			if ($this->Equipment->save($this->request->data)) {
+			if ($this->Equip->save($this->request->data)) {
 				$this->Session->setFlash('儲存成功.');
 				$this->redirect(array('action' => 'equip_list'));
 			} else {
@@ -29,13 +29,13 @@ class EquipmentsController extends AppController {
 	}
 	
 	public function equip_del($id) {
-		$this->Equipment->id = $id;
-		$this->request->data = $this->Equipment->read();
-		$this->request->data['Equipment']['valid'] = ($this->request->data['Equipment']['valid'] + 1)%2;
+		$this->Equip->id = $id;
+		$this->request->data = $this->Equip->read();
+		$this->request->data['Equip']['valid'] = ($this->request->data['Equip']['valid'] + 1)%2;
 		if ($this->request->is('get')) {
 			throw new MethodNotAllowedException();
 		}
-		if ($this->Equipment->save($this->request->data)) {
+		if ($this->Equip->save($this->request->data)) {
 			$this->Session->setFlash('儀器狀態已變更.');
 			$this->redirect(array('action' => 'equip_list'));
 		} else {
@@ -44,7 +44,7 @@ class EquipmentsController extends AppController {
 	}
 	
 	public function equip_booking_action($id = null, $sel_date = null) {
-		$this->set('equips', $this->Equipment->find('all', array('conditions' => array('valid' => 1, 'status' => 1), 'fields' => array('id','equip_name'))));
+		$this->set('equips', $this->Equip->find('all', array('conditions' => array('valid' => 1, 'status' => 1), 'fields' => array('id','equip_name'))));
 		$this->set('start_periods', $this->book_periods());
 		$this->set('end_periods', $this->book_periods());
 		$this->set('projects', $this->Project->find('all', array('conditions' => array('valid' => 1), 'fields' => array('id','prj_name'))));
@@ -84,8 +84,8 @@ class EquipmentsController extends AppController {
         $this->set('items', $this->EquipBooking->find('all', array('order' => array('equipment_id', 'book_start_time desc'))));
     }
 	
-	public function is_equip_book($equip_id, $start_date, $start_time, $end_date, $end_time) {
-		$result = false;
+	public function is_equip_book($equip_id, $start_time, $end_time) {
+		$result = true;
 		return $result;
 	}
 	
