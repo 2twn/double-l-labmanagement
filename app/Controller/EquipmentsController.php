@@ -44,7 +44,7 @@ class EquipmentsController extends AppController {
 	}
 	
 	public function equip_booking_action($id = null, $sel_date = null) {
-		$this->set('equips', $this->Equip->find('list', array('conditions' => array('valid' => 1, 'status' => 1), 'fields' => array('id','equip_name'))));
+		$this->set('equips', $this->genValidEquip());
 		$this->set('start_periods', $this->book_periods());
 		$this->set('end_periods', $this->book_periods(1));
 		$this->set('projects', $this->Project->find('list', array('conditions' => array('valid' => 1), 'fields' => array('id','prj_name'))));
@@ -89,6 +89,7 @@ class EquipmentsController extends AppController {
     }
 	
 	public function insert_book_record($book_data) {
+		$this->set('equips', $this->genValidEquip());
 		$book_data['book_end_time'] = $book_data['start_date']." ".$book_data['end_time'].":00";
 		$book_data['book_end_time'] = date('Y-m-d H:i:s', strtotime($book_data['book_end_time']));
 		$book_data['book_start_time'] = $book_data['start_date']." ".$book_data['start_time'].":00";
@@ -145,6 +146,77 @@ class EquipmentsController extends AppController {
 			unset($result['00:00']);
 		}
 		return $result;
+	}
+	
+	public function equip_booking_table() {
+		$this->set('equips', $this->genValidEquip());
+		$this->set('years', $this->genYears(2, 2));
+		$this->set('search_year', date('Y'));
+		$this->set('months', array('01'=>'01','02'=>'02','03'=>'03','04'=>'04','05'=>'05','06'=>'06',
+		                          '07'=>'07','08'=>'08','09'=>'09','10'=>'10','11'=>'11','12'=>'12'));
+		$this->set('search_month', date('m'));
+        $this->set('items', $this->EquipBooking->query("Select *
+		                                        from equip_bookings EquipBooking,
+												     equips Equip,
+													 projects Project
+											   where EquipBooking.equip_id = Equip.id
+											     and EquipBooking.project_id = Project.id
+											     and EquipBooking.valid = 1
+											   order by Equip.equip_name, EquipBooking.book_start_time desc;"));
+    }
+	
+	public function genYears($count_f = 2, $count_p =5) {
+		$result = array();
+		$cur_year = date('Y');
+		for($i= $cur_year + $count_f; $i > $cur_year; $i--) {
+			$result[$i] = $i;
+		}
+		for($i= $cur_year; $i > $cur_year - $count_p; $i--) {
+			$result[$i] = $i;
+		}
+		return $result;
+	}
+	
+	public function genValidEquip() {
+		return $this->Equip->find('list', array('conditions' => array('valid' => 1, 'status' => 1), 'fields' => array('id','equip_name')));
+	}
+	
+	public function get_booking_table() {
+		$this->layout = 'ajax';
+		$equip_id = $this->request->data['equip_id'];
+		$s_year = $this->request->data['search_year'];
+		$s_month = $this->request->data['search_month'];
+		$s_wday = date('w', strtotime($s_year."-".$s_month."-01"));
+		$week_table = array();
+		$line = 1;
+		for ($i=$s_wday; $i > 0; $i--) {
+			$line_date = date('Y-m-d', mktime(0, 0, 0, $s_month, 1 - $i, $s_year));
+			$week_table[$line][$line_date] = array('class' => 'pre', 'booking' => array());
+		}
+		$cur_day = 1;
+		$line_date = date('Y-m-d', mktime(0, 0, 0, $s_month, $cur_day, $s_year));
+		while ($s_month == date('m', strtotime($line_date))) {
+			if (date('w', strtotime($line_date)) == '0' && (date('d', strtotime($line_date)) != '01')) {
+				$line++;
+			}
+			$week_table[$line][$line_date] = array('class' => 'current', 'booking' => $this->get_book_by_date($equip_id, $line_date));
+			$cur_day++;
+			$line_date = date('Y-m-d', mktime(0, 0, 0, $s_month, $cur_day, $s_year));
+		}
+		while (date('w', strtotime($line_date)) > 0) {
+			$week_table[$line][$line_date] = array('class' => 'future', 'booking' => array());
+			$cur_day++;
+			$line_date = date('Y-m-d', mktime(0, 0, 0, $s_month, $cur_day, $s_year));
+		}
+		$this->set('week_table', $week_table);
+	}
+	
+	public function get_book_by_date($equip_id, $start_date) {
+		$result = array();
+		$booking = $this->EquipBooking->find('all', array('conditions' => array('EquipBooking.valid' => 1, 
+																				'EquipBooking.equip_id' => $equip_id,
+																				'substr(EquipBooking.book_start_time,1,10)' => $start_date)));
+		return $booking;
 	}
 }
 ?>
