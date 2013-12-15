@@ -1,7 +1,28 @@
  <script>
     $(function() {
         $(".jquery_date" ).datepicker({dateFormat: "yy-mm-dd", changeMonth: true, changeYear: true});
-        $("input[name='check_type']").on("click", function() { });
+        $("input[name='data[SafetyTrial][check_type]']").click( 
+        	function() { 
+        		
+        		$("input[class='checkmode']:checkbox").attr('checked',false);
+        		switch($(this).val()){
+        			case "1":
+        				$.each(['1M','2M','3M','6M','9M','12M','18M','24M'], function(index, val){
+        					
+        					$("input[class='checkmode'][name='data[check_modes]["+val+"]']:checkbox").attr('checked',true).click();
+        				});
+        				break;
+        			case "2":
+        				 $.each(['1M','2M','3M','6M'], function(index, val){
+        					
+        					$("input[class='checkmode'][name='data[check_modes]["+val+"]']:checkbox").attr('checked',true).click();
+        				});
+        				break;
+        			case 3:
+        				break;
+        		}
+        	}
+        );
     });
 </script>
 <style>
@@ -69,7 +90,7 @@ label {
 					}
 					echo '<td class="checkmode">';
 					echo $this->Form->input('check_modes.'.$key, 
-						array('type'=>'checkbox','hiddenField'=>false, 'value'=>$key)
+						array('type'=>'checkbox','hiddenField'=>false, 'value'=>$key, 'class'=>'checkmode')
 						);
 					echo $value;
 					echo '</td>';
