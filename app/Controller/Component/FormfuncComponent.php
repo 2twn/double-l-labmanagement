@@ -19,8 +19,17 @@
 			return array(1=>"正常使用",0=>"暫停預約");
 		}
 		
+		public function safety_trial_status() {
+			return array(1=>"進行中",0=>"已終止");
+		}
+		public function safety_trial_checktypes(){
+			return array(1=>"Long term",2=>"Accelerate",3=>"自定義");
+		}
+		public function safety_trial_humitures(){
+			return array(-20=>"-20°C",2=>"2~8°C",25=>"25°C/60%RH",30=>"30°C/65%RH",40=>"40°C/75%RH");
+					}
 		public function person_gender() {
-			return array(0=>"女",1=>"男");
+			return array(0=>"女",1=>"男");		
 		}
 		
 		public function person_valid(){
