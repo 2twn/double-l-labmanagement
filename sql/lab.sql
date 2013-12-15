@@ -160,6 +160,45 @@ CREATE TABLE `equips` (
   `modi_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+-- --------------------------------------------------------
+
+--
+-- 資料表格式： `safety_trials`
+--
+DROP TABLE IF EXISTS `safety_trials`;
+CREATE TABLE IF NOT EXISTS `safety_trials` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `trial_lot` varchar(20) NOT NULL,
+  `trial_name` varchar(20) NOT NULL,
+  `project_id` varchar(20) NOT NULL,
+  `start_date` date NOT NULL,
+  `location` varchar(20) NOT NULL,
+  `status` char(1) NOT NULL,
+  `check_type` varchar(5) NOT NULL,
+  `humiture` varchar(20) NOT NULL COMMENT '溫濕度',
+  `remark` varchar(30) NOT NULL COMMENT '說明不超過30',
+  `create_time` datetime NOT NULL,
+  `mod_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='安定性藥品檢核' AUTO_INCREMENT=5 ;
+
+-- --------------------------------------------------------
+
+--
+-- 資料表格式： `safety_trial_checkdates`
+--
+DROP TABLE IF EXISTS `safety_trial_checkdates`;
+CREATE TABLE IF NOT EXISTS `safety_trial_checkdates` (
+  `id` varchar(20) NOT NULL,
+  `safety_trial_id` int(11) NOT NULL,
+  `check_mode` varchar(5) NOT NULL,
+  `remind_date` date NOT NULL,
+  `check_date` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
