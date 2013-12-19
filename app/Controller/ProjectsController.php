@@ -1,11 +1,17 @@
 <?php
 class ProjectsController extends AppController {
 	public $uses = array('Project');
-    public $helpers = array('Html', 'Form', 'Session');
+    public $helpers = array('Html', 'Form', 'Session', 'Paginator');
     public $components = array('Session', 'Formfunc', 'Userfunc');
+	public $paginate = array('limit' => 10,);             
 
  	public function prj_list() {
-        $this->set('items', $this->Project->find('all', array('order' => 'valid DESC, id')));
+		$this->paginate = array(
+			'conditions' => array(),
+			'order' => array('valid desc','id asc'),
+			'limit' => 4
+		);
+        $this->set('items', $this->paginate('Project'));
     }
 	
 	public function prj_edit($id = null) {

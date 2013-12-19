@@ -1,12 +1,18 @@
 <?php
 class EquipmentsController extends AppController {
 	public $uses = array('Equip', 'EquipBooking', 'Project', 'User');
-    public $helpers = array('Html', 'Form', 'Session');
+    public $helpers = array('Html', 'Form', 'Session', 'Paginator');
     public $components = array('Session', 'Formfunc', 'Userfunc');
+	public $paginate = array('limit' => 10,);
 
  	public function equip_list() {
 		$this->set('equip_status', $this->Formfunc->equip_status());
-        $this->set('items', $this->Equip->find('all', array('order' => 'id')));
+		$this->paginate = array(
+			'conditions' => array(),
+			'order' => array('valid desc','id asc'),
+			'limit' => 4
+		);
+        $this->set('items', $this->paginate('Equip'));
     }
 	
 	public function equip_edit($id = null) {

@@ -6,7 +6,13 @@ class Project extends AppModel {
             'required' => array(
                 'rule' => array('notEmpty'),
                 'message' => 'A Project code is required'
-            )
+            ),
+			'unique' => array(
+				'rule' => 'isUnique',
+				'required' => true,
+				'on' => 'create',
+                'message' => 'A Project code are existed'
+			)
         ),  		
         'prj_name' => array(
             'required' => array(

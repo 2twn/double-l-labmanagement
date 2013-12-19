@@ -3,9 +3,15 @@ class MeetingroomsController extends AppController {
 	public $uses = array('MeetingRoom');
     public $helpers = array('Html', 'Form', 'Session');
     public $components = array('Session', 'Formfunc', 'Userfunc');
+	public $paginate = array('limit' => 10,);       
 
     public function mr_list() {
-        $this->set('items', $this->MeetingRoom->find('all', array('order' => 'valid DESC, id')));
+		$this->paginate = array(
+			'conditions' => array(),
+			'order' => array('valid desc','id asc'),
+			'limit' => 4
+		);
+        $this->set('items', $this->paginate('MeetingRoom'));
     }
 	
 	public function mr_edit($id = null) {
