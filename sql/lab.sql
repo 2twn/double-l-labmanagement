@@ -199,8 +199,78 @@ CREATE TABLE IF NOT EXISTS `safety_trial_checkdates` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- 資料表結構 `training`
+--
+
+DROP TABLE IF EXISTS `training`;
+CREATE TABLE IF NOT EXISTS `training` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `start_time` datetime NOT NULL,
+  `end_time` datetime NOT NULL,
+  `meeting_room_id` int(11) NOT NULL,
+  `instructor` varchar(20) NOT NULL,
+  `training_desc` varchar(60) DEFAULT NULL,
+  `valid` int(1) NOT NULL,
+  `create_time` datetime NOT NULL,
+  `modi_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `training_documents`
+--
+
+DROP TABLE IF EXISTS `training_documents`;
+CREATE TABLE IF NOT EXISTS `training_documents` (
+  `id` varchar(8) NOT NULL,
+  `document_name` varchar(30) NOT NULL,
+  `document_version` int(11) NOT NULL,
+  `document_desc` varchar(60) NOT NULL,
+  `valid` int(1) NOT NULL,
+  `create_time` datetime NOT NULL,
+  `modi_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `training_users`
+--
+
+DROP TABLE IF EXISTS `training_users`;
+CREATE TABLE IF NOT EXISTS `training_users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `training_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `valid` int(1) NOT NULL,
+  `create_time` datetime NOT NULL,
+  `modi_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `training_w_documents`
+--
+
+DROP TABLE IF EXISTS `training_w_documents`;
+CREATE TABLE IF NOT EXISTS `training_w_documents` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `training_id` int(11) NOT NULL,
+  `training_document_id` varchar(8) NOT NULL,
+  `valid` int(1) NOT NULL,
+  `create_time` datetime NOT NULL,
+  `modi_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+/*!40101 SET character_set_client = @saved_cs_client */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
