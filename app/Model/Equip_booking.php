@@ -1,6 +1,16 @@
 <?php
 class EquipBooking extends AppModel {
     public $name = 'EquipBooking';
+	public $belongsTo = array(
+        'Equip' => array(
+            'className' => 'Equip',
+            'foreignKey' => 'equip_id'
+        ),
+		'Project' => array(
+            'className' => 'Project',
+            'foreignKey' => 'project_id'
+        )
+    );
     public $validate = array(
         'equip_id' => array(
             'required' => array(
@@ -21,24 +31,13 @@ class EquipBooking extends AppModel {
             )
         ),
     );
-
-	public $belongsTo = array(
-        'Equip' => array(
-            'className' => 'Equip',
-            'foreignKey' => 'equip_id'
-        ),
-		'Project' => array(
-            'className' => 'Project',
-            'foreignKey' => 'project_id'
-        )
-    );
-	
 	public function beforeSave($options = array()) {
 		if (!isset($this->data[$this->alias]['id'])) {
 			$this->data[$this->alias]['create_time'] = date();
 		}
+		$super->beforeSave($options);
 		return true;
-	};
+	}
 	
 }
 ?>
