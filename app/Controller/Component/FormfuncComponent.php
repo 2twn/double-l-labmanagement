@@ -35,5 +35,13 @@
 		public function person_valid(){
 			return array(1=>"生效",0=>"未生效",-1=>"停權");
 		}
+
+		public function document_status(){
+			return array(1=>"生效",0=>"未生效");
+		}
+		
+		public function training_status(){
+			return array(1=>"生效",0=>"未生效");
+		}
 	}
 ?>

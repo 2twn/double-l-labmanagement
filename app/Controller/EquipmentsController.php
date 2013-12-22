@@ -84,6 +84,7 @@ class EquipmentsController extends AppController {
 	}
 
  	public function equip_book_list() {
+		$this->EquipBooking->find('all');
         $this->set('items', $this->EquipBooking->query("Select *
 		                                        from equip_bookings EquipBooking,
 												     equips Equip,
