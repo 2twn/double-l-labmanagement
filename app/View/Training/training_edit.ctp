@@ -23,10 +23,10 @@
 			<td>會議室：<?php echo $this->Form->select('meeting_room_id', $meeting_rooms, array('empty'=>false));?></td>
 		</tr>
 		<tr>
-			<td>授課人員：</td>
+			<td>上課人員：</td>
 		</tr>	
 		<tr>
-			<td>上課人員：<?php echo $this->Form->input('instructor', array('style'=>'width:150px'));?></td>
+			<td>授課人員：<?php echo $this->Form->input('instructor', array('style'=>'width:150px'));?></td>
 		</tr>	
 		<tr>
 			<td>說明：(最多30個中文字)</td>
@@ -35,7 +35,10 @@
 			<td><?php echo $this->Form->text('training_desc', array('style'=>'width:450px'));?></td>
 		</tr>
 		<tr>
-			<td colspan=2><?php echo $this->Form->submit('儲存');?></td>
+			<td colspan=2>
+				<?php echo $this->Form->hidden('id');?>
+				<?php echo $this->Form->submit('儲存');?>
+			</td>
 		</tr>
 	</table>
 <?php echo $this->Form->end(); ?>

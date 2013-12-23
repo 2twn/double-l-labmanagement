@@ -16,15 +16,11 @@ class EquipmentsController extends AppController {
     }
 	
 	public function equip_edit($id = null) {
-		$this->Equip->id = $id;
+		if ($id != null) {$this->Equip->id = $id;} else {$this->request->data['Equip']['create_time'] = date('Y-m-d H:i:s');}
 		$this->set('equip_status', $this->Formfunc->equip_status());
 		if ($this->request->is('get')) {
 			$this->request->data = $this->Equip->read();
 		} else {
-			if ($id == null) {
-				$this->Equip->id == null;
-				$this->request->data['Equip']['create_time'] = date('Y-m-d H:i:s');
-			}
 			if ($this->Equip->save($this->request->data)) {
 				$this->Session->setFlash('儲存成功.');
 				$this->redirect(array('action' => 'equip_list'));

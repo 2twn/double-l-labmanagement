@@ -25,7 +25,7 @@
             <?php echo $item['TrainingDocument']['create_time']; ?>
         </td>
         <td>
-            <?php echo $document_status[$item['TrainingDocument']['status']]; ?>
+            <?php echo $document_status[$item['TrainingDocument']['valid']]; ?>
         </td>
         <td>
             <?php 

@@ -6,7 +6,7 @@ class TrainingController extends AppController {
 	public $paginate = array('limit' => 10,);
 
  	public function document_list() {
-		$this->set('$document_status', $this->Formfunc->document_status());
+		$this->set('document_status', $this->Formfunc->document_status());
 		$this->paginate = array(
 			'conditions' => array(),
 			'order' => array('valid desc','id asc'),
@@ -16,14 +16,10 @@ class TrainingController extends AppController {
     }
 	
 	public function document_edit($id = null) {
-		$this->TrainingDocument->id = $id;
+		if ($id != null) {$this->TrainingDocument->id = $id;} else {$this->request->data['TrainingDocument']['create_time'] = date('Y-m-d H:i:s');}
 		if ($this->request->is('get')) {
 			$this->request->data = $this->TrainingDocument->read();
 		} else {
-			if ($id == null) {
-				$this->TrainingDocument->id == null;
-				$this->request->data['TrainingDocument']['create_time'] = date('Y-m-d H:i:s');
-			}
 			if ($this->TrainingDocument->save($this->request->data)) {
 				$this->Session->setFlash('儲存成功.');
 				$this->redirect(array('action' => 'document_list'));
@@ -59,20 +55,18 @@ class TrainingController extends AppController {
     }
 	
 	public function training_edit($id = null) {
+		$this->set('documents', $this->TrainingDocument->find('list', array('conditions' => array('valid' => 1), 'fields' => array('id','document_name'))));
 		$this->set('meeting_rooms', $this->MeetingRoom->find('list', array('conditions' => array('valid' => 1), 'fields' => array('id','mr_name'))));
-		$this->Training->id = $id;
+		if ($id != null) { $this->Training->id = $id; } else {$this->request->data['Training']['create_time'] = date('Y-m-d H:i:s');}
 		if ($this->request->is('get')) {
 			$this->request->data = $this->Training->read();
 		} else {
-			if ($id == null) {
-				$this->Training->id == null;
-				$this->request->data['Training']['create_time'] = date('Y-m-d H:i:s');
-			}
 			$this->request->data['Training']['start_time'] = substr($this->request->data['Training']['start_date'],0,10)." ".$this->request->data['Training']['b_start_time'];
 			$this->request->data['Training']['end_time'] = substr($this->request->data['Training']['start_date'],0,10)." ".$this->request->data['Training']['b_end_time'];
 			if ($this->Training->save($this->request->data)) {
+			
 				$this->Session->setFlash('儲存成功.');
-				$this->redirect(array('action' => 'training_list'));
+				//$this->redirect(array('action' => 'training_list'));
 			} else {
 				$this->Session->setFlash('儲存失敗.');
 			}

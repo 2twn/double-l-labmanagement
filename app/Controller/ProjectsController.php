@@ -15,13 +15,10 @@ class ProjectsController extends AppController {
     }
 	
 	public function prj_edit($id = null) {
-		$this->Project->id = $id;
+		f ($id != null){$this->Project->id = $id;} else {$this->request->data['Project']['create_time'] = date('Y-m-d H:i:s');}
 		if ($this->request->is('get')) {
 			$this->request->data = $this->Project->read();
 		} else {
-			if ($this->Project->id == null){
-				$this->request->data['Project']['create_time'] = date('Y-m-d H:i:s');
-			}
 			if ($this->Project->save($this->request->data)) {
 				$this->Session->setFlash('儲存成功.');
 				$this->redirect(array('action' => 'prj_list'));

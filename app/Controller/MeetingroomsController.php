@@ -15,13 +15,10 @@ class MeetingroomsController extends AppController {
     }
 	
 	public function mr_edit($id = null) {
-		$this->MeetingRoom->id = $id;
+		if ($id != null){$this->MeetingRoom->id = $id;} else {$this->request->data['MeetingRoom']['create_time'] = date('Y-m-d H:i:s');}
 		if ($this->request->is('get')) {
 			$this->request->data = $this->MeetingRoom->read();
 		} else {
-			if ($this->request->data['MeetingRoom']['id'] == ''){
-				$this->request->data['MeetingRoom']['create_time'] = date('Y-m-d H:i:s');
-			}
 			if ($this->MeetingRoom->save($this->request->data)) {
 				$this->Session->setFlash('儲存成功.');
 				$this->redirect(array('action' => 'mr_list'));
