@@ -1,6 +1,10 @@
 <div class="pageheader_div"><h1 id="pageheader">安定性樣品列表</h1></div>
 <div class="pagemenu_div"><?php 
   	echo $this->Html->link('回上一頁', "javascript:history.back();", array('class' => 'button')); 
+    echo $this->Form->create('SafetyTrial',array('div'=>false, 'inputDefaults' => array('label' => false,'div' => false)));
+    echo $this->Form->select('status', $trial_status, array('empty'=>false));
+    echo $this->Form->submit('查詢',array('div'=>false, 'inputDefaults' => array('label' => false,'div' => false)));
+    echo $this->Form->end(); 
 ?></div>
 
 <table>
@@ -21,10 +25,10 @@
             <?php echo $item['SafetyTrial']['trial_name']; ?>
         </td>
         <td>
-            <?php echo $item['SafetyTrial']['project_id'];  ?>
+            <?php echo $item['Project']['prj_name'];  ?>
         </td>
         <td>
-            <?php echo $item['SafetyTrial']['status'];  ?>
+            <?php echo $trial_status[$item['SafetyTrial']['status']];  ?>
         </td>
         <td>
             <?php echo $item['SafetyTrial']['start_date'];  ?>

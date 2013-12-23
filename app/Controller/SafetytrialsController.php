@@ -32,8 +32,16 @@ class SafetytrialsController extends AppController {
 );
 	
 	public function index(){
+		$options = array (
+				'order' => 'SafetyTrial.id' 
+		);
+		if ($this->request->is('post')) {
+			$options ['conditions'] = array (
+					'SafetyTrial.status' => $this->request->data['SafetyTrial']['status'] 
+			);
+		}
 		$this->set('trial_status', $this->Formfunc->safety_trial_status());
-		$this->set('items', $this->SafetyTrial->find('all', array('order' => 'SafetyTrial.id')));
+		$this->set('items', $this->SafetyTrial->find('all', $options));
 	}
 	public function edit($id = null) {
 		$this->set('trial_status', $this->Formfunc->safety_trial_status());		
