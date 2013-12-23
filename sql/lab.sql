@@ -204,15 +204,15 @@ CREATE TABLE IF NOT EXISTS `safety_trial_checkdates` (
 -- 資料表結構 `training`
 --
 
-DROP TABLE IF EXISTS `training`;
-CREATE TABLE IF NOT EXISTS `training` (
+DROP TABLE IF EXISTS `trainings`;
+CREATE TABLE IF NOT EXISTS `trainings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `start_time` datetime NOT NULL,
   `end_time` datetime NOT NULL,
   `meeting_room_id` int(11) NOT NULL,
   `instructor` varchar(20) NOT NULL,
   `training_desc` varchar(60) DEFAULT NULL,
-  `valid` int(1) NOT NULL,
+  `valid` int(1) NOT NULL DEFAULT '0',
   `create_time` datetime NOT NULL,
   `modi_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
@@ -230,7 +230,7 @@ CREATE TABLE IF NOT EXISTS `training_documents` (
   `document_name` varchar(30) NOT NULL,
   `document_version` int(11) NOT NULL,
   `document_desc` varchar(60) NOT NULL,
-  `valid` int(1) NOT NULL,
+  `valid` int(1) NOT NULL DEFAULT '1',
   `create_time` datetime NOT NULL,
   `modi_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
@@ -247,7 +247,7 @@ CREATE TABLE IF NOT EXISTS `training_users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `training_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `valid` int(1) NOT NULL,
+  `valid` int(1) NOT NULL DEFAULT '1',
   `create_time` datetime NOT NULL,
   `modi_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
@@ -264,7 +264,7 @@ CREATE TABLE IF NOT EXISTS `training_w_documents` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `training_id` int(11) NOT NULL,
   `training_document_id` varchar(8) NOT NULL,
-  `valid` int(1) NOT NULL,
+  `valid` int(1) NOT NULL DEFAULT '1',
   `create_time` datetime NOT NULL,
   `modi_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
