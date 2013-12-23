@@ -5,16 +5,16 @@ class TrainingDocument extends AppModel {
         'id' => array(
             'required' => array(
                 'rule' => array('notEmpty'),
-                'message' => '儀器編號不可空白'
+                'message' => '文件編號不可空白'
             ),
 			'alphaNumeric' => array(
                 'rule'     => 'alphaNumeric',
                 'required' => true,
-                'message'  => '儀器編號必須是英數字元'
+                'message'  => '文件編號必須是英數字元'
             ),
 			'maxLength' => array(
                 'rule'    => array('maxLength', '8'),
-                'message' => '儀器編號不可超過8字元'
+                'message' => '文件編號不可超過8字元'
             )
 		),
         'document_name' => array(

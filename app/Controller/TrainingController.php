@@ -1,6 +1,6 @@
 <?php
 class TrainingController extends AppController {
-	public $uses = array('TrainingDocument', 'Training', 'MeetingRoom', 'User');
+	public $uses = array('TrainingDocument', 'Training', 'TrainingUser','TrainingWDocument','MeetingRoom', 'User');
     public $helpers = array('Html', 'Form', 'Session', 'Paginator');
     public $components = array('Session', 'Formfunc', 'Userfunc');
 	public $paginate = array('limit' => 10,);
@@ -55,6 +55,7 @@ class TrainingController extends AppController {
     }
 	
 	public function training_edit($id = null) {
+		$this->set('users', $this->User->find('list', array('conditions' => array('valid' => 1), 'fields' => array('id','name'))));
 		$this->set('documents', $this->TrainingDocument->find('list', array('conditions' => array('valid' => 1), 'fields' => array('id','document_name'))));
 		$this->set('meeting_rooms', $this->MeetingRoom->find('list', array('conditions' => array('valid' => 1), 'fields' => array('id','mr_name'))));
 		if ($id != null) { $this->Training->id = $id; } else {$this->request->data['Training']['create_time'] = date('Y-m-d H:i:s');}
