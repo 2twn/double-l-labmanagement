@@ -61,11 +61,28 @@ class TrainingController extends AppController {
 		if ($id != null) { $this->Training->id = $id; } else {$this->request->data['Training']['create_time'] = date('Y-m-d H:i:s');}
 		if ($this->request->is('get')) {
 			$this->request->data = $this->Training->read();
+			$this->request->data['Training']['start_date'] = substr($this->request->data['Training']['start_time'],0,10);
+			$this->request->data['Training']['b_start_time'] = substr($this->request->data['Training']['start_time'],11,5);
+			$this->request->data['Training']['b_end_time'] = substr($this->request->data['Training']['end_time'],11,5);
 		} else {
 			$this->request->data['Training']['start_time'] = substr($this->request->data['Training']['start_date'],0,10)." ".$this->request->data['Training']['b_start_time'];
 			$this->request->data['Training']['end_time'] = substr($this->request->data['Training']['start_date'],0,10)." ".$this->request->data['Training']['b_end_time'];
 			if ($this->Training->save($this->request->data)) {
-			
+				$newTrainingId = $this->Training->id;
+				$this->TrainingWDocument->deleteAll(array('TrainingWDocument.training_id' => $newTrainingId), false);
+				for($i=0;$i< sizeof($this->request->data["Training"]["docs_id"]); $i++) {
+					$this->request->data["TrainingWDocument"][$i] = array('training_document_id' => $this->request->data["Training"]["docs_id"][$i],
+																		  'training_id' => $newTrainingId,
+																		  'create_time' => date('Y-m-d H:i:s'));
+				}
+				$this->TrainingWDocument->saveMany($this->request->data["TrainingWDocument"]);
+				$this->TrainingUser->deleteAll(array('TrainingUser.training_id' => $newTrainingId), false);
+				for($i=0;$i< sizeof($this->request->data["Training"]["docs_id"]); $i++) {
+					$this->request->data["TrainingUser"][$i] = array('user_id' => $this->request->data["Training"]["docs_id"][$i],
+																		  'training_id' => $newTrainingId,
+																		  'create_time' => date('Y-m-d H:i:s'));
+				}
+				$this->TrainingUser->saveMany($this->request->data["TrainingWDocument"]);
 				$this->Session->setFlash('儲存成功.');
 				//$this->redirect(array('action' => 'training_list'));
 			} else {

@@ -22,10 +22,10 @@
             <?php echo substr($item['Training']['start_time'],0,10); ?>
         </td>
         <td>
-            <?php echo substr($item['Training']['start_time'],12,5); ?>
+            <?php echo substr($item['Training']['start_time'],11,5); ?>
         </td>
         <td>
-            <?php echo substr($item['Training']['end_time'],12,5); ?>
+            <?php echo substr($item['Training']['end_time'],11,5); ?>
         </td>
         <td>
             <?php echo $item['MeetingRoom']['mr_name']; ?>
