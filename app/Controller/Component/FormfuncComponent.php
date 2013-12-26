@@ -15,6 +15,9 @@
 			return $rt;
 		}
 		
+		public function status(){
+			return array(1=>"生效",0=>"未生效");
+		}
 		public function equip_status() {
 			return array(1=>"正常使用",0=>"暫停預約");
 		}
