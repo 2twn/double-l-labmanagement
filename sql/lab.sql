@@ -270,6 +270,142 @@ CREATE TABLE IF NOT EXISTS `training_w_documents` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+-- --------------------------------------------------------
+
+--
+-- 資料表格式： `chemicals`
+--
+-- 建立: Dec 23, 2013, 10:56 下午
+-- 最後更新: Dec 26, 2013, 10:07 下午
+--
+
+DROP TABLE IF EXISTS `chemicals`;
+CREATE TABLE IF NOT EXISTS `chemicals` (
+  `id` varchar(20) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `cas` varchar(20) NOT NULL,
+  `alias_name1` varchar(50) DEFAULT NULL,
+  `alias_name2` varchar(50) DEFAULT NULL,
+  `alias_name3` varchar(50) DEFAULT NULL,
+  `alias_name4` varchar(50) DEFAULT NULL,
+  `memo` varchar(60) NOT NULL,
+  `status` int(11) NOT NULL COMMENT '狀態',
+  `create_time` datetime NOT NULL,
+  `modi_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- 資料表格式： `companies`
+--
+-- 建立: Dec 25, 2013, 10:48 下午
+-- 最後更新: Dec 26, 2013, 10:30 下午
+--
+
+DROP TABLE IF EXISTS `companies`;
+CREATE TABLE IF NOT EXISTS `companies` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(30) NOT NULL,
+  `memo` varchar(60) NOT NULL,
+  `status` int(11) NOT NULL,
+  `create_time` datetime NOT NULL,
+  `modi_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- 資料表格式： `reagents`
+--
+-- 建立: Dec 23, 2013, 11:05 下午
+-- 最後更新: Dec 26, 2013, 10:04 下午
+--
+
+DROP TABLE IF EXISTS `reagents`;
+CREATE TABLE IF NOT EXISTS `reagents` (
+  `id` varchar(20) NOT NULL,
+  `name` varchar(20) NOT NULL,
+  `chemical_id` int(11) NOT NULL,
+  `reagent_level_id` varchar(20) NOT NULL,
+  `memo` varchar(60) NOT NULL,
+  `status` int(11) NOT NULL,
+  `create_time` datetime NOT NULL,
+  `modi_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- 資料表格式： `reagent_levels`
+--
+-- 建立: Dec 25, 2013, 10:49 下午
+-- 最後更新: Dec 26, 2013, 10:04 下午
+--
+
+DROP TABLE IF EXISTS `reagent_levels`;
+CREATE TABLE IF NOT EXISTS `reagent_levels` (
+  `id` varchar(20) NOT NULL,
+  `memo` varchar(60) NOT NULL,
+  `status` int(11) NOT NULL,
+  `create_time` datetime NOT NULL,
+  `modi_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- 資料表格式： `reagent_locations`
+--
+-- 建立: Dec 23, 2013, 11:08 下午
+-- 最後更新: Dec 26, 2013, 10:29 下午
+--
+
+DROP TABLE IF EXISTS `reagent_locations`;
+CREATE TABLE IF NOT EXISTS `reagent_locations` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) NOT NULL,
+  `memo` varchar(60) NOT NULL,
+  `status` int(11) NOT NULL,
+  `create_time` datetime NOT NULL,
+  `modi_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+-- --------------------------------------------------------
+
+--
+-- 資料表格式： `reagent_records`
+--
+-- 建立: Dec 23, 2013, 11:18 下午
+-- 最後更新: Dec 26, 2013, 11:09 下午
+--
+
+DROP TABLE IF EXISTS `reagent_records`;
+CREATE TABLE IF NOT EXISTS `reagent_records` (
+  `id` varchar(20) NOT NULL,
+  `name` varchar(20) DEFAULT NULL,
+  `reagent_location_id` int(11) DEFAULT NULL COMMENT '儲放位置',
+  `company_id` int(11) DEFAULT NULL COMMENT '製造商',
+  `package` varchar(20) DEFAULT NULL COMMENT '包裝',
+  `lot` varchar(20) DEFAULT NULL COMMENT '原廠批號',
+  `record_date` date DEFAULT NULL COMMENT '登錄日期',
+  `valid_date` date DEFAULT NULL COMMENT '有效日期',
+  `open_date` date DEFAULT NULL COMMENT '開封日期',
+  `usage` varchar(20) DEFAULT NULL COMMENT '使用期限',
+  `memo` varchar(60) DEFAULT NULL COMMENT '說明',
+  `create_time` datetime NOT NULL,
+  `modi_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------	
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
