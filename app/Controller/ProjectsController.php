@@ -15,7 +15,7 @@ class ProjectsController extends AppController {
     }
 	
 	public function prj_edit($id = null) {
-		f ($id != null){$this->Project->id = $id;} else {$this->request->data['Project']['create_time'] = date('Y-m-d H:i:s');}
+		if ($id != null){$this->Project->id = $id;} else {$this->request->data['Project']['create_time'] = date('Y-m-d H:i:s');}
 		if ($this->request->is('get')) {
 			$this->request->data = $this->Project->read();
 		} else {
