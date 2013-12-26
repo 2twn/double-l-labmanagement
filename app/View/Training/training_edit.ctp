@@ -4,25 +4,65 @@
     });
 	
 	function add_document() {
-		$sel_val = $("#TrainingDocs")[0].selectedIndex;
-		$("#docs_tbl")[0].innerHTML = $("#docs_tbl")[0].innerHTML + "<tr><tr>"+$("#TrainingDocs")[0][$sel_val].text+"<input type=\"hidden\" name=\"data[Training][docs_id][]\" value=\""+$("#TrainingDocs")[0][$sel_val].value+"\" id=\"TrainingDocsId\"/></td></tr>"
+		doc_num = $("#DocsNum")[0].value;
+		sel_val = $("#TrainingDocs")[0].selectedIndex;
+		$("#docs_tbl")[0].innerHTML = $("#docs_tbl")[0].innerHTML + "<tr id=\"tr_doc_"+doc_num+"\"><td>"
+									+ "<a href='javascript:del_document(\"tr_doc_"+doc_num+"\")'>刪除</a> "
+		                            + $("#TrainingDocs")[0][sel_val].text
+		                            + "<input type=\"hidden\" name=\"data[Training][docs_id][]\" value=\""+$("#TrainingDocs")[0][sel_val].value
+									+ "\" id=\"TrainingDocsId\"/>"
+									+ "</td></tr>"
+		$("#DocsNum")[0].value = $("#DocsNum")[0].value++;							
+	}
+
+	function del_document(obj) {
+		tr_id = "#"+obj;
+		del_tr = $(tr_id);
+		del_tr.remove();
 	}
 	
 	function add_member() {
-		$sel_val = $("#TrainingUsers")[0].selectedIndex;
-		$("#users_tbl")[0].innerHTML = $("#users_tbl")[0].innerHTML + "<tr><tr>"+$("#TrainingUsers")[0][$sel_val].text+"<input type=\"hidden\" name=\"data[Training][users_id][]\" value=\""+$("#TrainingUsers")[0][$sel_val].value+"\" id=\"TrainingDocsId\"/></td></tr>"	
+		user_num = $("#UsersNum")[0].value;
+		sel_val = $("#TrainingUsers")[0].selectedIndex;
+		$("#users_tbl")[0].innerHTML = $("#users_tbl")[0].innerHTML + "<tr id=\"tr_user_"+user_num+"\"><td>"
+									+ "<a href='javascript:del_user(\"tr_user_"+user_num+"\")'>刪除</a> "
+		                             + $("#TrainingUsers")[0][sel_val].text
+									 + "<input type=\"hidden\" name=\"data[Training][user_id][]\" value=\""+$("#TrainingUsers")[0][sel_val].value
+									 + "\" id=\"TrainingUsersId\"/>"
+									 + "</td></tr>"	
+		$("#UsersNum")[0].value = $("#UsersNum")[0].value++;							
 	}
+
+	function del_user(obj) {
+		tr_id = "#"+obj;
+		del_tr = $(tr_id);
+		del_tr.remove();
+	}
+
 </script>
 <div class="pageheader_div"><h1 id="pageheader">教育訓練維護</h1></div>
 <div class="pagemenu_div"><?php 
-  	echo $this->Html->link('回上一頁', "javascript:history.back();", array('class' => 'button')); 
+  	echo $this->Html->link('回上一頁', array('controller'=>'training', 'action' =>'training_list'), array('class' => 'button')); 
 ?></div>
 <?php echo $this->Form->create('Training', array('div'=>false, 'inputDefaults' => array('label' => false,'div' => false))); ?>
 	<table>
 		<tr>
 			<td>
 			文件編號：<?php echo $this->Form->select('docs', $documents, array('empty'=>false));?><?php echo $this->Html->link('新增文件', 'javascript:add_document()',array('onclick'=>''));?>
-			<table style="padding:0px;margin:0px" border=0 id="docs_tbl"></table>
+			<table style="padding:0px;margin:0px" border=0 id="docs_tbl">
+				<?php $doc_num =1; ?>
+				<?php foreach($this->request->data["TrainingWDocument"] as $docs):?>
+				<tr id="tr_doc_<?php echo $doc_num;?>">
+					<td>
+						<a href='javascript:del_document("tr_doc_<?php echo $doc_num;?>")'>刪除</a>
+						<?php echo $documents[$docs["training_document_id"]];?>
+						<input type="hidden" id="TrainingDocsId" value="<?php echo $docs["training_document_id"];?>" name="data[Training][docs_id][]">
+					</td>
+				</tr>
+				<?php $doc_num++ ;?>
+				<?php endforeach; ?>
+			</table>
+				<input type="hidden" id="DocsNum" value="<?php echo $doc_num;?>" >
 			</td>
 		</tr>	
 		<tr>
@@ -38,7 +78,20 @@
 		<tr>
 			<td>
 			上課人員：<?php echo $this->Form->select('users', $users, array('empty'=>false));?><?php echo $this->Html->link('新增人員', 'javascript:add_member()',array('onclick'=>''));?>
-			<table style="padding:0px;margin:0px" border=0 id="users_tbl"></table>
+			<table style="padding:0px;margin:0px" border=0 id="users_tbl">
+				<?php foreach($this->request->data["TrainingUser"] as $docs):?>
+				<?php $user_num =1; ?>
+				<tr id="tr_user_<?php echo $user_num;?>">
+					<td>
+						<a href='javascript:del_user("tr_user_<?php echo $user_num;?>")'>刪除</a>
+						<?php echo $users[$docs["user_id"]];?>
+						<input type="hidden" id="TrainingUsersId" value="<?php echo $docs["user_id"];?>" name="data[Training][user_id][]">
+					</td>
+				</tr>
+				<?php $user_num++ ;?>
+				<?php endforeach; ?>
+			</table>
+				<input type="hidden" id="UsersNum" value="<?php echo $user_num;?>" >
 			</td>
 		</tr>	
 		<tr>

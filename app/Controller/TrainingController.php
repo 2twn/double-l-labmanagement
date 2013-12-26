@@ -49,8 +49,9 @@ class TrainingController extends AppController {
 		$this->paginate = array(
 			'conditions' => array(),
 			'order' => array('valid desc','id asc'),
-			'limit' => 4
+			'limit' => 10
 		);
+		//var_Dump($this->paginate('Training'));
         $this->set('items', $this->paginate('Training'));
     }
 	
@@ -70,19 +71,23 @@ class TrainingController extends AppController {
 			if ($this->Training->save($this->request->data)) {
 				$newTrainingId = $this->Training->id;
 				$this->TrainingWDocument->deleteAll(array('TrainingWDocument.training_id' => $newTrainingId), false);
-				for($i=0;$i< sizeof($this->request->data["Training"]["docs_id"]); $i++) {
-					$this->request->data["TrainingWDocument"][$i] = array('training_document_id' => $this->request->data["Training"]["docs_id"][$i],
-																		  'training_id' => $newTrainingId,
-																		  'create_time' => date('Y-m-d H:i:s'));
+				if (isset($this->request->data["Training"]["docs_id"])) {
+					for($i=0;$i< sizeof($this->request->data["Training"]["docs_id"]); $i++) {
+						$this->request->data["TrainingWDocument"][$i] = array('training_document_id' => $this->request->data["Training"]["docs_id"][$i],
+																			  'training_id' => $newTrainingId,
+																			  'create_time' => date('Y-m-d H:i:s'));
+					}
+					$this->TrainingWDocument->saveMany($this->request->data["TrainingWDocument"]);
 				}
-				$this->TrainingWDocument->saveMany($this->request->data["TrainingWDocument"]);
 				$this->TrainingUser->deleteAll(array('TrainingUser.training_id' => $newTrainingId), false);
-				for($i=0;$i< sizeof($this->request->data["Training"]["docs_id"]); $i++) {
-					$this->request->data["TrainingUser"][$i] = array('user_id' => $this->request->data["Training"]["docs_id"][$i],
-																		  'training_id' => $newTrainingId,
-																		  'create_time' => date('Y-m-d H:i:s'));
+				if (isset($this->request->data["Training"]["user_id"])) {
+					for($i=0;$i< sizeof($this->request->data["Training"]["user_id"]); $i++) {
+						$this->request->data["TrainingUser"][$i] = array('user_id' => $this->request->data["Training"]["user_id"][$i],
+																			  'training_id' => $newTrainingId,
+																			  'create_time' => date('Y-m-d H:i:s'));
+					}
+					$this->TrainingUser->saveMany($this->request->data["TrainingUser"]);
 				}
-				$this->TrainingUser->saveMany($this->request->data["TrainingWDocument"]);
 				$this->Session->setFlash('儲存成功.');
 				//$this->redirect(array('action' => 'training_list'));
 			} else {

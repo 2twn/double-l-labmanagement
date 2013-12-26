@@ -11,6 +11,7 @@
         <th>結束時間</th>
         <th>上課地點</th>
         <th>授課人員</th>
+        <th>上課人數</th>
         <th>有效</th>
         <th>建立時間</th>
         <th><?php echo $this->Html->link('新增教育訓練', array('action' => 'training_edit'), array('class' => 'button')); ?></th>
@@ -32,6 +33,9 @@
         </td>
         <td>
             <?php echo $item['Training']['instructor']; ?>
+        </td>
+        <td>
+            <?php echo sizeof($item['TrainingUser']); ?>
         </td>
         <td>
             <?php if ($item['Training']['valid']) { echo 'Y'; } else {echo 'N';}; ?>
@@ -56,7 +60,7 @@
     </tr>
     <?php endforeach; ?>
 	<tr>
-	    <td colspan="9">
+	    <td colspan="10">
 			<?php echo $this->Paginator->first('<<'); ?>
 			<?php echo $this->Paginator->numbers(array('first' => 2, 'last' => 2)); ?>
 			<?php echo $this->Paginator->last('>>'); ?>

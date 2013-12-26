@@ -1,6 +1,6 @@
 <div class="pageheader_div"><h1 id="pageheader">文件維護</h1></div>
 <div class="pagemenu_div"><?php 
-  	echo $this->Html->link('回上一頁', "javascript:history.back();", array('class' => 'button')); 
+  	echo $this->Html->link('回上一頁', array('controller'=>'training', 'action' =>'document_list'), array('class' => 'button')); 
 ?></div>
 <?php echo $this->Form->create('TrainingDocument', array('div'=>false, 'inputDefaults' => array('label' => false,'div' => false))); ?>
 	<table>
