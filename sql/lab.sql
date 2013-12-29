@@ -247,6 +247,7 @@ CREATE TABLE IF NOT EXISTS `training_users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `training_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
+  `checkin` int(1) NOT NULL DEFAULT '0',
   `valid` int(1) NOT NULL DEFAULT '1',
   `create_time` datetime NOT NULL,
   `modi_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,

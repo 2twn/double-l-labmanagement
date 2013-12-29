@@ -110,5 +110,19 @@ class TrainingController extends AppController {
 			$this->Session->setFlash('作業失敗.');
 		}	
 	}
+	
+	 public function training_checkin($training_id) {
+		if ($this->request->data) {
+			foreach($this->request->data["TrainingUser"] as $record) {
+				if (isset($record['id'])) {
+					$this->TrainingUser->save($this->request->data["TrainingUser"][0]);
+				}
+			}
+		}
+		$this->set('training', $this->Training->find('all',array('conditions'=>array('Training.id'=>$training_id)))[0]);
+		$str_sql = "Select * from training_users TrainingUser, users User where user_id = User.id and training_id = '$training_id'; ";
+		$items = $this->TrainingUser->query($str_sql);
+        $this->set('items', $items);
+    }
 }
 ?>
