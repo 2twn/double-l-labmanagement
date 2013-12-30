@@ -12,7 +12,7 @@ class EquipBooking extends AppModel {
         'project_id' => array(
             'required' => array(
                 'rule' => array('notEmpty'),
-                'message' => '儀器編號不可空白'
+                'message' => '專案編號不可空白'
             ),
 		),
         'booking_desc' => array(
@@ -22,13 +22,6 @@ class EquipBooking extends AppModel {
             )
         ),
     );
-	
-	public function beforeSave($options = array()) {
-		if (!isset($this->data[$this->alias]['id'])) {
-			$this->data[$this->alias]['create_time'] = date('Y-m-d H:i:s');
-		}
-		return true;
-	};
-	
+
 }
 ?>

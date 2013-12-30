@@ -18,14 +18,28 @@ class EquipmentsController extends AppController {
 	public function equip_edit($id = null) {
 		if ($id != null) {$this->Equip->id = $id;} else {$this->request->data['Equip']['create_time'] = date('Y-m-d H:i:s');}
 		$this->set('equip_status', $this->Formfunc->equip_status());
+		$this->set('id', $id);
 		if ($this->request->is('get')) {
 			$this->request->data = $this->Equip->read();
 		} else {
-			if ($this->Equip->save($this->request->data)) {
-				$this->Session->setFlash('儲存成功.');
-				$this->redirect(array('action' => 'equip_list'));
-			} else {
-				$this->Session->setFlash('儲存失敗.');
+			$this->Equip->set($this->request->data);
+			if ($this->Equip->validates()) {
+				$equip_existed = $this->Equip->find('count', array('conditions' => array('id' => $this->request->data['Equip']['id'])));
+				if (($id == null) && (!$equip_existed)){
+					if ($this->Equip->save($this->request->data)) {
+						$this->Session->setFlash('儲存成功.');
+						//$this->redirect(array('action' => 'equip_list'));
+					} else {
+						$this->Session->setFlash('儲存失敗.');
+					}
+				}
+				else {
+					$this->Session->setFlash('儀器代號已存在.');
+				}
+			}
+			else {
+				$errors = $this->Equip->validationErrors;
+				$this->Session->setFlash($this->Formfunc->validate_errors($errors));
 			}
 		}
 	}
@@ -80,15 +94,21 @@ class EquipmentsController extends AppController {
 	}
 
  	public function equip_book_list() {
-		$this->EquipBooking->find('all');
-        $this->set('items', $this->EquipBooking->query("Select *
-		                                        from equip_bookings EquipBooking,
-												     equips Equip,
-													 projects Project
-											   where EquipBooking.equip_id = Equip.id
-											     and EquipBooking.project_id = Project.id
-											     and EquipBooking.valid = 1
-											   order by Equip.equip_name, EquipBooking.book_start_time desc;"));
+		// $this->EquipBooking->find('all');
+        // $this->set('items', $this->EquipBooking->query("Select *
+		                                        // from equip_bookings EquipBooking,
+												     // equips Equip,
+													 // projects Project
+											   // where EquipBooking.equip_id = Equip.id
+											     // and EquipBooking.project_id = Project.id
+											     // and EquipBooking.valid = 1
+											   // order by Equip.equip_name, EquipBooking.book_start_time desc;"));
+		$this->paginate = array(
+			'conditions' => array(),
+			'orders' => array('valid desc','id desc'),
+			'limit' => 10
+		);
+        $this->set('items', $this->paginate('EquipBooking'));
     }
 	
 	public function insert_book_record($book_data) {

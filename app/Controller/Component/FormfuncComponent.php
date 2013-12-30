@@ -46,5 +46,15 @@
 		public function training_status(){
 			return array(1=>"生效",0=>"未生效");
 		}
+		
+		public function validate_errors($errors) {
+			$result = '';
+			foreach($errors as $error1) {
+				foreach($error1 as $error_msg) {
+					$result = $result.','.$error_msg;
+				}
+			}
+			return substr($result,1);
+		}
 	}
 ?>

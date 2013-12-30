@@ -19,11 +19,18 @@ class MeetingroomsController extends AppController {
 		if ($this->request->is('get')) {
 			$this->request->data = $this->MeetingRoom->read();
 		} else {
-			if ($this->MeetingRoom->save($this->request->data)) {
-				$this->Session->setFlash('儲存成功.');
-				$this->redirect(array('action' => 'mr_list'));
-			} else {
-				$this->Session->setFlash('儲存失敗.');
+			$this->MeetingRoom->set($this->request->data);
+			if ($this->MeetingRoom->validates()) {
+				if ($this->MeetingRoom->save($this->request->data)) {
+					$this->Session->setFlash('儲存成功.');
+					$this->redirect(array('action' => 'mr_list'));
+				} else {
+					$this->Session->setFlash('儲存失敗.');
+				}
+			}
+			else {
+				$errors = $this->MeetingRoom->validationErrors;
+				$this->Session->setFlash($this->Formfunc->validate_errors($errors));
 			}
 		}
 	}

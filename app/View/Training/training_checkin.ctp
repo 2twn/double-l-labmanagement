@@ -1,6 +1,14 @@
+<script>
+	function check_all() {
+		var e = $("#TrainingUserCheckAll")[0].checked;
+        $(".checkin_box > input[type=checkbox]").each(function(){               
+            this.checked = e;
+        });
+	}
+</script>
 <div class="pageheader_div"><h1 id="pageheader">教育訓練列表</h1></div>
 <div class="pagemenu_div"><?php 
-  	echo $this->Html->link('回上一頁', "javascript:history.back();", array('class' => 'button')); 
+  	echo $this->Html->link('回教育訓練列表', array('controller'=>'training', 'action' =>'training_list'), array('class' => 'button')); 
 ?></div>
 <table>
     <tr>
@@ -46,7 +54,7 @@
 <table>
     <tr>
         <th>上課學員</th>
-        <th><?php echo $this->Form->checkbox('checkAll');?></th>
+        <th><?php echo $this->Form->checkbox('checkAll', array('onchange'=>'check_all()'));?></th>
     </tr>
     <?php $i=0; ?>
     <?php foreach ($items as $item): ?>
@@ -54,7 +62,7 @@
         <td>
             <?php echo $item['User']['name']; ?>
         </td>
-        <td>
+        <td class="checkin_box">
 			<?php echo $this->Form->hidden($i.'.id',array('value'=>$item['TrainingUser']['id'])); ?>
 			<?php
 				if ($item['TrainingUser']['checkin']) {

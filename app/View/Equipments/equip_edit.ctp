@@ -5,7 +5,7 @@
 </script>
 <div class="pageheader_div"><h1 id="pageheader">儀器維護</h1></div>
 <div class="pagemenu_div"><?php 
-  	echo $this->Html->link('回上一頁', "javascript:history.back();", array('class' => 'button')); 
+  	echo $this->Html->link('回儀器列表', array('controller'=>'equipments', 'action' =>'equip_list'), array('class' => 'button')); 
 ?></div>
 <?php echo $this->Form->create('Equip', array('div'=>false, 'inputDefaults' => array('label' => false,'div' => false))); ?>
 	<table>
@@ -15,7 +15,7 @@
 		<tr>
 			<td>儀器編號：
 				<?php 
-					if($this->request->data['Equip']['id'] == null)
+					if($id == null)
 						echo $this->Form->text('id', array('size'=>8, 'style'=>'width:150px'));
 					else
 						echo $this->Form->text('id', array('readonly'=>true, 'size'=>8, 'style'=>'width:150px'));

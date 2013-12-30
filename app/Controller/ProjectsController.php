@@ -19,11 +19,24 @@ class ProjectsController extends AppController {
 		if ($this->request->is('get')) {
 			$this->request->data = $this->Project->read();
 		} else {
-			if ($this->Project->save($this->request->data)) {
-				$this->Session->setFlash('儲存成功.');
-				$this->redirect(array('action' => 'prj_list'));
-			} else {
-				$this->Session->setFlash('儲存失敗.');
+			$this->Project->set($this->request->data);
+			if ($this->Project->validates()) {
+				$prj_existed = $this->Project->find('count', array('conditions' => array('id' => $this->request->data['Project']['id'])));
+				if (($id == null) && (!$prj_existed)){
+					if ($this->Project->save($this->request->data)) {
+						$this->Session->setFlash('儲存成功.');
+						//$this->redirect(array('action' => 'prj_list'));
+					} else {
+						$this->Session->setFlash('儲存失敗.');
+					}
+				}
+				else {
+					$this->Session->setFlash('專案代號已存在.');
+				}
+			}
+			else {
+				$errors = $this->Project->validationErrors;
+				$this->Session->setFlash($this->Formfunc->validate_errors($errors));
 			}
 		}
 	}

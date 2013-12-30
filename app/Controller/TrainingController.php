@@ -89,7 +89,7 @@ class TrainingController extends AppController {
 					$this->TrainingUser->saveMany($this->request->data["TrainingUser"]);
 				}
 				$this->Session->setFlash('儲存成功.');
-				//$this->redirect(array('action' => 'training_list'));
+				$this->redirect(array('action' => 'training_list'));
 			} else {
 				$this->Session->setFlash('儲存失敗.');
 			}

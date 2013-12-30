@@ -48,8 +48,10 @@
 				$delbtn = '生效';
 				if ($item['Training']['valid']) {
 					echo $this->Html->link('修改', array('action' => 'training_edit', $item['Training']['id']), array('class' => 'button'));
-					$delbtn = '失效';
 					echo '&nbsp';
+					echo $this->Html->link('出席登入', array('action' => 'training_checkin', $item['Training']['id']), array('class' => 'button'));
+					echo '&nbsp';
+					$delbtn = '失效';
 				}
 				echo $this->Form->postLink(
 				$delbtn,
