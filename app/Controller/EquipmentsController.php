@@ -9,7 +9,7 @@ class EquipmentsController extends AppController {
 		$this->set('equip_status', $this->Formfunc->equip_status());
 		$this->paginate = array(
 			'conditions' => array(),
-			'order' => array('valid desc','id asc'),
+			'order' => array('Equip.valid'=>'desc','Equip.id'=>'asc'),
 			'limit' => 4
 		);
         $this->set('items', $this->paginate('Equip'));
@@ -105,7 +105,7 @@ class EquipmentsController extends AppController {
 											   // order by Equip.equip_name, EquipBooking.book_start_time desc;"));
 		$this->paginate = array(
 			'conditions' => array(),
-			'orders' => array('valid desc','id desc'),
+			'order' => array('EquipBooking.valid'=>'desc','EquipBooking.id'=>'desc'),
 			'limit' => 10
 		);
         $this->set('items', $this->paginate('EquipBooking'));

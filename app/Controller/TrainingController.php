@@ -9,7 +9,7 @@ class TrainingController extends AppController {
 		$this->set('document_status', $this->Formfunc->document_status());
 		$this->paginate = array(
 			'conditions' => array(),
-			'order' => array('valid desc','id asc'),
+			'order' => array('TrainingDocument.valid'=>'desc','TrainingDocument.id'=>'asc'),
 			'limit' => 4
 		);
         $this->set('items', $this->paginate('TrainingDocument'));
@@ -48,7 +48,7 @@ class TrainingController extends AppController {
 		$this->set('$training_status', $this->Formfunc->training_status());
 		$this->paginate = array(
 			'conditions' => array(),
-			'order' => array('valid desc','id asc'),
+			'order' => array('Training.valid'=>'desc','Training.id'=>'asc'),
 			'limit' => 10
 		);
 		//var_Dump($this->paginate('Training'));
