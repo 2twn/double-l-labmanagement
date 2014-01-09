@@ -28,7 +28,7 @@ class EquipmentsController extends AppController {
 				if (($id == null) && (!$equip_existed)){
 					if ($this->Equip->save($this->request->data)) {
 						$this->Session->setFlash('儲存成功.');
-						//$this->redirect(array('action' => 'equip_list'));
+						$this->redirect(array('action' => 'equip_list'));
 					} else {
 						$this->Session->setFlash('儲存失敗.');
 					}

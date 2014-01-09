@@ -25,7 +25,7 @@ class ProjectsController extends AppController {
 				if (($id == null) && (!$prj_existed)){
 					if ($this->Project->save($this->request->data)) {
 						$this->Session->setFlash('儲存成功.');
-						//$this->redirect(array('action' => 'prj_list'));
+						$this->redirect(array('action' => 'prj_list'));
 					} else {
 						$this->Session->setFlash('儲存失敗.');
 					}

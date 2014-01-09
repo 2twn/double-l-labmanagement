@@ -1,6 +1,6 @@
 <div class="pageheader_div"><h1 id="pageheader">文件列表</h1></div>
 <div class="pagemenu_div"><?php 
-  	echo $this->Html->link('回上一頁', "javascript:history.back();", array('class' => 'button')); 
+  	//echo $this->Html->link('回上一頁', "javascript:history.back();", array('class' => 'button')); 
 ?></div>
 
 <table>

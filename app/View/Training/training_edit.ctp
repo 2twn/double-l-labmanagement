@@ -79,8 +79,8 @@
 			<td>
 			上課人員：<?php echo $this->Form->select('users', $users, array('empty'=>false));?><?php echo $this->Html->link('新增人員', 'javascript:add_member()',array('onclick'=>''));?>
 			<table style="padding:0px;margin:0px" border=0 id="users_tbl">
-				<?php foreach($this->request->data["TrainingUser"] as $docs):?>
 				<?php $user_num =1; ?>
+				<?php foreach($this->request->data["TrainingUser"] as $docs):?>
 				<tr id="tr_user_<?php echo $user_num;?>">
 					<td>
 						<a href='javascript:del_user("tr_user_<?php echo $user_num;?>")'>刪除</a>

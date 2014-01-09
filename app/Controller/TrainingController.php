@@ -62,9 +62,18 @@ class TrainingController extends AppController {
 		if ($id != null) { $this->Training->id = $id; } else {$this->request->data['Training']['create_time'] = date('Y-m-d H:i:s');}
 		if ($this->request->is('get')) {
 			$this->request->data = $this->Training->read();
-			$this->request->data['Training']['start_date'] = substr($this->request->data['Training']['start_time'],0,10);
-			$this->request->data['Training']['b_start_time'] = substr($this->request->data['Training']['start_time'],11,5);
-			$this->request->data['Training']['b_end_time'] = substr($this->request->data['Training']['end_time'],11,5);
+			if ($this->data != null) {
+				$this->request->data['Training']['start_date'] = substr($this->request->data['Training']['start_time'],0,10);
+				$this->request->data['Training']['b_start_time'] = substr($this->request->data['Training']['start_time'],11,5);
+				$this->request->data['Training']['b_end_time'] = substr($this->request->data['Training']['end_time'],11,5);
+			}
+			else {
+				$this->request->data['Training']['start_date'] = date('Y-m-d');
+				$this->request->data['Training']['b_start_time'] = date('H').':00';
+				$this->request->data['Training']['b_end_time'] = date('H').':00';
+				$this->request->data["TrainingWDocument"] = array();
+				$this->request->data["TrainingUser"] = array();
+			}
 		} else {
 			$this->request->data['Training']['start_time'] = substr($this->request->data['Training']['start_date'],0,10)." ".$this->request->data['Training']['b_start_time'];
 			$this->request->data['Training']['end_time'] = substr($this->request->data['Training']['start_date'],0,10)." ".$this->request->data['Training']['b_end_time'];
@@ -119,7 +128,8 @@ class TrainingController extends AppController {
 				}
 			}
 		}
-		$this->set('training', $this->Training->find('all',array('conditions'=>array('Training.id'=>$training_id)))[0]);
+		$training = $this->Training->find('all',array('conditions'=>array('Training.id'=>$training_id)));
+		$this->set('training', $training[0]);
 		$str_sql = "Select * from training_users TrainingUser, users User where user_id = User.id and training_id = '$training_id'; ";
 		$items = $this->TrainingUser->query($str_sql);
         $this->set('items', $items);
