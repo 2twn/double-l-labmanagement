@@ -53,12 +53,20 @@
 <?php echo $this->Form->create('TrainingUser', array('div'=>false, 'inputDefaults' => array('label' => false,'div' => false))); ?>
 <table>
     <tr>
-        <th>上課學員</th>
-        <th><?php echo $this->Form->checkbox('checkAll', array('onchange'=>'check_all()'));?></th>
+        <th>部門</th>
+        <th>工號</th>
+        <th>姓名</th>
+        <th>評核結果</th>
     </tr>
     <?php $i=0; ?>
     <?php foreach ($items as $item): ?>
     <tr>
+        <td>
+            <?php echo $item['Department']['dep_name']; ?>
+        </td>
+        <td>
+            <?php echo $item['User']['username']; ?>
+        </td>
         <td>
             <?php echo $item['User']['name']; ?>
         </td>
@@ -66,9 +74,9 @@
 			<?php echo $this->Form->hidden($i.'.id',array('value'=>$item['TrainingUser']['id'])); ?>
 			<?php
 				if ($item['TrainingUser']['checkin']) {
-					echo $this->Form->checkbox($i.'.checkin', array('checked'));
+					echo $this->Form->select($i.'.checkin', $checkins, array('value'=>$item['TrainingUser']['checkin'], 'empty'=>false));
 				} else {
-					echo $this->Form->checkbox($i.'.checkin', array());
+					echo $this->Form->select($i.'.checkin', $checkins, array('empty'=>false));
 				}
 			?>
 		</td>

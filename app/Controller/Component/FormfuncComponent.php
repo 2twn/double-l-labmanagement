@@ -56,5 +56,9 @@
 			}
 			return substr($result,1);
 		}
+		
+		public function checkin_status(){
+			return array(0=>"合格(Pass)",1=>"不合格(Fail)", 2=>"N/A");
+		}
 	}
 ?>

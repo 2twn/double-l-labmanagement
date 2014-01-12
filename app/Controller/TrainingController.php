@@ -130,9 +130,27 @@ class TrainingController extends AppController {
 		}
 		$training = $this->Training->find('all',array('conditions'=>array('Training.id'=>$training_id)));
 		$this->set('training', $training[0]);
-		$str_sql = "Select * from training_users TrainingUser, users User where user_id = User.id and training_id = '$training_id'; ";
+		$items = $this->TrainingUser->find('all', array('conditions'=>array('training_id' => $training_id)));
+		$str_sql = "Select * 
+		              from training_users TrainingUser, users User, departments Department 
+		             where user_id = User.id 
+		               and User.department_id = Department.id 
+		               and training_id = '$training_id'; ";
 		$items = $this->TrainingUser->query($str_sql);
         $this->set('items', $items);
+        $this->set('checkins', $this->Formfunc->checkin_status());
+    }
+    
+    public function training_checkin_print($training_id) {
+    	$training = $this->Training->find('all',array('conditions'=>array('Training.id'=>$training_id)));
+    	$this->set('training', $training[0]);
+    	$str_sql = "Select *
+    	from training_users TrainingUser, users User, departments Department
+    	where user_id = User.id
+    	and User.department_id = Department.id
+    	and training_id = '$training_id'; ";
+    	$items = $this->TrainingUser->query($str_sql);
+    	$this->set('items', $items);
     }
 }
 ?>
