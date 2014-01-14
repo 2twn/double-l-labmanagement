@@ -89,6 +89,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `email` varchar(100) NOT NULL,
   `name` varchar(40) NOT NULL,
   `username` varchar(20) NOT NULL,
+  `group_id` int(11) NOT NULL,
   `valid` char(1) NOT NULL DEFAULT '0',
   `create_time` datetime NOT NULL,
   `modi_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
