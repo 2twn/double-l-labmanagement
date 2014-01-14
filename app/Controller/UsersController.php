@@ -61,15 +61,16 @@ class UsersController extends AppController {
 	
 	public function user_list() {
         $this->set('items', $this->User->find('all', array('order' => 'User.valid DESC, User.id')));
+        $this->_initUserViewItems();
     }
 	
 	public function user_edit($id = null) {
+		$this->_initUserViewItems();
+		
 		$this->User->id = $id;
 		if ($this->request->is('get')) {
 			$this->request->data = $this->User->read();
-			$this->set('items', $this->Department->find('list', array('conditions' => array('Department.valid' => 1), 
-			                                                          'fields' => array('Department.id','Department.dep_name'),
-																	  'order' => 'Department.dep_name')));
+
 		} else {
 			if ($this->request->data['User']['id'] == ''){
 				$this->request->data['User']['create_time'] = date('Y-m-d H:i:s');
@@ -96,6 +97,13 @@ class UsersController extends AppController {
 		} else {
 			$this->Session->setFlash('作業失敗.');
 		}	
+	}
+	
+	private function _initUserViewItems(){
+			$this->set('departments', $this->Department->find('list', array('conditions' => array('Department.valid' => 1), 
+			                                                          'fields' => array('Department.id','Department.dep_name'),
+																	  'order' => 'Department.dep_name')));
+			$this->set('groups', $this->Userfunc->getGroupOptions());
 	}
 }
 ?>

@@ -24,7 +24,8 @@
 	<div id="container">
 		<div id="header" sytle="clear:left; float:left; background: #6494CD; ">
 		<?php
-			if($this->Session->read('Auth.User'))	
-				echo $this->element('user_menu');
+			if($this->Session->read('Auth.User'))	{
+				echo $this->element($this->Session->read('Auth.User.group_id').'_menu');
+			}
 		?>
 		</div>

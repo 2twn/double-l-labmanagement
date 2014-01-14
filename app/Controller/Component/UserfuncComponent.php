@@ -8,7 +8,14 @@ class UserfuncComponent extends Component {
 			'localadmin'=>'分校管理員', 
 			'localmanager'=>'分校經理'
 		);
+	public $user_groups = array(
+			0=>'管理者',
+			1=>'使用者'
+	);
 
+	public function getGroupOptions(){
+		return $this->user_groups;
+	}
 	public function getRoleOptinons(){
 		if($this->Session->read('user_role') !== 'admin'){
 			return array('localadmin'=>'分校管理員', 'localmanager'=>'分校經理');			
