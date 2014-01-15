@@ -2,7 +2,7 @@
 class TrainingController extends AppController {
 	public $uses = array('TrainingDocument', 'Training', 'TrainingUser','TrainingWDocument','MeetingRoom', 'User');
     public $helpers = array('Html', 'Form', 'Session', 'Paginator');
-    public $components = array('Session', 'Formfunc', 'Userfunc');
+    public $components = array('Session', 'Formfunc', 'Userfunc', 'Emailfunc');
 	public $paginate = array('limit' => 10,);
 
  	public function document_list() {
@@ -150,6 +150,40 @@ class TrainingController extends AppController {
     	and User.department_id = Department.id
     	and training_id = '$training_id'; ";
     	$items = $this->TrainingUser->query($str_sql);
+    	$this->set('items', $items);
+    }
+    
+    public function training_checkin_send($training_id) {
+    	$training = $this->Training->find('all',array('conditions'=>array('Training.id'=>$training_id)));
+    	$this->set('training', $training[0]);
+    	$this->Emailfunc->subject ="教育訓練通知 (".date('m/d/Y', strtotime($training[0]['Training']['start_time'])).")";
+    	$this->Emailfunc->html_body ="<html><body>
+    									<p>主旨: 教育訓練通知 (".date('m/d/Y', strtotime($training[0]['Training']['start_time'])).")</p>
+ 										<p></p>
+										<p>內容:</p>
+										<p> </p>
+										<p style=\"padding-left:24px\">請 {#NAME#} 準時參加教育訓練課程</p>
+										<p style=\"padding-left:24px\">訓練時間、地點及內容如下</p>
+										<p> </p>
+										<p>
+    									<span style=\"padding-left:36px\">時間: ".date('m/d/Y H:i', strtotime($training[0]['Training']['start_time']))." – ".date('H:i', strtotime($training[0]['Training']['end_time']))."</span><br/>
+										<span style=\"padding-left:36px\">地點: ".$training[0]["MeetingRoom"]['mr_name']."</span><br/>
+										<span style=\"padding-left:36px\">講師: ".$training[0]['Training']["instructor"]."</span><br/>
+										<span style=\"padding-left:36px\">內容: (課程名稱)</span><br/>
+										</p>
+										</body></html>";
+    	$str_sql = "Select *
+			    	  from training_users TrainingUser, users User, departments Department
+			    	 where user_id = User.id
+			    	   and User.department_id = Department.id
+			    	   and training_id = '$training_id'; ";
+    	$items = $this->TrainingUser->query($str_sql);
+    	for($i = 0; $i<sizeof($items);$i++) {
+    		$this->Emailfunc->to = array(array('email'=> $items[$i]['User']['email'], 'name'=> $items[$i]['User']['name']));
+    		$this->Emailfunc->html_body = str_replace('{#NAME#}',$items[$i]['User']['name'],$this->Emailfunc->html_body);
+ 			$ret = $this->Emailfunc->send();
+ 			$items[$i]['User']['email_result'] = $ret;
+    	}
     	$this->set('items', $items);
     }
 }

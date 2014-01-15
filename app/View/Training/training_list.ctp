@@ -49,6 +49,10 @@
 				if ($item['Training']['valid']) {
 					echo $this->Html->link('修改', array('action' => 'training_edit', $item['Training']['id']), array('class' => 'button'));
 					echo '&nbsp';
+					echo $this->Html->link('通知', array('action' => 'training_checkin_send', $item['Training']['id']), array('class' => 'button'));
+					echo '&nbsp';
+					echo $this->Html->link('列印', array('action' => 'training_checkin_print', $item['Training']['id']), array('class' => 'button'));
+					echo '&nbsp';
 					echo $this->Html->link('出席登入', array('action' => 'training_checkin', $item['Training']['id']), array('class' => 'button'));
 					echo '&nbsp';
 					$delbtn = '失效';

@@ -16,12 +16,10 @@
 		 document.body.innerHTML = originalContents;
 	}
 </script>
-<div class="pageheader_div"><h1 id="pageheader">教育訓練簽到表</h1></div>
+<div class="pageheader_div"><h1 id="pageheader">教育訓練通知</h1></div>
 <div class="pagemenu_div">
 <?php 
   	echo $this->Html->link('回教育訓練列表', array('controller'=>'training', 'action' =>'training_list'), array('class' => 'button'));
-  	echo '&nbsp;';
-  	echo $this->Html->link('列印', 'javascript:printDiv("print_area");', array('class' => 'button')); 
 ?>
 </div>
 <div id="print_area" style="background-color:white;">
@@ -52,8 +50,7 @@
         <th style="width:100px" class="tb_border">部門</th>
         <th style="width:100px" class="tb_border">工號</th>
         <th style="width:150px" class="tb_border">姓名</th>
-        <th class="tb_border">簽名</th>
-        <th style="width:250px" class="tb_border">評核結果</th>
+        <th class="tb_border">結果</th>
     </tr>
     <?php $i=0; ?>
     <?php foreach ($items as $item): ?>
@@ -67,8 +64,7 @@
         <td class="tb_border">
             <?php echo $item['User']['name']; ?>
         </td>
-        <td class="tb_border">&nbsp;</td>
-        <td class="tb_border">□合格(Pass)&nbsp;□不合格(Fail)&nbsp;□N/A</td>
+        <td class="tb_border"><?php if ($item['User']['email_result']) {echo '寄送成功';} else {echo '寄送失敗';} ?></td>
     </tr>
     <?php $i++; ?>
     <?php endforeach; ?>
