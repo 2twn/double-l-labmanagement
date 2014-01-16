@@ -10,6 +10,7 @@
         <th>登入名稱</th>
         <th>電子郵件</th>
         <th>部門</th>
+        <th>群組</th>
         <th>有效</th>
         <th>建立時間</th>
         <th><?php echo $this->Html->link('新增人員', array('action' => 'user_edit'), array('class' => 'button')); ?></th>
@@ -26,9 +27,12 @@
         <td>
             <?php echo $item['User']['email']; ?>
         </td>
-        <td>
+        <td>    
             <?php echo $item['Department']['dep_name']; ?>
         </td>
+        <td>
+            <?php echo $groups[$item['User']['group_id']]; ?>
+        </td>        
         <td>
             <?php if ($item['User']['valid']) { echo 'Y'; } else {echo 'N';}; ?>
         </td>

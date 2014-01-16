@@ -16,13 +16,16 @@
 			<td>人員名稱</td><td><?php echo $this->Form->input('name');?></td>
 		</tr>
 		<tr>
-			<td>部門</td><td><?php echo $this->Form->select('department_id', $items, array('empty'=>false));?></td>
+			<td>部門</td><td><?php echo $this->Form->select('department_id', $departments, array('empty'=>false));?></td>
 		</tr>
 		<tr>
 			<td>人員帳號</td><td><?php echo $this->Form->input('username');?></td>
 		</tr>
 		<tr>
 			<td>電子郵件</td><td><?php echo $this->Form->input('email');?></td>
+		</tr>
+		<tr>
+			<td>群組</td><td><?php echo $this->Form->select('group_id', $groups, array('empty'=>false));?></td>
 		</tr>
 		<tr>
 			<td colspan=2><?php echo $this->Form->submit('儲存');?></td>
