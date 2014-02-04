@@ -124,6 +124,9 @@ class EquipmentsController extends AppController {
 			$book_id = $book_data['id'];
 		}
 		$error_msg = $this->is_equip_book($book_data['equip_id'], $book_data['book_start_time'], $book_data['book_end_time'], $book_id);
+		if ($book_data['book_start_time'] >= $book_data['book_end_time']) {
+			$error_msg = '起訖日期錯誤';
+		}
 		if ($error_msg == ''){
 			if (!$this->EquipBooking->save($book_data)) {
 				$error_msg = '儲存失敗.';
@@ -241,5 +244,48 @@ class EquipmentsController extends AppController {
 																				'substr(EquipBooking.book_start_time,1,10)' => $start_date)));
 		return $booking;
 	}
+	
+	public function equip_booking_day_table() {
+
+	}
+	
+	public function get_booking_day_table($sel_date='') {
+		$this->layout = 'ajax';
+		if ($sel_date = '') {
+			$sel_date = date('Y-m-d');
+		}
+		$this->set('equips', $this->genValidEquip());
+		$start_periods = $this->book_periods();
+		$i = 0;
+		foreach ($start_periods as $start_period) {
+			$start_periods[$i] = $start_period;
+			unset($start_periods[$start_period]);
+			$i++;
+		}
+		$this->set('start_periods', $start_periods);
+		$end_periods = $this->book_periods(1);
+		$i = 0;
+		foreach ($end_periods as $end_period) {
+			$end_periods[$i] = $end_period;
+			unset($end_periods[$start_period]);
+			$i++;
+		}
+		$this->set('end_periods', $end_periods);
+		$bookings = $this->EquipBooking->query("Select *
+													from equip_bookings EquipBooking,
+													equips Equip,
+													projects Project
+													where EquipBooking.equip_id = Equip.id
+													and EquipBooking.project_id = Project.id
+													and EquipBooking.valid = 1 "
+											//	  ."and substr(EquipBooking.book_start_time,1,10) = '$sel_date' "
+												  ."order by Equip.equip_name, EquipBooking.book_start_time desc;");
+		$items = array();
+		foreach ($bookings as $book) {
+			$items[$book['EquipBooking']['equip_id']][substr($book['EquipBooking']['book_start_time'],11,5)] = $book;		
+		}
+		$this->set('items', $items);
+	}
+	
 }
 ?>
