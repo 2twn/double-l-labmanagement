@@ -251,7 +251,7 @@ class EquipmentsController extends AppController {
 	
 	public function get_booking_day_table($sel_date='') {
 		$this->layout = 'ajax';
-		if ($sel_date = '') {
+		if ($sel_date == '') {
 			$sel_date = date('Y-m-d');
 		}
 		$this->set('equips', $this->genValidEquip());
@@ -278,7 +278,7 @@ class EquipmentsController extends AppController {
 													where EquipBooking.equip_id = Equip.id
 													and EquipBooking.project_id = Project.id
 													and EquipBooking.valid = 1 "
-											//	  ."and substr(EquipBooking.book_start_time,1,10) = '$sel_date' "
+												  ."and substr(EquipBooking.book_start_time,1,10) = '$sel_date' "
 												  ."order by Equip.equip_name, EquipBooking.book_start_time desc;");
 		$items = array();
 		foreach ($bookings as $book) {
