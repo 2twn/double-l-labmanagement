@@ -1,9 +1,10 @@
 <?php
 class SafetyTrialCheckdate extends AppModel {
     public $name = 'SafetyTrialCheckdate';
-    
-	public function beforeSave($options = array()) {
-
-	}
+    public $belongsTo = array(
+    		'SafetyTrial' => array(
+    				'className' => 'SafetyTrial',
+    				'foreignKey' => 'safty_trial_id'),
+    );    
 }
 ?>

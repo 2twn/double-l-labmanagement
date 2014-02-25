@@ -10,8 +10,8 @@ class User extends AppModel {
 					'message'  => '只可是英數',
 				),
 				'between' => array(
-					'rule'    => array('between', 5, 20),
-					'message' => '長度在5-20字元',
+					'rule'    => array('between', 2, 20),
+					'message' => '長度在2-20字元',
 				),
 				'unique' => array(
 					'rule' => 'isUnique',

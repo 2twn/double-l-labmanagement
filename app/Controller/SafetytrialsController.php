@@ -2,7 +2,7 @@
 class SafetytrialsController extends AppController {
 	public $uses = array('SafetyTrial', 'SafetyTrialCheckdate', 'Project', 'User');
 	public $helpers = array('Html', 'Form', 'Session');
-	public $components = array('Session', 'Formfunc', 'Userfunc','Util');
+	public $components = array('Session', 'Formfunc', 'Userfunc','Util','Safetyfunc');
 	
 	public $check_modes = array(
 		'1W'=>array('id'=>'1W','label'=>'1W(3d)','check_day'=>'+7','remind_day'=>-3),
@@ -35,13 +35,19 @@ class SafetytrialsController extends AppController {
 		$options = array (
 				'order' => 'SafetyTrial.id' 
 		);
+		$many_conditions = null;
 		if ($this->request->is('post')) {
-			$options ['conditions'] = array (
-					'SafetyTrial.status' => $this->request->data['SafetyTrial']['status'] 
-			);
+			$items = $this->Safetyfunc->search ( 
+					$this->request->data ['SafetyTrial'] ['status'], 
+					$this->request->data ['SafetyTrial'] ['check_start'], 
+					$this->request->data ['SafetyTrial'] ['check_end']
+			 );
+
+		} else {
+			$items = $this->SafetyTrial->find('all', $options);
 		}
 		$this->set('trial_status', $this->Formfunc->safety_trial_status());
-		$this->set('items', $this->SafetyTrial->find('all', $options));
+		$this->set('items', $items);
 	}
 	public function edit($id = null) {
 		$this->set('trial_status', $this->Formfunc->safety_trial_status());		

@@ -1,6 +1,12 @@
 <?php
 class SafetyTrial extends AppModel {
     public $name = 'SafetyTrial';
+    public $hasMany = array(
+    		'SafetyTrialCheckdate' => array(
+    			'className' => 'SafetyTrialCheckdate',
+    				'foreignKey' => 'safety_trial_id',
+    				),
+    );
     public $belongsTo = array(
     		'Project' => array(
             	'className' => 'Project',
@@ -26,8 +32,5 @@ class SafetyTrial extends AppModel {
     				)
     		),
     );    
-	public function beforeSave($options = array()) {
-
-	}
 }
 ?>

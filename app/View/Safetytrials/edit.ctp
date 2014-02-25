@@ -58,7 +58,11 @@ label {
 		</tr>		
 		<tr>
 			<td class="input_label">所屬專案</td><td><?php echo $this->Form->select('project_id', $projects, array('empty'=>false));?></td>
+		</tr>		
+		<tr>
+			<td class="input_label">儲存位置</td><td><?php echo $this->Form->input('location');?></td>
 		</tr>
+
 		<tr>
 			<td class="input_label">狀態</td><td><?php echo $this->Form->select('status', $trial_status, array('empty'=>false));?></td>
 		</tr>
