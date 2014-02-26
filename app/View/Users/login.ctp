@@ -1,4 +1,8 @@
-<div class="users form">
+<table>
+<tr><td width='300px'>
+<?php echo $this->Html->image('TLC_Color.jpg', array('alt' => 'TLC Lab Management', 'border' => '0'));?>
+</td>
+<td>
 <?php echo $this->Session->flash('auth'); ?>
 <?php echo $this->Form->create('User'); ?>
     <fieldset>
@@ -9,4 +13,5 @@
     ?>
     </fieldset>
 <?php echo $this->Form->end(__('Login')); ?>
-</div>
+</td>
+</tr></table>
