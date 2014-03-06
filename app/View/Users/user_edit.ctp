@@ -2,13 +2,15 @@
 <div class="pagemenu_div"><?php 
   	echo $this->Html->link('回上一頁', "javascript:history.back();", array('class' => 'button')); 
 ?></div>
-<?php echo $this->Form->create('User', array('div'=>false, 'inputDefaults' => array('label' => false,'div' => false))); ?>
+<?php echo $this->Form->create('User', array('div'=>false, 'inputDefaults' => array('label' => false,'div' => false))); 
+	echo $this->Form->hidden('id');
+?>
 	<table>
 		<tr>
-			<td>人員代碼(不可變更)</td>
+			<td>員工編號</td>
 			<td>
 				<?php 
-					echo $this->Form->input('id', array('type'=>'text','readonly'=>true));
+					echo $this->Form->input('employee_id', array('type'=>'text'));
 				?>
 			</td>
 		</tr>	

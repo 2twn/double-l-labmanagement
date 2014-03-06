@@ -5,7 +5,7 @@
 
 <table>
     <tr>
-        <th>人員代號</th>
+        <th>員工編號</th>
         <th>人員姓名</th>
         <th>登入名稱</th>
         <th>電子郵件</th>
@@ -17,7 +17,7 @@
     </tr>
     <?php foreach ($items as $item): ?>
     <tr>
-        <td><?php echo $item['User']['id']; ?></td>
+        <td><?php echo $item['User']['employee_id']; ?></td>
         <td>
             <?php echo $item['User']['name']; ?>
         </td>
