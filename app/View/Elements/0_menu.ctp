@@ -37,6 +37,5 @@
 			<li><?php echo $this->html->link('試藥登錄', array('controller' => 'reagents', 'action' => 'record_list')); ?></li>
 		</ul>
 	</li>	
-	<li><?php echo $this->html->link('登出', array('controller' => 'users', 'action' => 'logout')); ?>
 </ul>
 </div>
