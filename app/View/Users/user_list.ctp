@@ -2,7 +2,9 @@
 <div class="pagemenu_div"><?php 
   	echo $this->Html->link('回上一頁', "javascript:history.back();", array('class' => 'button')); 
 ?></div>
-
+<div class="pagebtn_div">
+<?php echo $this->Html->link('新增人員', array('action' => 'user_edit'), array('class' => 'button')); ?>
+</div>
 <table>
     <tr>
         <th>員工編號</th>
@@ -13,7 +15,7 @@
         <th>群組</th>
         <th>有效</th>
         <th>建立時間</th>
-        <th><?php echo $this->Html->link('新增人員', array('action' => 'user_edit'), array('class' => 'button')); ?></th>
+        <th></th>
     </tr>
     <?php foreach ($items as $item): ?>
     <tr>

@@ -185,3 +185,8 @@ td h1 {
 	padding-left: 66px; 
 	padding-top: 3px;
 }
+
+.pagebtn_div{
+	clear:left;
+	padding:5px 5px 5px 5px;
+}
