@@ -5,6 +5,7 @@ class UsersController extends AppController {
     public $components = array('Session', 'Formfunc', 'Userfunc');
     
     public function login() {
+    	$this->layout = 'login';
     	if ($this->request->is('post')) {
     		if ($this->Auth->login()) {
     			//$this->Session->write('user',$this->Auth->user());

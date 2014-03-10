@@ -22,7 +22,7 @@
 	?>
 </head>
 <body>
-	<div id="container" style="background: #FFFFFF;">
+	<div id="container" >
 		<div id="header" sytle="clear:left; float:left; background: #6494CD; ">
 		<table style="border: 0px;padding=0px;margin:0px">
 		<tr><td>
