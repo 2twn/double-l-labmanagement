@@ -10,7 +10,12 @@ class UserfuncComponent extends Component {
 		);
 	public $user_groups = array(
 			0=>'管理者',
-			1=>'使用者'
+			1=>'使用者',
+			2=>'儀器管理',
+			3=>'安定性樣品管理',
+			4=>'教育訓練管理',
+			5=>'試藥管理',
+			
 	);
 
 	public function getGroupOptions(){
