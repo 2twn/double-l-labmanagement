@@ -36,7 +36,9 @@
     echo $this->Form->submit('查詢',array('div'=>false, 'inputDefaults' => array('label' => false,'div' => false)));
     echo $this->Form->end(); 
 ?></div>
-
+<div class="pagebtn_div">
+<?php echo $this->Html->link('新增', array('action' => 'edit'), array('class' => 'button')); ?>
+</div>
 <table>
     <tr>
         <th>樣品批號</th>
@@ -46,7 +48,7 @@
         <th>樣品時間</th>
         <th>儲存位置</th>
         <th>建立時間</th>
-        <th><?php echo $this->Html->link('新增', array('action' => 'edit'), array('class' => 'button')); ?></th>
+        <th></th>
     </tr>
     <?php foreach ($items as $item): ?>
     <tr>
