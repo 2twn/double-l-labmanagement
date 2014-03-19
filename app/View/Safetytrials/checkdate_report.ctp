@@ -25,19 +25,18 @@
         );
     });
 </script>
-<div class="pageheader_div"><h1 id="pageheader">安定性樣品列表</h1></div>
+<div class="pageheader_div"><h1 id="pageheader">檢核時間點查詢</h1></div>
 <div class="pagemenu_div"><?php 
   	echo $this->Html->link('回上一頁', "javascript:history.back();", array('class' => 'button')); 
     echo $this->Form->create('SafetyTrial',array('div'=>false, 'inputDefaults' => array('label' => false,'div' => false)));
-    //echo $this->Form->text('check_start', array('dateFormat' => 'Y-M-D', 'class' =>'jquery_date',  'size'=>8, 'style'=>'width:150px'));
-    //echo '-';
-    //echo $this->Form->text('check_end', array('dateFormat' => 'Y-M-D', 'class' =>'jquery_date',  'size'=>8, 'style'=>'width:150px'));
-    echo $this->Form->select('status', $trial_status, array('empty'=>false));
+    echo $this->Form->text('check_start', array('dateFormat' => 'Y-M-D', 'class' =>'jquery_date',  'size'=>8, 'style'=>'width:150px'));
+    echo '-';
+    echo $this->Form->text('check_end', array('dateFormat' => 'Y-M-D', 'class' =>'jquery_date',  'size'=>8, 'style'=>'width:150px'));
+    //echo $this->Form->select('status', $trial_status, array('empty'=>false));
     echo $this->Form->submit('查詢',array('div'=>false, 'inputDefaults' => array('label' => false,'div' => false)));
     echo $this->Form->end(); 
 ?></div>
 <div class="pagebtn_div">
-<?php echo $this->Html->link('新增', array('action' => 'edit'), array('class' => 'button')); ?>
 </div>
 <table>
     <tr>
@@ -47,7 +46,8 @@
         <th>狀態</th>
         <th>樣品時間</th>
         <th>儲存位置</th>
-        <th></th>
+        <th>檢核週期</th>
+        <th>檢核時間</th>
     </tr>
     <?php foreach ($items as $item): ?>
     <tr>
@@ -56,7 +56,7 @@
             <?php echo $item['SafetyTrial']['trial_name']; ?>
         </td>
         <td>
-            <?php echo $item['Project']['prj_name'];  ?>
+            <?php echo $item['SafetyTrial']['Project']['prj_name'];  ?>
         </td>
         <td>
             <?php echo $trial_status[$item['SafetyTrial']['status']];  ?>
@@ -68,8 +68,11 @@
             <?php echo $item['SafetyTrial']['location'];  ?>
         </td>   
         <td>
-            <?php echo $this->Html->link('修改', array('action' => 'edit', $item['SafetyTrial']['id']), array('class' => 'button'));?>    
-        </td>
+            <?php echo $item['SafetyTrialCheckdate']['check_mode'];  ?>
+        </td>  
+        <td>
+            <?php echo $item['SafetyTrialCheckdate']['check_date'];  ?>
+        </td>                  
     </tr>
     <?php endforeach; ?>
 </table>

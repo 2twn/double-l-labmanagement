@@ -18,11 +18,25 @@ class SafetyfuncComponent extends Component {
 		);		
 		$subQuery = $this->_getSubQuery($start_date, $end_date);
 		if($subQuery <> null) $conditions[] = $subQuery;
-		var_dump($subQuery);
 		$options['conditions'] = $conditions;
 		return $model->find('all', $options);		
 	}
-	
+	public function searchByCheckdate($start_date,$end_date){
+		$model = ClassRegistry::init('SafetyTrialCheckdate');
+		$options = array (
+				'recursive' => 2,
+				'order' => 'SafetyTrialCheckdate.check_date'
+		);
+		$conditions = array (
+				'SafetyTrial.status' => 1,
+				'AND'=> array(
+					'SafetyTrialCheckdate.check_date >= ' => $start_date,
+        			'SafetyTrialCheckdate.check_date <= ' => $end_date,
+				)
+		);
+		$options['conditions'] = $conditions;
+		return $model->find('all', $options);
+	}
 	private function _getSubQuery($start_date, $end_date){
 		$mname = 'SafetyTrialCheckdate';
 		$m = ClassRegistry::init($mname);

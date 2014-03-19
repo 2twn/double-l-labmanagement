@@ -12,6 +12,8 @@
 	<li><?php echo $this->html->link('安定性樣品', '#'); ?>
 		<ul class="second-level">
 			<li><?php echo $this->html->link('樣品列表', array('controller' => 'safetytrials', 'action' => 'index')); ?></li>
+			<li><?php echo $this->html->link('檢核時間點查詢', array('controller' => 'safetytrials', 'action' => 'checkdate_report')); ?></li>
+
 		</ul>
 	</li>	
 	<li><?php echo $this->html->link('教育訓練管理', '#'); ?>

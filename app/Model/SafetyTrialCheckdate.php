@@ -4,7 +4,7 @@ class SafetyTrialCheckdate extends AppModel {
     public $belongsTo = array(
     		'SafetyTrial' => array(
     				'className' => 'SafetyTrial',
-    				'foreignKey' => 'safty_trial_id'),
+    				'foreignKey' => 'safety_trial_id'),
     );    
 }
 ?>

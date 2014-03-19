@@ -70,6 +70,23 @@ class SafetytrialsController extends AppController {
 			}
 		}
 	}
+	
+	public function  checkdate_report(){
+		$items = array();
+		$many_conditions = null;
+		if ($this->request->is('post')) {
+			$items = $this->Safetyfunc->searchByCheckdate (
+					$this->request->data ['SafetyTrial'] ['check_start'],
+					$this->request->data ['SafetyTrial'] ['check_end']
+			);
+		
+		} else {
+			$this->request->data ['SafetyTrial'] ['check_start'] = date('Y-m-d');
+			$this->request->data ['SafetyTrial'] ['check_end'] = date('Y-m-d');;
+		}
+		$this->set('trial_status', $this->Formfunc->safety_trial_status());
+		$this->set('items', $items);		
+	}
 	private function _getCheckModes($id){
 		$options = array(
 				'conditions'=>array('SafetyTrialCheckdate.safety_trial_id'=>$id),
