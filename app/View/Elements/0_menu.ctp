@@ -1,13 +1,6 @@
 <div id="cakephp-global-navigation">
 <ul id="menu">
-	<li><?php echo $this->html->link('組織管理', '#'); ?>
-		<ul class="second-level">
-			<li><?php echo $this->html->link('部門資訊', array('controller' => 'users', 'action' => 'dep_list')); ?></li>
-			<li><?php echo $this->html->link('員工資訊', array('controller' => 'users', 'action' => 'user_list')); ?></li>
-			<li><?php echo $this->html->link('專案資訊', array('controller' => 'projects', 'action' => 'prj_list')); ?></li>
-			<li><?php echo $this->html->link('會議室資訊', array('controller' => 'meetingrooms', 'action' => 'mr_list')); ?></li>
-		</ul>
-	</li>
+
 	<li><?php echo $this->html->link('儀器管理', '#'); ?>
 		<ul class="second-level">
 			<li><?php echo $this->html->link('儀器列表', array('controller' => 'equipments', 'action' => 'equip_list')); ?></li>
@@ -35,6 +28,14 @@
 			<li><?php echo $this->html->link('試藥資訊管理', array('controller' => 'reagents', 'action' => 'reagent_list')); ?></li>
 			<li><?php echo $this->html->link('試藥儲存位置管理', array('controller' => 'reagents', 'action' => 'location_list')); ?></li>
 			<li><?php echo $this->html->link('試藥登錄', array('controller' => 'reagents', 'action' => 'record_list')); ?></li>
+		</ul>
+	</li>	
+	<li><?php echo $this->html->link('組織管理', '#'); ?>
+		<ul class="second-level">
+			<li><?php echo $this->html->link('部門資訊', array('controller' => 'users', 'action' => 'dep_list')); ?></li>
+			<li><?php echo $this->html->link('員工資訊', array('controller' => 'users', 'action' => 'user_list')); ?></li>
+			<li><?php echo $this->html->link('專案資訊', array('controller' => 'projects', 'action' => 'prj_list')); ?></li>
+			<li><?php echo $this->html->link('會議室資訊', array('controller' => 'meetingrooms', 'action' => 'mr_list')); ?></li>
 		</ul>
 	</li>	
 </ul>

@@ -3,6 +3,7 @@
 <?php echo $this->Html->image('TLC_Color.jpg', array('alt' => 'TLC Lab Management', 'border' => '0'));?>
 </td>
 <td>
+<?php echo $this->Html->image('tlc_login.gif', array('alt' => 'TLC Lab Management', 'border' => '0'));?>
 <?php echo $this->Session->flash('auth'); ?>
 <?php echo $this->Form->create('User'); ?>
     <fieldset>
