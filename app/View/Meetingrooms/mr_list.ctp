@@ -7,7 +7,6 @@
 </div>
 <table>
     <tr>
-        <th>會議室代號</th>
         <th>會議室名稱</th>
         <th>容納人數</th>
         <th>有效</th>
@@ -16,7 +15,6 @@
     </tr>
     <?php foreach ($items as $item): ?>
     <tr>
-        <td><?php echo $item['MeetingRoom']['id']; ?></td>
         <td>
             <?php echo $item['MeetingRoom']['mr_name']; ?>
         </td>

@@ -60,5 +60,21 @@
 		public function checkin_status(){
 			return array(0=>"合格(Pass)",1=>"不合格(Fail)", 2=>"N/A");
 		}
+		
+		public function book_periods($type=0,$minutes=480) {
+			$result = array();
+			$add_minutes = 0;
+			$period_tmp = mktime(0, 0, 0, 1, 1, 2000);
+			while ($add_minutes <= 86400) {
+				$period_tmp = mktime(0, $add_minutes, 0, 1, 1, 2000);
+				$result[date('H:i',$period_tmp)] = date('H:i',$period_tmp);
+				$add_minutes = $add_minutes + $minutes;
+			}
+			if ($type == 1) {
+				$result['24:00'] = '24:00';
+				unset($result['00:00']);
+			}
+			return $result;
+		}
 	}
 ?>

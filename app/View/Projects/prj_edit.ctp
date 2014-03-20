@@ -8,10 +8,13 @@
 			<td>專案代碼(不可變更)</td>
 			<td>
 				<?php 
-					if($this->request->data['Project']['id'] == null)
-						echo $this->Form->input('id', array('type'=>'text'));
-					else
-						echo $this->Form->input('id', array('type'=>'text','readonly'=>true));
+					if($this->request->data['Project']['id'] == null) {
+						echo $this->Form->input('prj_code', array('type'=>'text'));
+					}
+					else {
+						echo $this->Form->hidden('id');
+						echo $this->Form->input('prj_code', array('type'=>'text','readonly'=>true));
+					}
 				?>
 			</td>
 		</tr>	

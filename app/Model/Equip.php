@@ -7,11 +7,11 @@ class Equip extends AppModel {
                 'rule' => array('notEmpty'),
                 'message' => '儀器編號不可空白'
             ),
-			'alphaNumeric' => array(
-                'rule'     => 'alphaNumeric',
-                'required' => true,
-                'message'  => '儀器編號必須是英數字元'
-            ),
+// 			'alphaNumeric' => array(
+//                 'rule'     => 'alphaNumeric',
+//                 'required' => true,
+//                 'message'  => '儀器編號必須是英數字元'
+//             ),
 			'maxLength' => array(
                 'rule'    => array('maxLength', '8'),
                 'message' => '儀器編號不可超過8字元'
@@ -22,11 +22,11 @@ class Equip extends AppModel {
                 'rule' => array('notEmpty'),
                 'message' => '儀器名稱不可空白'
             ),
-			'alphaNumeric' => array(
-                'rule'     => 'alphaNumeric',
-                'required' => true,
-                'message'  => '儀器名稱必須是英數字元'
-            ),
+// 			'alphaNumeric' => array(
+//                 'rule'     => 'alphaNumeric',
+//                 'required' => true,
+//                 'message'  => '儀器名稱必須是英數字元'
+//             ),
 			'maxLength' => array(
                 'rule'    => array('maxLength', '30'),
                 'message' => '儀器名稱不可超過30字元'
@@ -38,18 +38,18 @@ class Equip extends AppModel {
                 'message' => '下次校正日期不可空白'
             ),
 		),
-        'location' => array(
-			'maxLength' => array(
-                'rule'    => array('maxLength', '60'),
-                'message' => '儀器名稱不可超過30中文字元'
-            )
-        ),
-        'equip_desc' => array(
-			'maxLength' => array(
-                'rule'    => array('maxLength', '60'),
-                'message' => '儀器名稱不可超過30中文字元'
-            )
-        ),  		
+//         'location' => array(
+// 			'maxLength' => array(
+//                 'rule'    => array('maxLength', '60'),
+//                 'message' => '儀器名稱不可超過30中文字元'
+//             )
+//         ),
+//         'equip_desc' => array(
+// 			'maxLength' => array(
+//                 'rule'    => array('maxLength', '60'),
+//                 'message' => '儀器名稱不可超過30中文字元'
+//             )
+//         ),  		
     );
 	public function beforeSave($options = array()) {
 		if (!isset($this->data[$this->alias]['id'])) {

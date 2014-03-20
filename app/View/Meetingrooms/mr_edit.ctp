@@ -5,15 +5,11 @@
 <?php echo $this->Form->create('MeetingRoom', array('div'=>false, 'inputDefaults' => array('label' => false,'div' => false))); ?>
 	<table>
 		<tr>
-			<td>會議室代碼(不可變更)</td>
+			<td>會議室名稱</td>
 			<td>
-				<?php 
-					echo $this->Form->input('id', array('type'=>'text','readonly'=>true));
-				?>
+			<?php echo $this->Form->hidden('id');?>
+			<?php echo $this->Form->input('mr_name');?>
 			</td>
-		</tr>	
-		<tr>
-			<td>會議室名稱</td><td><?php echo $this->Form->input('mr_name');?></td>
 		</tr>
 		<tr>
 			<td>會議室簡述</td><td><?php echo $this->Form->text('mr_desc');?></td>

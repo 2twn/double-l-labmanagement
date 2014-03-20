@@ -2,7 +2,7 @@
 class Project extends AppModel {
     public $name = 'Project';
     public $validate = array(
-        'id' => array(
+        'prj_code' => array(
             'required' => array(
                 'rule' => array('notEmpty'),
                 'message' => 'A Project code is required'

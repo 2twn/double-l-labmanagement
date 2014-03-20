@@ -9,20 +9,28 @@ class ProjectsController extends AppController {
 		$this->paginate = array(
 			'conditions' => array(),
 			'order' => array('valid desc','id asc'),
-			'limit' => 4
+			'limit' => 10
 		);
         $this->set('items', $this->paginate('Project'));
     }
 	
 	public function prj_edit($id = null) {
-		if ($id != null){$this->Project->id = $id;} else {$this->request->data['Project']['create_time'] = date('Y-m-d H:i:s');}
+		if ($id != null){
+			$this->Project->id = $id;
+		} 
+		else {
+			$this->request->data['Project']['create_time'] = date('Y-m-d H:i:s');
+		}
 		if ($this->request->is('get')) {
 			$this->request->data = $this->Project->read();
 		} else {
 			$this->Project->set($this->request->data);
 			if ($this->Project->validates()) {
-				$prj_existed = $this->Project->find('count', array('conditions' => array('id' => $this->request->data['Project']['id'])));
-				if (($id == null) && (!$prj_existed)){
+				$prj_existed = $this->Project->find('count', array('conditions' => array('prj_code' => $this->request->data['Project']['prj_code'])));
+				if ($this->request->data['Project']['id'] != null) {
+					$prj_existed = $this->Project->find('count', array('conditions' => array('prj_code' => $this->request->data['Project']['prj_code'], 'id != '.$this->request->data['Project']['id'])));
+				}
+				if ($prj_existed == 0){
 					if ($this->Project->save($this->request->data)) {
 						$this->Session->setFlash('儲存成功.');
 						$this->redirect(array('action' => 'prj_list'));
