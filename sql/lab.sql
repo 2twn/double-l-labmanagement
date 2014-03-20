@@ -399,7 +399,7 @@ CREATE TABLE IF NOT EXISTS `reagent_records` (
   `record_date` date DEFAULT NULL COMMENT '登錄日期',
   `valid_date` date DEFAULT NULL COMMENT '有效日期',
   `open_date` date DEFAULT NULL COMMENT '開封日期',
-  `usage` varchar(20) DEFAULT NULL COMMENT '使用期限',
+  `usage` date DEFAULT NULL COMMENT '有效日期',
   `memo` varchar(60) DEFAULT NULL COMMENT '說明',
   `create_time` datetime NOT NULL,
   `modi_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,

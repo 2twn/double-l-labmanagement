@@ -13,11 +13,10 @@
         <th>製造商</th>
         <th>包裝</th>
         <th>原廠批號</th>
-        <th>登錄時間</th>
-        <th>有效時間</th>
-        <th>開封時間</th>
+        <th>登錄日期</th>
+        <th>有效日期</th>
+        <th>開封日期</th>
         <th>使用期限</th>
-        <th>說明</th>
         <th>建立時間</th>        
         <th></th>
     </tr>
@@ -33,7 +32,6 @@
         <td><?php echo $item['ReagentRecord']['valid_date']; ?></td>
         <td><?php echo $item['ReagentRecord']['open_date']; ?></td>
         <td><?php echo $item['ReagentRecord']['usage']; ?></td>
-        <td><?php echo $item['ReagentRecord']['memo']; ?></td>
         <td><?php echo $item['ReagentRecord']['create_time']; ?></td>        
         <td>
             <?php 

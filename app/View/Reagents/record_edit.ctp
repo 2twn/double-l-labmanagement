@@ -18,7 +18,7 @@
 ?>
 	<table>
 		<tr>
-			<td class="input_label">試藥代號</td>
+			<td class="input_label">試藥編號</td>
 			<td><?php echo $this->Form->text('id', array('readonly'=>true, 'size'=>8, 'style'=>'width:150px'));?></td>
 		</tr>
 		<tr>
@@ -37,19 +37,19 @@
 			<td class="input_label">原廠批號</td><td><?php echo $this->Form->input('lot');?></td>
 		</tr>
 		<tr>
-			<td class="input_label">登錄時間</td>
+			<td class="input_label">登錄日期</td>
 			<td><?php echo $this->Form->text('record_date', array('dateFormat' => 'Y-M-D', 'class' =>'jquery_date', 'readonly'=>true, 'size'=>8, 'style'=>'width:150px'));?></td>
 		</tr>		
 		<tr>
-			<td class="input_label">有效時間</td>
+			<td class="input_label">有效日期</td>
 			<td><?php echo $this->Form->text('valid_date', array('dateFormat' => 'Y-M-D', 'class' =>'jquery_date', 'readonly'=>true, 'size'=>8, 'style'=>'width:150px'));?></td>
 		</tr>	
 		<tr>
-			<td class="input_label">開封時間</td>
+			<td class="input_label">開封日期</td>
 			<td><?php echo $this->Form->text('open_date', array('dateFormat' => 'Y-M-D', 'class' =>'jquery_date', 'readonly'=>true, 'size'=>8, 'style'=>'width:150px'));?></td>
 		</tr>					
 		<tr>
-			<td class="input_label">使用期限</td><td><?php echo $this->Form->input('usage');?></td>
+			<td class="input_label">使用期限</td><td><?php echo $this->Form->text('usage', array('dateFormat' => 'Y-M-D', 'class' =>'jquery_date', 'readonly'=>true, 'size'=>8, 'style'=>'width:150px'));?></td>
 		</tr>									
 		<tr>
 			<td class="input_label">說明：<br>(最多30個中文字)</td>

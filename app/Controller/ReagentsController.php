@@ -244,11 +244,12 @@ class ReagentsController extends AppController {
 			$this->ReagentRecord->id = $id;
 		} else {
 			$this->request->data ['ReagentRecord'] ['create_time'] = date ( 'Y-m-d H:i:s' );
+			$this->request->data ['ReagentRecord'] ['id'] =$this->Reagentfunc->create_record_id();
 		}
 		if ($this->request->is ( 'get' )) {
 			$this->request->data = $this->ReagentRecord->read ();
 		} else {
-			$this->request->data ['ReagentRecord'] ['id'] =$this->Reagentfunc->create_record_id();
+			
 			if ($this->ReagentRecord->save ( $this->request->data )) {
 				$this->Session->setFlash ( '儲存成功.' );
 				$this->redirect ( array (
