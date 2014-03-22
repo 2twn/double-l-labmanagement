@@ -30,6 +30,8 @@
 			<li><?php echo $this->html->link('試藥資訊管理', array('controller' => 'reagents', 'action' => 'reagent_list')); ?></li>
 			<li><?php echo $this->html->link('試藥儲存位置管理', array('controller' => 'reagents', 'action' => 'location_list')); ?></li>
 			<li><?php echo $this->html->link('試藥登錄', array('controller' => 'reagents', 'action' => 'record_list')); ?></li>
+			<li><?php echo $this->html->link('試藥查詢', array('controller' => 'reagents', 'action' => 'record_query')); ?></li>
+
 		</ul>
 	</li>	
 	<li><?php echo $this->html->link('組織管理', '#'); ?>

@@ -18,6 +18,7 @@ class ReagentsController extends AppController {
 	);
 	public $components = array (
 			'Session',
+			'Paginator',
 			'Formfunc',
 			'Reagentfunc',
 			'Util' 
@@ -64,7 +65,6 @@ class ReagentsController extends AppController {
 						'valid desc',
 						'id asc' 
 				),
-				'limit' => 4 
 		);
 		$this->set ( 'status', $this->Formfunc->status () );
 		$this->set ( 'items', $this->paginate ( 'Company' ) );
@@ -210,14 +210,19 @@ class ReagentsController extends AppController {
 		$this->set ( 'status', $this->Formfunc->status () );
 	}
 	public function record_list() {
-		$this->paginate = array (
+		$this->Paginator->settings = array (
 				'conditions' => array (),
 				'order' => array (
 						'valid desc',
 						'id asc' 
 				),
-				'limit' => 4 
+				'limit' => 2
 		);
+		$this->_initRecordPara();
+		$this->set ( 'items', $this->Paginator->paginate ( 'ReagentRecord' ) );
+	}
+	
+	private function _initRecordPara(){
 		$this->set ( 'locations', $this->ReagentLocation->find ( 'list', array (
 				'order' => array (
 						'name asc'
@@ -235,10 +240,41 @@ class ReagentsController extends AppController {
 						'id',
 						'name'
 				)
-		) ) );		
-		$this->set ( 'status', $this->Formfunc->status () );
-		$this->set ( 'items', $this->paginate ( 'ReagentRecord' ) );
+		) ) );
+		$this->set ( 'status', $this->Formfunc->status () );		
 	}
+	public function record_query(){
+		$this->_initRecordPara();
+		unset($conditions);
+		unset($settings);
+		if(($settings=$this->Session->read('Reagents.RecordQuery.paginate')) == null){
+			$settings = array (
+						'paramType' => 'querystring',
+						'conditions' => array ('1 = 2'),
+						'order' => array (
+								'ReagentRecord.usage desc',
+						),
+						'limit' => 3
+			);		
+			$this->Session->write('Reagents.RecordQuery.paginate',$settings);
+		}
+		if($this->request->is ( 'post' )){
+			if(!empty($this->request->data['ReagentRecord']['from'])){
+				$conditions[] = array ('ReagentRecord.usage >= ' => $this->request->data['ReagentRecord']['from'] );
+			}
+			if(!empty($this->request->data['ReagentRecord']['to'])){
+				$conditions[] = array ('ReagentRecord.usage <= ' => $this->request->data['ReagentRecord']['to'] );
+			}		
+			if(!isset($conditions)){
+				$conditions[] = array ('1 = 2');
+			}
+			$settings['conditions'] = $conditions;
+			$this->Session->write('Reagents.RecordQuery.paginate',$settings);
+		} 
+		$this->Paginator->settings = $settings;
+		$this->set ( 'items', $this->Paginator->paginate ( 'ReagentRecord') );
+	}
+	
 	public function record_edit($id = null) {
 		if ($id != null) {
 			$this->ReagentRecord->id = $id;
