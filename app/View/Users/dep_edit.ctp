@@ -3,17 +3,15 @@
   	echo $this->Html->link('回上一頁', "javascript:history.back();", array('class' => 'button')); 
 ?></div>
 <?php echo $this->Form->create('Department', array('div'=>false, 'inputDefaults' => array('label' => false,'div' => false))); ?>
+<?php echo $this->Form->hidden('id');?></td>
 	<table>
 		<tr>
-			<td>部門代碼(不可變更)</td>
-			<td>
-				<?php 
-					echo $this->Form->input('id', array('type'=>'text','readonly'=>true));
-				?>
-			</td>
+			<td>部門代碼</td>
+			<td><?php echo $this->Form->input('dep_code');?></td>
 		</tr>	
 		<tr>
-			<td>部門名稱</td><td><?php echo $this->Form->input('dep_name');?></td>
+			<td>部門名稱</td>
+			<td><?php echo $this->Form->input('dep_name');?></td>
 		</tr>
 		<tr>
 			<td colspan=2><?php echo $this->Form->submit('儲存');?></td>

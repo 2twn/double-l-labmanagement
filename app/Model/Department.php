@@ -7,7 +7,14 @@ class Department extends AppModel {
                 'rule' => array('notEmpty'),
                 'message' => 'A Departmrnt name is required'
             )
-        ),  		
+        ),      	
+    	'dep_code' => array(
+    		'required' => array(
+    			'rule' => array('notEmpty'),
+    			'message' => 'A Departmrnt code is required'
+    		)
+    	),    
+				
     );
 }
 ?>

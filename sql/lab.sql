@@ -30,6 +30,7 @@ USE `lab`;
 
 CREATE TABLE IF NOT EXISTS `departments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `dep_code` varchar(50) NOT NULL,
   `dep_name` varchar(45) NOT NULL,
   `valid` char(1) NOT NULL DEFAULT '0',
   `create_time` datetime NOT NULL,
