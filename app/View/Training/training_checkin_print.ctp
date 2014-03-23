@@ -36,9 +36,6 @@
         <td colspan="3" class="tb_border">代號:<?php echo $training['Training']['id']; ?></td>
     </tr>
     <tr class="tb_border">
-        <td colspan="3" class="tb_border">訓練類別:</td>
-    </tr>
-    <tr class="tb_border">
         <td colspan="3" class="tb_border">授課人員：<?php echo $training['Training']['instructor']; ?></th>
     </tr>
     <tr class="tb_border">
@@ -50,7 +47,7 @@
 <table style="width:800px;">
     <tr>
         <th style="width:100px" class="tb_border">部門</th>
-        <th style="width:100px" class="tb_border">工號</th>
+        <th style="width:100px" class="tb_border">員工編號</th>
         <th style="width:150px" class="tb_border">姓名</th>
         <th class="tb_border">簽名</th>
         <th style="width:250px" class="tb_border">評核結果</th>

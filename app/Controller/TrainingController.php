@@ -10,7 +10,7 @@ class TrainingController extends AppController {
 		$this->paginate = array(
 			'conditions' => array(),
 			'order' => array('TrainingDocument.valid'=>'desc','TrainingDocument.id'=>'asc'),
-			'limit' => 4
+			'limit' => 10
 		);
         $this->set('items', $this->paginate('TrainingDocument'));
     }
