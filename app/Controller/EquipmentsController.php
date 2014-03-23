@@ -178,7 +178,7 @@ class EquipmentsController extends AppController {
 // 	}
 	
 	public function equip_booking_table() {
-		$this->set('equips', $this->genValidEquip());
+		$this->set('equips', $this->genValidEquip(1));
 		$this->set('years', $this->genYears(2, 2));
 		$this->set('search_year', date('Y'));
 		$this->set('months', array('01'=>'01','02'=>'02','03'=>'03','04'=>'04','05'=>'05','06'=>'06',
@@ -206,8 +206,13 @@ class EquipmentsController extends AppController {
 		return $result;
 	}
 	
-	public function genValidEquip() {
-		return $this->Equip->find('list', array('conditions' => array('valid' => 1, 'status' => 1), 'fields' => array('id','equip_name')));
+	public function genValidEquip($etype=0) {
+		if ($etype=1) {
+			return $this->Equip->find('list', array('conditions' => array('valid' => 1, 'status' => 1), 'fields' => array('id','id')));
+		}
+		else {
+			return $this->Equip->find('list', array('conditions' => array('valid' => 1, 'status' => 1), 'fields' => array('id','equip_name')));
+		}
 	}
 	
 	public function get_booking_table() {

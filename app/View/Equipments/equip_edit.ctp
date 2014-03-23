@@ -10,9 +10,6 @@
 <?php echo $this->Form->create('Equip', array('div'=>false, 'inputDefaults' => array('label' => false,'div' => false))); ?>
 	<table>
 		<tr>
-			<td>儀器名稱：<?php echo $this->Form->input('equip_name', array('size'=>30, 'style'=>'width:150px'));?>(最多30碼英文字母或數字)</td>
-		</tr>
-		<tr>
 			<td>儀器編號：
 				<?php 
 					if($id == null)
@@ -23,6 +20,9 @@
 				(最多8碼英文字母或數字)
 			</td>
 		</tr>			
+		<tr>
+			<td>儀器名稱：<?php echo $this->Form->input('equip_name', array('size'=>30, 'style'=>'width:150px'));?>(最多30碼英文字母或數字)</td>
+		</tr>
 		<tr>
 			<td>下次校正日期：<?php echo $this->Form->text('maintain_time', array('dateFormat' => 'Y-M-D', 'class' =>'jquery_date', 'readonly'=>true, 'size'=>8, 'style'=>'width:150px'));?></td>
 		</tr>
