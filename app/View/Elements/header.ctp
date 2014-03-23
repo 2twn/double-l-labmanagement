@@ -17,7 +17,7 @@
 		echo $this->Html->script('jquery-1.9.1'); // Include jQuery library
 		echo $this->Html->script('jquery-ui-1.10.3.custom');
 		echo $this->Html->css('cupertino/jquery-ui-1.10.3.custom');
-		echo $this->Html->css('menu');
+		echo $this->Html->css('menu');	
 		echo $this->Html->css('application');
 	?>
 </head>
@@ -30,7 +30,7 @@
 		</td><td>
 		<?php
 			if($this->Session->read('Auth.User'))	{
-				echo $this->Html->image('TLC_Chinese_H_Color.jpg', array('alt' => 'TLC Lab Management', 'border' => '0'));
+				echo $this->Html->image('TLC_Chinese_H_Color.jpg', array('alt' => 'TLC Lab Management', 'border' => '0','width'=>'200'));
 				echo '<br>';
 				echo $this->element($this->Session->read('Auth.User.group_id').'_menu');
 
