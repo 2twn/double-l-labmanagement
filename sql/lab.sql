@@ -409,6 +409,11 @@ CREATE TABLE IF NOT EXISTS `reagent_records` (
 
 -- --------------------------------------------------------	
 
+ALTER TABLE `projects` CHANGE `id` `prj_code` VARCHAR( 20 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ;
+ALTER TABLE `projects` DROP PRIMARY KEY ;
+ALTER TABLE `projects` ADD `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST ;
+ALTER TABLE `projects` ADD UNIQUE (`prj_code`);
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
