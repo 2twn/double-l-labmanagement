@@ -2,7 +2,7 @@
 class TrainingDocument extends AppModel {
     public $name = 'TrainingDocument';
     public $validate = array(
-        'id' => array(
+        'doc_code' => array(
             'required' => array(
                 'rule' => array('notEmpty'),
                 'message' => '文件編號不可空白'

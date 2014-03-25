@@ -17,7 +17,7 @@
     </tr>
     <?php foreach ($items as $item): ?>
     <tr>
-        <td><?php echo $item['Equip']['id']; ?></td>
+        <td><?php echo $item['Equip']['equip_code']; ?></td>
         <td>
             <?php echo $item['Equip']['equip_name']; ?>
         </td>

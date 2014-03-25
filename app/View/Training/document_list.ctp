@@ -16,7 +16,7 @@
     </tr>
     <?php foreach ($items as $item): ?>
     <tr>
-        <td><?php echo $item['TrainingDocument']['id']; ?></td>
+        <td><?php echo $item['TrainingDocument']['doc_code']; ?></td>
         <td>
             <?php echo $item['TrainingDocument']['document_name']; ?>
         </td>

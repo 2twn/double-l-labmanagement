@@ -2,7 +2,7 @@
 class Equip extends AppModel {
     public $name = 'Equip';
     public $validate = array(
-        'id' => array(
+        'equip_code' => array(
             'required' => array(
                 'rule' => array('notEmpty'),
                 'message' => '儀器編號不可空白'

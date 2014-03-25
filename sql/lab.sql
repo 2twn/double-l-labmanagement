@@ -414,6 +414,21 @@ ALTER TABLE `projects` DROP PRIMARY KEY ;
 ALTER TABLE `projects` ADD `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST ;
 ALTER TABLE `projects` ADD UNIQUE (`prj_code`);
 
+ALTER TABLE `equips` CHANGE `id` `equip_code` VARCHAR( 8 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
+ALTER TABLE `equips` DROP PRIMARY KEY ;
+ALTER TABLE `equips` ADD `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST ;
+ALTER TABLE `equips` ADD UNIQUE (`equip_code`);
+
+ALTER TABLE `training_documents` CHANGE `id` `doc_code` VARCHAR( 8 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
+ALTER TABLE `training_documents` DROP PRIMARY KEY ;
+ALTER TABLE `training_documents` ADD `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST ;
+ALTER TABLE `training_documents` ADD UNIQUE (`doc_code`);
+
+ALTER TABLE `equip_bookings` CHANGE `equip_id` `equip_id` INT NOT NULL;
+ALTER TABLE `equip_bookings` CHANGE `project_id` `project_id` INT NOT NULL;
+ALTER TABLE `equip_maintains` CHANGE `equip_id` `equip_id` INT NOT NULL;
+ALTER TABLE `training_w_documents` CHANGE `training_document_id` `training_document_id` INT NOT NULL;
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

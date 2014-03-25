@@ -7,10 +7,8 @@
 		<tr>
 			<td>文件編號：
 				<?php 
-					if($this->request->data['TrainingDocument']['id'] == null)
-						echo $this->Form->text('id', array('style'=>'width:150px'));
-					else
-						echo $this->Form->text('id', array('readonly'=>true, 'style'=>'width:150px'));
+					echo $this->Form->hidden('id');
+					echo $this->Form->text('doc_code', array('style'=>'width:150px'));
 				?>
 			</td>
 		</tr>			

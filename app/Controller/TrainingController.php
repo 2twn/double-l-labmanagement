@@ -16,15 +16,28 @@ class TrainingController extends AppController {
     }
 	
 	public function document_edit($id = null) {
-		if ($id != null) {$this->TrainingDocument->id = $id;} else {$this->request->data['TrainingDocument']['create_time'] = date('Y-m-d H:i:s');}
+		if ($id != null) {
+			$this->TrainingDocument->id = $id;
+		} else {
+			$this->request->data['TrainingDocument']['create_time'] = date('Y-m-d H:i:s');
+		}
 		if ($this->request->is('get')) {
 			$this->request->data = $this->TrainingDocument->read();
 		} else {
-			if ($this->TrainingDocument->save($this->request->data)) {
-				$this->Session->setFlash('儲存成功.');
-				$this->redirect(array('action' => 'document_list'));
-			} else {
-				$this->Session->setFlash('儲存失敗.');
+			$doc_existed = $this->TrainingDocument->find('count', array('conditions' => array('doc_code' => $this->request->data['TrainingDocument']['doc_code'])));
+			if ($this->request->data['TrainingDocument']['id'] != null) {
+				$doc_existed = $this->TrainingDocument->find('count', array('conditions' => array('doc_code' => $this->request->data['TrainingDocument']['doc_code'], 'id != '.$this->request->data['TrainingDocument']['id'])));
+			}
+			if ($doc_existed == 0){
+				if ($this->TrainingDocument->save($this->request->data)) {
+					$this->Session->setFlash('儲存成功.');
+					$this->redirect(array('action' => 'document_list'));
+				} else {
+					$this->Session->setFlash('儲存失敗.');
+				}
+			}
+			else {
+				$this->Session->setFlash('文件代號已存在.');
 			}
 		}
 	}

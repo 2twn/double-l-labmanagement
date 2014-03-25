@@ -10,13 +10,17 @@ class EquipmentsController extends AppController {
 		$this->paginate = array(
 			'conditions' => array(),
 			'order' => array('Equip.valid'=>'desc','Equip.id'=>'asc'),
-			'limit' => 4
+			'limit' => 10
 		);
         $this->set('items', $this->paginate('Equip'));
     }
 	
 	public function equip_edit($id = null) {
-		if ($id != null) {$this->Equip->id = $id;} else {$this->request->data['Equip']['create_time'] = date('Y-m-d H:i:s');}
+		if ($id != null) {
+			$this->Equip->id = $id;
+		} else {
+			$this->request->data['Equip']['create_time'] = date('Y-m-d H:i:s');
+		}
 		$this->set('equip_status', $this->Formfunc->equip_status());
 		$this->set('id', $id);
 		if ($this->request->is('get')) {
@@ -25,7 +29,10 @@ class EquipmentsController extends AppController {
 			$this->Equip->set($this->request->data);
 			if ($this->Equip->validates()) {
 				$equip_existed = $this->Equip->find('count', array('conditions' => array('id' => $this->request->data['Equip']['id'])));
-				if (($id == null) && (!$equip_existed)){
+				if ($this->request->data['Equip']['id'] != null) {
+					$equip_existed = $this->Equip->find('count', array('conditions' => array('equip_code' => $this->request->data['Equip']['equip_code'], 'id != '.$this->request->data['Equip']['id'])));
+				}
+				if (($id == null) || (!$equip_existed)){
 					if ($this->Equip->save($this->request->data)) {
 						$this->Session->setFlash('儲存成功.');
 						$this->redirect(array('action' => 'equip_list'));
@@ -208,7 +215,7 @@ class EquipmentsController extends AppController {
 	
 	public function genValidEquip($etype=0) {
 		if ($etype=1) {
-			return $this->Equip->find('list', array('conditions' => array('valid' => 1, 'status' => 1), 'fields' => array('id','id')));
+			return $this->Equip->find('list', array('conditions' => array('valid' => 1, 'status' => 1), 'fields' => array('id','equip_code')));
 		}
 		else {
 			return $this->Equip->find('list', array('conditions' => array('valid' => 1, 'status' => 1), 'fields' => array('id','equip_name')));

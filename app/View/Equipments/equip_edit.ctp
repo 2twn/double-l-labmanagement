@@ -12,10 +12,8 @@
 		<tr>
 			<td>儀器編號：
 				<?php 
-					if($id == null)
-						echo $this->Form->text('id', array('size'=>8, 'style'=>'width:150px'));
-					else
-						echo $this->Form->text('id', array('readonly'=>true, 'size'=>8, 'style'=>'width:150px'));
+					echo $this->Form->hidden('id');
+					echo $this->Form->text('equip_code', array('size'=>8, 'style'=>'width:150px'));
 				?>
 				(最多8碼英文字母或數字)
 			</td>
