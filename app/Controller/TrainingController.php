@@ -124,7 +124,7 @@ class TrainingController extends AppController {
 		if ($this->request->data) {
 			foreach($this->request->data["TrainingUser"] as $record) {
 				if (isset($record['id'])) {
-					$this->TrainingUser->save($this->request->data["TrainingUser"][0]);
+					$this->TrainingUser->save($record);
 				}
 			}
 		}
