@@ -216,7 +216,7 @@ class ReagentsController extends AppController {
 						'valid desc',
 						'id asc' 
 				),
-				'limit' => 2
+				'limit' => 10
 		);
 		$this->_initRecordPara();
 		$this->set ( 'items', $this->Paginator->paginate ( 'ReagentRecord' ) );
@@ -254,7 +254,7 @@ class ReagentsController extends AppController {
 						'order' => array (
 								'ReagentRecord.usage desc',
 						),
-						'limit' => 3
+						'limit' => 10
 			);		
 			$this->Session->write('Reagents.RecordQuery.paginate',$settings);
 		}
