@@ -22,10 +22,16 @@ class UserfuncComponent extends Component {
 		return $this->user_groups;
 	}
 	public function getRoleOptinons(){
-		if($this->Session->read('user_role') !== 'admin'){
-			return array('localadmin'=>'分校管理員', 'localmanager'=>'分校經理');			
-		}
-		return $this->user_roles;
+		$modelName = 'Role';
+		$model = ClassRegistry::init($modelName);
+		
+		$items = $model->find('list',
+				array(
+					'order' => array($modelName.'.id '),
+					'fields' => array($modelName.'.id', $modelName.'.name')		
+				)
+		);
+		return $items;
 	}
 	
 	public function getLocationOptions($prearray=null,$postarray=null){
@@ -61,6 +67,38 @@ class UserfuncComponent extends Component {
 			$condition = array_merge($condition, $t);
 		}
 		return $condition;
+	}
+	
+	public function buildUserMenu($user){
+		
+		$db = ClassRegistry::init("User")->getDataSource();
+		$sql ="Select * from menus as Menu 
+				where 
+					id in ( 
+						select menu_id from role_menus 
+						where role_id in (
+							select role_id from user_roles where user_id = :user_id
+						)
+					) 
+				order by view_order";
+ 		$items = $db->fetchAll($sql,array('user_id'=>$user['id']));
+ 		//return $items;
+		$menus = null;
+		$catalog_name = count($items)>0?$items[0]['Menu']['catalog']:null;
+		$catas = array();
+		foreach($items as $item){
+			if($catalog_name !== $item['Menu']['catalog']){
+				$menus[$catalog_name] = $catas;
+				$catas = array();
+				$catalog_name = $item['Menu']['catalog'];
+			}
+			$catas[] = $item['Menu'];
+		}
+		if($catalog_name !== null){
+			$menus[$catalog_name] = $catas;
+		}
+		return $menus;
+		
 	}
 }
 ?>

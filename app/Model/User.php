@@ -2,6 +2,8 @@
 class User extends AppModel {
     public $name = 'User';
 	public $useTable = 'users';
+	public $hasMany = array('UserRole');
+	
     public $validate = array(
         'username' => array(
 				'alphaNumeric' => array(

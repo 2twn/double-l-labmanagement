@@ -1,14 +1,15 @@
 <?php
 class UsersController extends AppController {
-	public $uses = array('Department', 'User');
+	public $uses = array('Department', 'User','UserRole');
     public $helpers = array('Html', 'Form', 'Session');
-    public $components = array('Session', 'Formfunc', 'Userfunc');
+    public $components = array('Session', 'Formfunc', 'Userfunc','Util');
     
     public function login() {
     	$this->layout = 'login';
     	if ($this->request->is('post')) {
     		if ($this->Auth->login()) {
-    			//$this->Session->write('user',$this->Auth->user());
+    			//$this->Session->write('menus',$this->Auth->user());
+    			$this->Session->write('menus',$this->Userfunc->buildUserMenu($this->Auth->user()));
     			$this->redirect('/users/index');
     		}
     		$this->Session->setFlash(__('Invalid username or password, try again'));
@@ -71,19 +72,53 @@ class UsersController extends AppController {
 		$this->User->id = $id;
 		if ($this->request->is('get')) {
 			$this->request->data = $this->User->read();
+			$this->request->data['UserRoles'] = $this->Util->array_column($this->request->data['UserRole'],'role_id','role_id');
+				
 
 		} else {
 			if ($this->request->data['User']['id'] == ''){
 				$this->request->data['User']['create_time'] = date('Y-m-d H:i:s');
 			}
-			if ($this->User->save($this->request->data)) {
+			if ($this->_saveUser($this->request->data)) {
 				$this->Session->setFlash('儲存成功.');
 				$this->redirect(array('action' => 'user_list'));
 			} else {
 				$this->Session->setFlash('儲存失敗.');
-			}
+			}			
 		}
 	}
+	
+	private function _saveUser($data){
+		$result = false;
+		if ($this->request->data['User']['id'] == ''){
+			$this->request->data['User']['create_time'] = date('Y-m-d H:i:s');
+		}
+		if ($this->User->save($data)) {
+			$id = $this->User->id;
+			$userroles = isset($data['UserRoles'])?$data['UserRoles']:array();
+			$this->_saveUserRoles($id,$userroles);
+			$result = true;
+		} else {
+			$result = false;
+		}
+		return $result;		
+	}	
+	
+	private function _saveUserRoles($foregin_id, $items ){
+		$modelName = 'UserRole';
+		$foregin_name = 'user_id';
+		$data_name = 'role_id';
+		$this->$modelName->deleteAll(array($modelName.'.'.$foregin_name => $foregin_id), false);
+		foreach($items as $item){			
+			$data  = null;
+			$data[$modelName]['id'] = $foregin_id.'.'.$item;
+			$data[$modelName][$foregin_name] = $foregin_id;
+			$data[$modelName][$data_name] = $item;
+			$this->$modelName->create();
+			$this->$modelName->save($data);
+		}
+		return true;
+	}  
 	
 	public function user_del($id) {
 		$this->User->id = $id;
@@ -105,6 +140,7 @@ class UsersController extends AppController {
 			                                                          'fields' => array('Department.id','Department.dep_name'),
 																	  'order' => 'Department.dep_name')));
 			$this->set('groups', $this->Userfunc->getGroupOptions());
+			$this->set('roles', $this->Userfunc->getRoleOptinons());
 	}
 }
 ?>

@@ -105,6 +105,100 @@ CREATE TABLE IF NOT EXISTS `users` (
 INSERT INTO `users` (`id`, `department_id`, `email`, `name`, `username`,`valid`,`create_time`, `modi_time`) VALUES
 (1, 1, 'admin@mail.com', 'Administrator', 'admin', 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
+-- --------------------------------------------------------
+
+--
+-- 資料表格式： `menus`
+--
+
+DROP TABLE IF EXISTS `menus`;
+CREATE TABLE IF NOT EXISTS `menus` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `catalog` varchar(30) NOT NULL,
+  `name` varchar(20) NOT NULL,
+  `control` varchar(30) NOT NULL,
+  `action` varchar(50) NOT NULL,
+  `view_order` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
+
+--
+-- 列出以下資料庫的數據： `menus`
+--
+
+INSERT INTO `menus` (`id`, `catalog`, `name`, `control`, `action`, `view_order`) VALUES
+(1, '儀器管理', '儀器列表', 'equipments', 'equip_list', 1000),
+(2, '儀器管理', '儀器預約', 'equipments', 'equip_booking_action', 1001),
+(3, '儀器管理', '儀器預約列表', 'equipments', 'equip_book_list', 1002),
+(4, '儀器管理', '儀器預約紀錄查詢', 'equipments', 'equip_booking_table', 1003),
+(5, '安定性樣品', '樣品列表', 'safetytrials', 'index', 2000),
+(6, '安定性樣品', '檢核時間點查詢', 'safetytrials', 'checkdate_report', 2001),
+(7, '教育訓練管理', '文件列表', 'training', 'document_list', 3000),
+(8, '教育訓練管理', '文件列表', 'training', 'training_list', 3001),
+(9, '試藥管理', '製造商資訊管理', 'reagents', 'company_list', 4000),
+(10, '試藥管理', '化學名稱管理', 'reagents', 'chemical_list', 4001),
+(11, '試藥管理', '等級管理', 'reagents', 'level_list', 4002),
+(12, '試藥管理', '試藥資訊管理', 'reagents', 'reagent_list', 4003),
+(13, '試藥管理', '試藥儲存位置管理', 'reagents', 'location_list', 4004),
+(14, '試藥管理', '試藥登錄', 'reagents', 'record_list', 4005),
+(15, '試藥管理', '試藥查詢', 'reagents', 'record_query', 4006),
+(16, '組織管理', '部門資訊', 'users', 'dep_list', 5000),
+(17, '組織管理', '員工資訊', 'users', 'user_list', 5001),
+(18, '組織管理', '專案資訊', 'projects', 'prj_list', 5002),
+(19, '組織管理', '會議室資訊', 'meetingrooms', 'mr_list', 5003),
+(20, '組織管理', '角色管理', 'roles', 'index', 5004);
+
+-- --------------------------------------------------------
+
+--
+-- 資料表格式： `roles`
+--
+
+DROP TABLE IF EXISTS `roles`;
+CREATE TABLE IF NOT EXISTS `roles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(30) NOT NULL,
+  `valid` int(11) NOT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `modi_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+
+--
+-- 列出以下資料庫的數據： `roles`
+--
+
+INSERT INTO `roles` (`id`, `name`, `valid`, `create_time`, `modi_time`) VALUES
+(1, '管理者', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(2, '使用者', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(3, '儀器管理', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(4, '安定性樣品管理', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(5, '教育訓練管理', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(6, '試藥管理', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- 資料表格式： `role_menus`
+--
+
+DROP TABLE IF EXISTS `role_menus`;
+CREATE TABLE IF NOT EXISTS `role_menus` (
+  `id` varchar(20) NOT NULL,
+  `role_id` int(11) NOT NULL,
+  `menu_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `user_roles`;
+CREATE TABLE IF NOT EXISTS `user_roles` (
+  `id` varchar(20) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `role_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+-- --------------------------------------------------------
+
 
 DROP TABLE IF EXISTS `equip_bookings`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;

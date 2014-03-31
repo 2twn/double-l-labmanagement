@@ -32,8 +32,8 @@
 			if($this->Session->read('Auth.User'))	{
 				echo $this->Html->image('TLC_Chinese_H_Color.jpg', array('alt' => 'TLC Lab Management', 'border' => '0','width'=>'200'));
 				echo '<br>';
-				echo $this->element($this->Session->read('Auth.User.group_id').'_menu');
-
+				//echo $this->element($this->Session->read('Auth.User.group_id').'_menu');
+				echo $this->element('menu');
 				echo '<div style="position: absolute; top : 10px; right : 10px;"><ul id="menu"><li>';
 				echo $this->html->link('登出', array('controller' => 'users', 'action' => 'logout')); 
 				echo '</li></ul></div>';

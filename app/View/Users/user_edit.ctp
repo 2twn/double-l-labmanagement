@@ -26,8 +26,20 @@
 		<tr>
 			<td>電子郵件</td><td><?php echo $this->Form->input('email');?></td>
 		</tr>
+
 		<tr>
-			<td>群組</td><td><?php echo $this->Form->select('group_id', $groups, array('empty'=>false));?></td>
+			<td>權限</td>
+			<td>
+				<?php foreach( $roles as $role_id=>$role_name): ?>
+					<div style="padding: 0;">
+					<?php echo $this->Form->input('UserRoles.'.$role_id, 
+						array('type'=>'checkbox','hiddenField'=>false, 'value'=>$role_id, 'class'=>'checkmode')
+						);?>
+					<?php echo $role_name;?>
+					</div>
+				<?php endforeach; ?>				
+			</td>
+
 		</tr>
 		<tr>
 			<td colspan=2><?php echo $this->Form->submit('儲存');?></td>
