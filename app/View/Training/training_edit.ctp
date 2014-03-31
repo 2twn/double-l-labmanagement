@@ -5,14 +5,15 @@
 	
 	function add_document() {
 		doc_num = $("#DocsNum")[0].value;
-		sel_val = $("#TrainingDocs")[0].selectedIndex;
+		sel_val = $("#docs")[0].selectedIndex;
 		$("#docs_tbl")[0].innerHTML = $("#docs_tbl")[0].innerHTML + "<tr id=\"tr_doc_"+doc_num+"\"><td>"
 									+ "<a href='javascript:del_document(\"tr_doc_"+doc_num+"\")'>刪除</a> "
 		                            + $("#TrainingDocs")[0][sel_val].text
 		                            + "<input type=\"hidden\" name=\"data[Training][docs_id][]\" value=\""+$("#TrainingDocs")[0][sel_val].value
 									+ "\" id=\"TrainingDocsId\"/>"
 									+ "</td></tr>"
-		$("#DocsNum")[0].value = $("#DocsNum")[0].value++;							
+		$("#DocsNum")[0].value = $("#DocsNum")[0].value++;	
+		$.unblockUI();						
 	}
 
 	function del_document(obj) {
@@ -39,6 +40,10 @@
 		del_tr.remove();
 	}
 
+    function open_document() { 
+        $.blockUI({ message: $('#document_list') }); 
+    }; 
+
 </script>
 <div class="pageheader_div"><h1 id="pageheader">教育訓練維護</h1></div>
 <div class="pagemenu_div"><?php 
@@ -48,7 +53,7 @@
 	<table>
 		<tr>
 			<td>
-			文件編號：<?php echo $this->Form->select('docs', $documents, array('empty'=>false));?><?php echo $this->Html->link('新增文件', 'javascript:add_document()',array('onclick'=>''));?>
+			文件編號：<?php echo $this->Html->link('選擇文件', 'javascript:open_document()',array('onclick'=>''));?>
 			<table style="padding:0px;margin:0px" border=0 id="docs_tbl">
 				<?php $doc_num =1; ?>
 				<?php foreach($this->request->data["TrainingWDocument"] as $docs):?>
@@ -111,3 +116,8 @@
 		</tr>
 	</table>
 <?php echo $this->Form->end(); ?>
+<div id="document_list" style="display:none; cursor: default"> 
+    <h1>Would you like to contine?.</h1> 
+	文件編號：<?php echo $this->Form->select('docs', $documents, array('empty'=>false));?>
+    <?php echo $this->Html->link('新增文件', 'javascript:add_document()',array('onclick'=>''));?>
+</div> 

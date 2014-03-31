@@ -16,6 +16,7 @@
 		echo $this->fetch('script');
 		echo $this->Html->script('jquery-1.9.1'); // Include jQuery library
 		echo $this->Html->script('jquery-ui-1.10.3.custom');
+		echo $this->Html->script('jquery.blockUI.js');
 		echo $this->Html->css('cupertino/jquery-ui-1.10.3.custom');
 		echo $this->Html->css('menu');	
 		echo $this->Html->css('application');
