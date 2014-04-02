@@ -199,5 +199,19 @@ class TrainingController extends AppController {
     	}
     	$this->set('items', $items);
     }
+    
+    public function document_search() {
+    	$this->layout = 'ajax';
+    	$filter_array = array();
+    	if (isset($this->data["doc_topic"])) {
+    		$filter_array = array("document_name like '%".$this->data["doc_topic"]."%'");
+    	}
+    	$this->paginate = array(
+    			'conditions' => $filter_array,
+    			'order' => array('TrainingDocument.valid'=>'desc','TrainingDocument.id'=>'asc'),
+    			'limit' => 10
+    	);
+    	$this->set('items', $this->paginate('TrainingDocument'));
+    }
 }
 ?>
