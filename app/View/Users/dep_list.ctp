@@ -1,6 +1,6 @@
 <div class="pageheader_div"><h1 id="pageheader">部門資料列表</h1></div>
 <div class="pagemenu_div">
-<?php echo $this->Html->link('回上一頁', "javascript:history.back();", array('class' => 'button'));?><br/>
+<?php //echo $this->Html->link('回上一頁', "javascript:history.back();", array('class' => 'button'));?><br/>
 </div>
 <div class="pagebtn_div">
 <?php echo $this->Html->link('新增部門', array('action' => 'dep_edit'), array('class' => 'button')); ?>

@@ -302,5 +302,20 @@ class EquipmentsController extends AppController {
 		$this->set('items', $items);
 	}
 	
+	function index() {
+		
+	}
+	
+	public function equip_book_day_list($sel_date=null) {
+		$this->layout = 'ajax';
+		if ($sel_date == null) { $sel_date = date('Y-m-d'); }
+		$items =$this->EquipBooking->find("all", array(
+				'conditions' => array("substr(EquipBooking.book_start_time,1,10) = '".substr($sel_date,0,10)."'"),
+		        'order' => array('EquipBooking.valid'=>'desc','EquipBooking.id'=>'desc'),
+		        'limit' => 10
+		));
+		$this->set('sel_date', $sel_date);
+		$this->set('items', $items);
+    }
 }
 ?>

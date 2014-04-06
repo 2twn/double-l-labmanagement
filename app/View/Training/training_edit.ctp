@@ -151,4 +151,4 @@ echo $this->Html->link ( '回教育訓練列表', array (
     <?php echo $this->Html->link('搜尋', 'javascript:void(0);',array('onclick'=>'search_document();'));?>
     <div id="select_doc_tbl"></div>
     <?php echo $this->Html->link('加入', 'javascript:void(0);',array('onclick'=>'add_document();'));?>
-    </div>
+</div>
