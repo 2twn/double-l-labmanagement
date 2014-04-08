@@ -96,7 +96,7 @@ class ReagentsController extends AppController {
 						'valid desc',
 						'id asc' 
 				),
-				'limit' => 4 
+				'limit' => 10
 		);
 		$this->set ( 'status', $this->Formfunc->status () );
 		$this->set ( 'items', $this->paginate ( 'ReagentLevel' ) );
@@ -128,7 +128,7 @@ class ReagentsController extends AppController {
 						'valid desc',
 						'id asc' 
 				),
-				'limit' => 4 
+				'limit' => 10
 		);
 		$this->set ( 'status', $this->Formfunc->status () );
 		$this->set ( 'items', $this->paginate ( 'ReagentLocation' ) );
@@ -160,7 +160,7 @@ class ReagentsController extends AppController {
 						'valid desc',
 						'id asc' 
 				),
-				'limit' => 4 
+				'limit' => 10 
 		);
 		$this->set ( 'status', $this->Formfunc->status () );
 		$this->set ( 'items', $this->paginate ( 'Reagent' ) );
@@ -221,6 +221,23 @@ class ReagentsController extends AppController {
 		$this->_initRecordPara();
 		$this->set ( 'items', $this->Paginator->paginate ( 'ReagentRecord' ) );
 	}
+	
+	public function reagent_name_search() {
+		$this->layout = 'ajax';
+		$filter_array = "Reagent.name like '%test%'";
+		if (isset($this->request->data["name"])) {			
+			$filter_array = array(
+					"Reagent.name like '%".$this->request->data["name"]."%'");
+		}
+
+		$this->Paginator->settings= array(
+				'conditions' => $filter_array,
+				'order' => array('name desc'),
+				'limit' => 10
+		);
+		$this->set('items', $this->Paginator->paginate('Reagent'));
+	}	
+	
 	
 	private function _initRecordPara(){
 		$this->set ( 'locations', $this->ReagentLocation->find ( 'list', array (
