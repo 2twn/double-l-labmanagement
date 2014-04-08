@@ -121,7 +121,7 @@ div.pagement_div form{
 
 #content {
 	/*background-color: rgb(243, 227, 120);*/
-	background-image: url("../img/body-bg-gradient.jpg");
+	/*background-image: url("../img/body-bg-gradient.jpg");*/
 	background-repeat: repeat-x;
 	min-height: 450px;
 }

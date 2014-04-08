@@ -260,8 +260,11 @@ class EquipmentsController extends AppController {
 		return $booking;
 	}
 	
-	public function equip_booking_day_table() {
-
+	public function equip_booking_day_table($sel_date='') {
+		if ($sel_date == '') {
+			$sel_date = date('Y-m-d');
+		}
+		$this->set("sel_date", $sel_date);
 	}
 	
 	public function get_booking_day_table($sel_date='') {

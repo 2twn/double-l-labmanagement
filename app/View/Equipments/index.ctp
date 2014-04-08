@@ -9,6 +9,17 @@
 		type: "post", 
 		success: function(response){
 			$('#equip_table_content')[0].innerHTML = response;
+			$(function() {
+			 	$( document ).tooltip({
+			 		items: "[title]",
+			 		content: function() {
+			 			var element = $( this );
+			 			if ( element.is( "[title]" ) ) {
+			 				return element.attr( "title" );
+			 			}
+			 		}
+			 	});
+			 });
 		}
 	});
 </script>
