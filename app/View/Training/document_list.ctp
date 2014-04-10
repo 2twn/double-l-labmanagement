@@ -41,6 +41,8 @@
 				$delbtn,
 				array('action' => 'document_del', $item['TrainingDocument']['id']),
 				array('class'=>'button','confirm' => '確認變更?'));
+				echo '&nbsp';
+				echo $this->Html->link('訓練', array('action' => 'training_result_by_docid', $item['TrainingDocument']['id']), array('class' => 'button'));
             ?>
         </td>
     </tr>

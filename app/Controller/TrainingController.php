@@ -69,7 +69,7 @@ class TrainingController extends AppController {
     }
 	
 	public function training_edit($id = null) {
-		$this->set('users', $this->User->find('list', array('conditions' => array('valid' => 1), 'fields' => array('id','name'))));
+		$this->set('users', $this->User->find('list', array('conditions' => array(), 'fields' => array('id','name'))));
 		$this->set('documents', $this->TrainingDocument->find('list', array('conditions' => array('valid' => 1), 'fields' => array('id','document_name'))));
 		$this->set('meeting_rooms', $this->MeetingRoom->find('list', array('conditions' => array('valid' => 1), 'fields' => array('id','mr_name'))));
 		if ($id != null) { $this->Training->id = $id; } else {$this->request->data['Training']['create_time'] = date('Y-m-d H:i:s');}
@@ -158,10 +158,10 @@ class TrainingController extends AppController {
     	$training = $this->Training->find('all',array('conditions'=>array('Training.id'=>$training_id)));
     	$this->set('training', $training[0]);
     	$str_sql = "Select *
-    	from training_users TrainingUser, users User, departments Department
-    	where user_id = User.id
-    	and User.department_id = Department.id
-    	and training_id = '$training_id'; ";
+    				  from training_users TrainingUser, users User, departments Department
+    				 where user_id = User.id
+    			       and User.department_id = Department.id
+    				   and training_id = '$training_id'; ";
     	$items = $this->TrainingUser->query($str_sql);
     	$this->set('items', $items);
     }
@@ -204,7 +204,7 @@ class TrainingController extends AppController {
     	$this->layout = 'ajax';
     	$filter_array = array();
     	if (isset($this->data["doc_topic"])) {
-    		$filter_array = array("document_name like '%".$this->data["doc_topic"]."%'");
+    		$filter_array = array("document_name like '%".$this->data["doc_topic"]."%'", 'TrainingDocument.valid'=>1);
     	}
     	$this->paginate = array(
     			'conditions' => $filter_array,
@@ -212,6 +212,48 @@ class TrainingController extends AppController {
     			'limit' => 10
     	);
     	$this->set('items', $this->paginate('TrainingDocument'));
+    }
+    
+    public function user_search() {
+    	$this->layout = 'ajax';
+    	$filter_array = array();
+    	if (isset($this->data["user_pattern"])) {
+    		$filter_array = array("name like '%".$this->data["user_pattern"]."%'", 'User.valid'=>1);
+    	}
+    	$this->paginate = array(
+    			'conditions' => $filter_array,
+    			'order' => array('User.valid'=>'desc','User.id'=>'asc'),
+    			'limit' => 10
+    	);
+    	$this->set('items', $this->paginate('User'));
+    }
+    
+    public function training_result_by_docid($doc_id=0) {
+    	$str_sql = "Select *
+    			      from training_users TrainingUser, 
+    			           users User, 
+    			           departments Department,
+    			           training_w_documents Doc
+    	             where user_id = User.id
+    	               and User.department_id = Department.id
+    	               and TrainingUser.training_id = Doc.training_id
+    	               and Doc.training_document_id = '$doc_id'; ";
+    	$items = $this->TrainingUser->query($str_sql);
+    	$this->set('items', $items);
+    	if (!empty($items)) {
+    		$training = $this->Training->find('all',array('conditions'=>array('Training.id'=>$items[0]["TrainingUser"]["training_id"])));
+    		$this->set('training', $training[0]);
+    		$str_sql = "Select *
+    					  from training_documents Doc,
+    						   training_w_documents TDoc
+    					 where Doc.id = TDoc.training_document_id
+    		               and TDoc.training_id = '".$items[0]["TrainingUser"]["training_id"]."'; ";
+   	    	$doc = $this->TrainingDocument->query($str_sql);
+    		$this->set('docs', $doc);
+    	}
+    	else {
+    		$this->set('training', array());
+    	}
     }
 }
 ?>

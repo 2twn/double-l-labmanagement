@@ -36,10 +36,42 @@
 //		$.unblockUI();						
 	}
 
+	function search_user() {
+		user_pattern = $("#user_pattern")[0].value;
+		$.ajax(
+				{	
+					url:'<?php echo $this->html->url(array('controller'=>'training', 'action' => 'user_search'));?>', 
+					data:{ user_pattern: user_pattern }, 
+					type: "post", 
+					success: function(response){
+						$("#select_user_tbl")[0].innerHTML = response;
+					}
+				}
+			);
+		return false;
+//		$.unblockUI();						
+	}
+	
 	function del_document(obj) {
 		tr_id = "#"+obj;
 		del_tr = $(tr_id);
 		del_tr.remove();
+	}
+
+	function add_user() {
+		user_num = $("#UsersNum")[0].value;
+ 		sel_vals = $(".users_select:checked");
+ 		for ($i=0;$i<sel_vals.length;$i++) {
+	 		sel_users = $("#user_name_"+sel_vals[$i].value);
+			$("#users_tbl")[0].innerHTML = $("#users_tbl")[0].innerHTML + "<tr id=\"tr_doc_"+user_num+"\"><td>"
+										+ "<a href='javascript:del_user(\"tr_user_"+user_num+"\")'>刪除</a> "
+			                            + sel_users[0].value
+			                            + "<input type=\"hidden\" name=\"data[Training][user_id][]\" value=\""+sel_vals[$i].value
+										+ "\" id=\"TrainingUsersId\"/>"
+										+ "</td></tr>"
+			$("#UsersNum")[0].value = $("#UsersNum")[0].value++;	
+ 		}
+		$.unblockUI();						
 	}
 	
 	function add_member() {
@@ -64,6 +96,13 @@
         $.blockUI({ message: $('#document_list') }); 
     }; 
 
+    function open_user() { 
+        $.blockUI({ message: $('#user_list') }); 
+    }; 
+
+    function close_ui() {
+    	$.unblockUI();	
+    }
 </script>
 <div class="pageheader_div">
 	<h1 id="pageheader">教育訓練維護</h1>
@@ -110,7 +149,7 @@ echo $this->Html->link ( '回教育訓練列表', array (
 	</tr>
 	<tr>
 		<td>
-			上課人員：<?php echo $this->Form->select('users', $users, array('empty'=>false));?><?php echo $this->Html->link('新增人員', 'javascript:add_member()',array('onclick'=>''));?>
+			上課人員：<?php echo $this->Html->link('選擇人員', 'javascript:open_user()',array('onclick'=>''));?>
 			<table style="padding: 0px; margin: 0px" border=0 id="users_tbl">
 				<?php $user_num =1; ?>
 				<?php foreach($this->request->data["TrainingUser"] as $docs):?>
@@ -151,4 +190,13 @@ echo $this->Html->link ( '回教育訓練列表', array (
     <?php echo $this->Html->link('搜尋', 'javascript:void(0);',array('onclick'=>'search_document();'));?>
     <div id="select_doc_tbl"></div>
     <?php echo $this->Html->link('加入', 'javascript:void(0);',array('onclick'=>'add_document();'));?>
-</div>
+    <?php echo $this->Html->link('取消', 'javascript:void(0);',array('onclick'=>'close_ui();'));?>
+    </div>
+<div id="user_list" style="display: none; cursor: default"> 
+	關鍵字：
+	<?php echo $this->Form->text('user_pattern', array('size'=>8, 'style'=>'width:150px') );?>
+    <?php echo $this->Html->link('搜尋', 'javascript:void(0);',array('onclick'=>'search_user();'));?>
+    <div id="select_user_tbl"></div>
+    <?php echo $this->Html->link('加入', 'javascript:void(0);',array('onclick'=>'add_user();'));?>
+    <?php echo $this->Html->link('取消', 'javascript:void(0);',array('onclick'=>'close_ui();'));?>
+    </div>
