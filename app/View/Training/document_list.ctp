@@ -5,8 +5,17 @@
 <div class="pagebtn_div">
 <?php echo $this->Html->link('新增文件', array('action' => 'document_edit'), array('class' => 'button')); ?>
 </div>
+<?php echo $this->Form->create('TrainingDocument', array('div'=>false, 'inputDefaults' => array('label' => false,'div' => false))); ?>
 <table>
     <tr>
+        <th>
+       	<?php echo $this->Form->text('search_doc_code', array('style'=>'width:150px'));?>
+       	</th>
+       	<th>
+        	<?php echo $this->Form->submit('搜尋');?>
+        </th>
+    </tr>
+	<tr>
         <th>文件編號</th>
         <th>文件名稱</th>
 		<th>文件版本</th>
@@ -55,3 +64,4 @@
 		</td>
     </tr>
 </table>
+<?php echo $this->Form->end(); ?>

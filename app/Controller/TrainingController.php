@@ -6,9 +6,17 @@ class TrainingController extends AppController {
 	public $paginate = array('limit' => 10,);
 
  	public function document_list() {
+ 		$search_condition = array();
+ 		if (isset($this->data["TrainingDocument"]["search_doc_code"])) {
+ 			$search_condition = array("doc_code like '".$this->data["TrainingDocument"]["search_doc_code"]."%'");
+ 			$this->Session->write("document_list_filter",$search_condition);
+ 		}
+ 		if ($this->Session->check("document_list_filter")) {
+ 			$search_condition = $this->Session->read("document_list_filter");
+ 		}
 		$this->set('document_status', $this->Formfunc->document_status());
 		$this->paginate = array(
-			'conditions' => array(),
+			'conditions' => $search_condition,
 			'order' => array('TrainingDocument.valid'=>'desc','TrainingDocument.id'=>'asc'),
 			'limit' => 10
 		);
@@ -58,10 +66,18 @@ class TrainingController extends AppController {
 	}
 	
 	 public function training_list() {
+	 	$search_condition = array();
+	 	if (isset($this->data["Training"]["search_start_date"])) {
+	 		$search_condition = array("start_time >= '".$this->data["Training"]["search_start_date"]."'");
+	 		$this->Session->write("training_list_filter",$search_condition);
+	 	}
+	 	if ($this->Session->check("training_list_filter")) {
+	 		$search_condition = $this->Session->read("training_list_filter");
+	 	}
 		$this->set('$training_status', $this->Formfunc->training_status());
 		$this->paginate = array(
-			'conditions' => array(),
-			'order' => array('Training.valid'=>'desc','Training.id'=>'asc'),
+			'conditions' => $search_condition,
+			'order' => array('Training.start_time'=>'desc','Training.valid'=>'desc','Training.id'=>'asc'),
 			'limit' => 10
 		);
 		//var_Dump($this->paginate('Training'));
@@ -230,30 +246,68 @@ class TrainingController extends AppController {
     
     public function training_result_by_docid($doc_id=0) {
     	$str_sql = "Select *
-    			      from training_users TrainingUser, 
-    			           users User, 
-    			           departments Department,
+    			      from training_users TrainingUser,
     			           training_w_documents Doc
-    	             where user_id = User.id
-    	               and User.department_id = Department.id
-    	               and TrainingUser.training_id = Doc.training_id
+    	             where  TrainingUser.training_id = Doc.training_id
     	               and Doc.training_document_id = '$doc_id'; ";
     	$items = $this->TrainingUser->query($str_sql);
+//     	$this->set('items', $items);
+		$result = array();
+		foreach ($items as $item) {
+	    		$training = $this->Training->find('first',array('conditions'=>array('Training.id'=>$item["TrainingUser"]["training_id"])));
+	    		$result[$item["TrainingUser"]["training_id"]]['training'] = $training;
+	    		$str_sql = "Select *
+	    					  from training_documents Doc,
+	    						   training_w_documents TDoc
+	    					 where Doc.id = TDoc.training_document_id
+	    		               and TDoc.training_id = '".$items[0]["TrainingUser"]["training_id"]."'; ";
+	   	    	$doc = $this->TrainingDocument->query($str_sql);
+	    		$result[$item["TrainingUser"]["training_id"]]['doc'] = $doc;
+		    	$str_sql = "Select *
+		    			      from training_users TrainingUser, 
+		    			           users User, 
+		    			           departments Department
+		    	             where user_id = User.id
+		    	               and User.department_id = Department.id
+		    	               and TrainingUser.training_id = '".$item["TrainingUser"]["training_id"]."'; ";
+		    	$training_users = $this->TrainingDocument->query($str_sql);
+		    	$result[$item["TrainingUser"]["training_id"]]['items'] = $training_users;
+    	}
+        $this->set('checkins', $this->Formfunc->checkin_status());
+    	$this->set('results', $result);
+    }
+    
+    public function user_list() {
+	 	$search_condition = array();
+	 	if (isset($this->data["User"]["search_name"])) {
+	 		$search_condition = array("name like '%".$this->data["User"]["search_name"]."%'");
+	 		$this->Session->write("training_user_list_filter",$search_condition);
+	 	}
+	 	if ($this->Session->check("training_user_list_filter")) {
+	 		$search_condition = $this->Session->read("training_user_list_filter");
+	 	}
+		$this->set('$training_status', $this->Formfunc->training_status());
+		$this->paginate = array(
+								'conditions' => $search_condition,
+								'order' => array('order' => 'User.valid DESC, User.id'),
+								'limit' => 10
+		);
+        $this->set('items', $this->paginate('User'));
+    }
+    
+    public function user_doc_list($user_id='') {
+    	$str_sql = "Select *
+				      from training_users TrainingUser,
+				    	   training_w_documents Doc,
+				    	   users User,
+				    	   training_documents Doc_Info
+				     where TrainingUser.training_id = Doc.training_id
+				       and Doc.training_document_id = Doc_Info.id
+				       and User.id = TrainingUser.user_id
+    	               and TrainingUser.user_id = '$user_id'; ";
+    	$items = $this->TrainingUser->query($str_sql);
+    	$this->set('checkins', $this->Formfunc->checkin_status());
     	$this->set('items', $items);
-    	if (!empty($items)) {
-    		$training = $this->Training->find('all',array('conditions'=>array('Training.id'=>$items[0]["TrainingUser"]["training_id"])));
-    		$this->set('training', $training[0]);
-    		$str_sql = "Select *
-    					  from training_documents Doc,
-    						   training_w_documents TDoc
-    					 where Doc.id = TDoc.training_document_id
-    		               and TDoc.training_id = '".$items[0]["TrainingUser"]["training_id"]."'; ";
-   	    	$doc = $this->TrainingDocument->query($str_sql);
-    		$this->set('docs', $doc);
-    	}
-    	else {
-    		$this->set('training', array());
-    	}
     }
 }
 ?>

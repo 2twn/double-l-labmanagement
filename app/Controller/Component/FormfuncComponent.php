@@ -58,7 +58,7 @@
 		}
 		
 		public function checkin_status(){
-			return array(0=>"合格(Pass)",1=>"不合格(Fail)", 2=>"N/A");
+			return array(2=>"合格(Pass)",1=>"不合格(Fail)", 0=>"N/A");
 		}
 		
 		public function book_periods($type=0,$minutes=480) {

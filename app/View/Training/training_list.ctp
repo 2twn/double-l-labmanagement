@@ -1,3 +1,8 @@
+<script>
+    $(function() {
+        $(".jquery_date" ).datepicker({dateFormat: "yy-mm-dd", changeMonth: true, changeYear: true});
+    });
+</script>
 <div class="pageheader_div"><h1 id="pageheader">教育訓練列表</h1></div>
 <div class="pagemenu_div"><?php 
   	//echo $this->Html->link('回上一頁', "javascript:history.back();", array('class' => 'button')); 
@@ -5,7 +10,17 @@
 <div class="pagebtn_div">
 <?php echo $this->Html->link('新增教育訓練', array('action' => 'training_edit'), array('class' => 'button')); ?>
 </div>
+<?php echo $this->Form->create('Training', array('div'=>false, 'inputDefaults' => array('label' => false,'div' => false))); ?>
 <table>
+    <tr>
+    	<th></th>
+        <th>
+		<?php echo $this->Form->text('search_start_date', array('dateFormat' => 'Y-M-D', 'class' =>'jquery_date', 'readonly'=>true, 'size'=>8, 'style'=>'width:150px'));?>
+       	</th>
+       	<th colsapan=7>
+        	<?php echo $this->Form->submit('搜尋');?>
+        </th>
+    </tr>
     <tr>
         <th>代號</th>
         <th>上課日期</th>
@@ -15,7 +30,6 @@
         <th>授課人員</th>
         <th>上課人數</th>
         <th>有效</th>
-        <th>建立時間</th>
         <th></th>
     </tr>
     <?php foreach ($items as $item): ?>
@@ -43,9 +57,6 @@
             <?php if ($item['Training']['valid']) { echo 'Y'; } else {echo 'N';}; ?>
         </td>
         <td>
-            <?php echo $item['Training']['create_time']; ?>
-        </td>
-        <td>
             <?php 
 				$delbtn = '生效';
 				if ($item['Training']['valid']) {
@@ -55,7 +66,7 @@
 					echo '&nbsp';
 					echo $this->Html->link('列印', array('action' => 'training_checkin_print', $item['Training']['id']), array('class' => 'button'));
 					echo '&nbsp';
-					echo $this->Html->link('出席登入', array('action' => 'training_checkin', $item['Training']['id']), array('class' => 'button'));
+					echo $this->Html->link('出席', array('action' => 'training_checkin', $item['Training']['id']), array('class' => 'button'));
 					echo '&nbsp';
 					$delbtn = '失效';
 				}
@@ -75,3 +86,4 @@
 		</td>
     </tr>
 </table>
+<?php echo $this->Form->end(); ?>

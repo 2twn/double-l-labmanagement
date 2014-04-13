@@ -31,16 +31,16 @@
 		padding: 0px; 
 	}
 	</STYLE> 
+<?php foreach($results as $result): ?>
 <table style="width:800px;">
-<?php if (!empty($training)): ?>
-<table style="width:800px;">
-    <?php foreach ($docs as $doc): ?>
+    <?php foreach ($result['doc'] as $doc): ?>
     <tr>
         <td class="tb_border">代號:<?php echo $doc['Doc']['id']; ?></td>
         <td class="tb_border">文件名稱：<?php echo $doc['Doc']['document_name']." (version:".$doc['Doc']['document_version'].")"; ?></th>
     </tr>
     <?php endforeach;?>
 </table>
+<?php $training = $result['training'];?>
 <table style="width:800px;">
     <tr>
         <td colspan="3" class="tb_border">代號:<?php echo $training['Training']['id']; ?></td>
@@ -54,12 +54,12 @@
         <td class="tb_border">時間:<?php echo substr($training['Training']['start_time'],11,5); ?>~<?php echo substr($training['Training']['end_time'],11,5); ?></td>
     </tr>
 </table>
+<?php $items = $result['items'];?>
 <table style="width:800px;">
     <tr>
         <th style="width:100px" class="tb_border">部門</th>
         <th style="width:100px" class="tb_border">員工編號</th>
         <th style="width:150px" class="tb_border">姓名</th>
-        <th class="tb_border">簽名</th>
         <th style="width:250px" class="tb_border">評核結果</th>
     </tr>
     <?php $i=0; ?>
@@ -74,13 +74,10 @@
         <td class="tb_border">
             <?php echo $item['User']['name']; ?>
         </td>
-        <td class="tb_border">&nbsp;</td>
-        <td class="tb_border">□合格(Pass)&nbsp;□不合格(Fail)&nbsp;□N/A</td>
+        <td class="tb_border"><?php echo $checkins[$item['TrainingUser']["checkin"]]; ?></td>
     </tr>
     <?php $i++; ?>
     <?php endforeach; ?>
-<?php else: ?>
-	<tr><td>無相關教育訓練</td></tr>
-<?php endif;?>
+<?php endforeach;?>
 </table>
 </div>
