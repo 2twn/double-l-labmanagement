@@ -62,6 +62,8 @@ INSERT INTO `menus` (`id`, `catalog`, `name`, `control`, `action`, `view_order`)
 (19, '組織管理', '會議室資訊', 'meetingrooms', 'mr_list', 5003),
 (20, '組織管理', '角色管理', 'roles', 'index', 5004);
 
+INSERT INTO `menus` (`id`, `catalog`, `name`, `control`, `action`, `view_order`) VALUES
+(21, '教育訓練管理', '使用者文件查詢', 'roles', 'user_list', 3002);
 -- --------------------------------------------------------
 
 --
@@ -149,6 +151,8 @@ INSERT INTO `role_menus` (`id`, `role_id`, `menu_id`) VALUES
 ('3.3', 3, 3),
 ('3.4', 3, 4);
 
+INSERT INTO `role_menus` (`id`, `role_id`, `menu_id`) VALUES
+('36', 1, 21);
 -- --------------------------------------------------------
 
 --
