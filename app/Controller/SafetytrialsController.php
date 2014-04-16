@@ -87,6 +87,18 @@ class SafetytrialsController extends AppController {
 		$this->set('trial_status', $this->Formfunc->safety_trial_status());
 		$this->set('items', $items);		
 	}
+	
+	public function checkdate_list($sel_date=null) {
+		$this->layout = 'ajax';
+		if ($sel_date == null) { $sel_date = date('Y-m-d'); }
+		$items = $this->Safetyfunc->searchByCheckdate (
+				$sel_date,
+				$sel_date
+		);		
+		$this->set('sel_date', $sel_date);
+		$this->set('items', $items);
+		$this->set('trial_status', $this->Formfunc->safety_trial_status());
+    }
 	private function _getCheckModes($id){
 		$options = array(
 				'conditions'=>array('SafetyTrialCheckdate.safety_trial_id'=>$id),

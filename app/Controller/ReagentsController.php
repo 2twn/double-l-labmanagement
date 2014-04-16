@@ -291,6 +291,18 @@ class ReagentsController extends AppController {
 		$this->Paginator->settings = $settings;
 		$this->set ( 'items', $this->Paginator->paginate ( 'ReagentRecord') );
 	}
+
+	public function record_usage_list($sel_date=null){
+		$this->layout = 'ajax';
+		$this->_initRecordPara();
+		unset($conditions);
+		
+		if ($sel_date == null) { $sel_date = date('Y-m-d'); }
+		$conditions[] = array ('ReagentRecord.usage = ' => $sel_date );
+		$items = $this->ReagentRecord->find('all',array('conditions'=> $conditions));
+		$this->set('items', $items);		
+		$this->set('sel_date', $sel_date);
+	}
 	
 	public function record_edit($id = null) {
 		if ($id != null) {

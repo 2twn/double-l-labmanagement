@@ -10,7 +10,7 @@ class UsersController extends AppController {
     		if ($this->Auth->login()) {
     			//$this->Session->write('menus',$this->Auth->user());
     			$this->Session->write('menus',$this->Userfunc->buildUserMenu($this->Auth->user()));
-    			$this->redirect('/users/index');
+    			$this->redirect('/reports/index');
     		}
     		$this->Session->setFlash(__('Invalid username or password, try again'));
     	}
