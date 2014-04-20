@@ -315,7 +315,7 @@ class EquipmentsController extends AppController {
 		$items =$this->EquipBooking->find("all", array(
 				'conditions' => array("substr(EquipBooking.book_start_time,1,10) = '".substr($sel_date,0,10)."'"),
 		        'order' => array('EquipBooking.valid'=>'desc','EquipBooking.id'=>'desc'),
-		        'limit' => 10
+		        'limit' => 100
 		));
 		$this->set('sel_date', $sel_date);
 		$this->set('items', $items);

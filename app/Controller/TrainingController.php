@@ -84,6 +84,22 @@ class TrainingController extends AppController {
         $this->set('items', $this->paginate('Training'));
     }
 	
+    public function training_day_list($sel_date='') {
+		$this->layout = 'ajax';
+    	if ($sel_date=='') {
+    		$sel_date = date('Y-m-d');
+    	}
+   		$search_condition = array("substr(start_time,1,10) = '".$sel_date."'", 'Training.valid' => 1);
+    	$this->set('$training_status', $this->Formfunc->training_status());
+    	$this->paginate = array(
+    			'conditions' => $search_condition,
+    			'order' => array('Training.start_time'=>'desc','Training.valid'=>'desc','Training.id'=>'asc'),
+    			'limit' => 100
+    	);
+		$this->set('sel_date', $sel_date);
+    	$this->set('items', $this->paginate('Training'));
+    }
+    
 	public function training_edit($id = null) {
 		$this->set('users', $this->User->find('list', array('conditions' => array(), 'fields' => array('id','name'))));
 		$this->set('documents', $this->TrainingDocument->find('list', array('conditions' => array('valid' => 1), 'fields' => array('id','document_name'))));

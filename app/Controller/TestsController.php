@@ -8,7 +8,7 @@ class TestsController extends AppController {
     
     public function login() {
 		$ldap_auth = new ldap_func();
-		$result = $ldap_auth->connect();
+		$result = $ldap_auth->ldap_auth('lab-ad@tlcbio.local', 'TLCbio!@#');
 		var_dump($result);
     }
 }
