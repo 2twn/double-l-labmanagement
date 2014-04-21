@@ -1,6 +1,6 @@
 <?php
 App::uses('BaseAuthenticate', 'Controller/Component/Auth');
-
+App::import('Vendor', 'phpldap/ldap_func');
 class LdapAuthenticate extends BaseAuthenticate {
 	public function authenticate(CakeRequest $request, CakeResponse $response) {
 		$userModel = $this->settings['userModel'];
@@ -36,9 +36,8 @@ class LdapAuthenticate extends BaseAuthenticate {
 		return true;
 	}
 	private function _findLdapUser($username, $password = null){
-		$userModel = $this->settings['userModel'];
-		$result['username'] = $username;
-		$result['password'] = $password;
+		$ldap_auth = new ldap_func();
+		$result = $ldap_auth->ldap_auth($username, $password);
 		return $result;
 	}
 }

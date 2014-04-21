@@ -6,11 +6,11 @@ class User extends AppModel {
 	
     public $validate = array(
         'username' => array(
-				'alphaNumeric' => array(
-					'rule'     => 'alphaNumeric',
-					'required' => true,
-					'message'  => '只可是英數',
-				),
+// 				'alphaNumeric' => array(
+// 					'rule'     => 'alphaNumeric',
+// 					'required' => true,
+// 					'message'  => '只可是英數',
+// 				),
 				'between' => array(
 					'rule'    => array('between', 2, 20),
 					'message' => '長度在2-20字元',
