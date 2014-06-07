@@ -13,8 +13,8 @@ class TrainingDocument extends AppModel {
                 'message'  => '文件編號必須是英數字元'
             ),
 			'maxLength' => array(
-                'rule'    => array('maxLength', '8'),
-                'message' => '文件編號不可超過8字元'
+                'rule'    => array('maxLength', '16'),
+                'message' => '文件編號不可超過16字元'
             )
 		),
         'document_name' => array(

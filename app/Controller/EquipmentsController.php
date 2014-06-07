@@ -9,7 +9,7 @@ class EquipmentsController extends AppController {
 		$this->set('equip_status', $this->Formfunc->equip_status());
 		$this->paginate = array(
 			'conditions' => array(),
-			'order' => array('Equip.valid'=>'desc','Equip.id'=>'asc'),
+			'order' => array('Equip.valid'=>'desc','Equip.equip_code'=>'asc'),
 			'limit' => 10
 		);
         $this->set('items', $this->paginate('Equip'));
@@ -102,7 +102,22 @@ class EquipmentsController extends AppController {
 			}
 		}
 	}
-
+	
+	public function equip_booking_delete($id = null) {
+ 		$this->EquipBooking->id = $id;
+ 		$this->request->data = $this->EquipBooking->read();
+ 		$this->request->data['EquipBooking']['valid'] = ($this->request->data['EquipBooking']['valid'] + 1)%2;
+//  		if ($this->request->is('get')) {
+//  			throw new MethodNotAllowedException();
+//  		}
+ 		if ($this->EquipBooking->save($this->request->data)) {
+ 			$this->Session->setFlash('儀器預約已取消.');
+ 			$this->redirect(array('action' => 'equip_book_list'));
+ 		} else {
+			$this->Session->setFlash('作業失敗.');
+		}
+	}
+	
  	public function equip_book_list() {
 		// $this->EquipBooking->find('all');
         // $this->set('items', $this->EquipBooking->query("Select *
@@ -114,7 +129,7 @@ class EquipmentsController extends AppController {
 											     // and EquipBooking.valid = 1
 											   // order by Equip.equip_name, EquipBooking.book_start_time desc;"));
 		$this->paginate = array(
-			'conditions' => array(),
+			'conditions' => array('EquipBooking.valid'=>1),
 			'order' => array('EquipBooking.valid'=>'desc','EquipBooking.id'=>'desc'),
 			'limit' => 10
 		);
@@ -313,7 +328,7 @@ class EquipmentsController extends AppController {
 		$this->layout = 'ajax';
 		if ($sel_date == null) { $sel_date = date('Y-m-d'); }
 		$items =$this->EquipBooking->find("all", array(
-				'conditions' => array("substr(EquipBooking.book_start_time,1,10) = '".substr($sel_date,0,10)."'"),
+				'conditions' => array("substr(EquipBooking.book_start_time,1,10) = '".substr($sel_date,0,10)."'", 'EquipBooking.valid' => 1),
 		        'order' => array('EquipBooking.valid'=>'desc','EquipBooking.id'=>'desc'),
 		        'limit' => 100
 		));

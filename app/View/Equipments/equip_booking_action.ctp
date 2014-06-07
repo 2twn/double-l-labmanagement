@@ -43,7 +43,7 @@
 			<td></td>
 		</tr>
 		<tr>
-			<td colspan=3>專案名稱：<?php echo $this->Form->select('project_id', $projects, array('empty'=>false));?></td>
+			<td colspan=3>專案代號：<?php echo $this->Form->select('project_id', $projects, array('empty'=>false));?></td>
 		</tr>
 		<tr>
 			<td colspan=3>說明：(最多30個中文字)</td>

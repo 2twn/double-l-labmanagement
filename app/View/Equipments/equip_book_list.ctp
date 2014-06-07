@@ -10,7 +10,7 @@
         <th>預約代號</th>
         <th>儀器名稱</th>
         <th>儀器位置</th>
-        <th>專案名稱</th>
+        <th>專案代號</th>
 		<th>開始時間</th>
 		<th>結束時間</th>
         <th>建立時間</th>
@@ -40,7 +40,8 @@
         <td>
             <?php 
 				echo $this->Html->link('修改', array('action' => 'equip_booking_action', $item['EquipBooking']['id']), array('class' => 'button'));
-            ?>
+				echo $this->Html->link('刪除', array('action' => 'equip_booking_delete', $item['EquipBooking']['id']), array('class' => 'button'));
+				?>
         </td>
     </tr>
     <?php endforeach; ?>
