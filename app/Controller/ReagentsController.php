@@ -224,10 +224,12 @@ class ReagentsController extends AppController {
 	
 	public function reagent_name_search() {
 		$this->layout = 'ajax';
-		$filter_array = "Reagent.name like '%test%'";
+		unset($filter_array);
+		$filter_array[] = array("Reagent.status"=>1);
 		if (isset($this->request->data["name"])) {			
-			$filter_array = array(
+			$filter_array[] = array(
 					"Reagent.name like '%".$this->request->data["name"]."%'");
+
 		}
 
 		$this->Paginator->settings= array(

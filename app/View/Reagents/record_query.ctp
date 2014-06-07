@@ -24,7 +24,6 @@
   	echo $this->Html->link('回上一頁', "javascript:history.back();", array('class' => 'button')); 
 ?></div>
 <div class="pagebtn_div">
-<?php echo $this->Html->link('新增', array('action' => 'record_edit'), array('class' => 'button')); ?>
 <?php
     echo $this->Form->create('ReagentRecord', array('div'=>false, 'inputDefaults' => array('label' => false,'div' => false))); 
     echo "From";
