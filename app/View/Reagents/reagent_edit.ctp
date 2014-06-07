@@ -16,13 +16,14 @@
 			<td class="input_label">試藥代號</td>
 			<td><?php 
 				if($this->request->data['Reagent']['id'] == null)
-					echo $this->Form->text('id', array('size'=>8, 'style'=>'width:150px'));
+					echo $this->Form->text('id', array('size'=>20, 'maxlength'=>20));
 				else
-					echo $this->Form->text('id', array('readonly'=>true, 'size'=>8, 'style'=>'width:150px'));
+					echo $this->Form->text('id', array('readonly'=>true, 'size'=>20, 'maxlength'=>20));
+
 			?></td>
 		</tr>
 		<tr>
-			<td class="input_label">試藥名稱</td><td><?php echo $this->Form->input('name');?></td>
+			<td class="input_label">試藥名稱</td><td><?php echo $this->Form->input('name', array('size'=>20, 'maxlength'=>20));?></td>
 		</tr>		
 		<tr>
 			<td class="input_label">化學名稱</td><td><?php echo $this->Form->select('chemical_id', $chemicals, array('empty'=>false));?></td>
@@ -35,7 +36,12 @@
 		</tr>
 		<tr>
 			<td class="input_label">說明：<br>(最多30個中文字)</td>
-			<td><?php echo $this->Form->textarea('memo',array('cols'=>'30','rows'=>'3'));?></td>
+			<td valign="top"><?php 
+				echo $this->Form->textarea('memo',array('cols'=>'30','rows'=>'3'));
+				if(!empty($errors['memo']))
+					echo $this->Html->tag('span',$errors['memo'][0],array('class'=>'message'));
+			?></td>
+			</td>
 		</tr>									
 		<tr>
 			<td colspan=2><?php echo $this->Form->submit('儲存');?></td>

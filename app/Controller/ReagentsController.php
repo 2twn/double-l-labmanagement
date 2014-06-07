@@ -180,7 +180,9 @@ class ReagentsController extends AppController {
 						'action' => 'reagent_list' 
 				) );
 			} else {
-				$this->Session->setFlash ( '儲存失敗.' );
+				$errors = $this->Reagent->validationErrors;
+				$this->set('errors',$errors);
+				$this->Session->setFlash ( '儲存失敗. ' );
 			}
 		}
 		$this->set ( 'chemicals', $this->Chemical->find ( 'list', array (
