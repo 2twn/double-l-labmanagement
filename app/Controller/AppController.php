@@ -36,7 +36,11 @@ class AppController extends Controller {
     public $components = array(
         'Session',
     	'Auth' => array(
-    		'authenticate' => array('Ldap'),
+    		'authenticate' => array(
+    			'Ldap'=>array(
+    				'scope'=>array('User.valid' => 1),
+    			)
+    		),
     		'loginRedirect' => array('controller' => 'users', 'action' => 'index'),
     		'logoutRedirect' => array('controller' => 'users', 'action' => 'login')
     		),    		
