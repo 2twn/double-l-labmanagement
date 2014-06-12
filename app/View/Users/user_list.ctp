@@ -33,7 +33,11 @@
             <?php echo $item['Department']['dep_name']; ?>
         </td>
         <td>
-            <?php echo $groups[$item['User']['group_id']]; ?>
+            <?php 
+            	foreach ($item['UserRole'] as $role) {
+            		echo $roles[$role['role_id']].'<br>';
+            	}
+            ?>
         </td>        
         <td>
             <?php if ($item['User']['valid']) { echo 'Y'; } else {echo 'N';}; ?>
