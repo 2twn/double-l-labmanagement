@@ -32,6 +32,23 @@ class ReagentsController extends AppController {
 		$this->set( 'items', $this->Chemical->find('all', array('order' => 'Chemical.id')));
 
 	}
+	public function chemical_name_search() {
+		$this->layout = 'ajax';
+		unset($filter_array);
+		$filter_array[] = array("Chemical.status"=>1);
+		if (isset($this->request->data["name"])) {
+			$filter_array[] = array(
+					"Chemical.name like '%".$this->request->data["name"]."%'");
+		}
+	
+		$this->Paginator->settings= array(
+				'conditions' => $filter_array,
+				'order' => array('name desc'),
+				'limit' => 10
+		);
+		$this->set('items', $this->Paginator->paginate('Chemical'));
+	}	
+	
 	public function chemical_edit($id = null) {
 		if ($id != null) {
 			$this->Chemical->id = $id;
@@ -154,24 +171,49 @@ class ReagentsController extends AppController {
 		$this->set ( 'status', $this->Formfunc->status () );
 	}
 	public function reagent_list() {
-		$this->paginate = array (
-				'conditions' => array (),
-				'order' => array (
-						'valid desc',
-						'id asc' 
-				),
-				'limit' => 10 
-		);
+		unset($conditions);
+		unset($settings);
+		if(($settings=$this->Session->read('Reagents.ReagentList.paginate')) == null){
+			$settings = array (
+					'paramType' => 'querystring',
+					'conditions' => array ('1 = 1'),
+					'order' => array (
+							'Reagent.id desc',
+					),
+					'limit' => 10
+			);
+			$this->Session->write('Reagents.RecordList.paginate',$settings);
+		}
+		if($this->request->is ('post' )){
+			$settings = array (
+					'paramType' => 'querystring',
+					'conditions' => array ('1 = 1'),
+					'order' => array (
+							'Reagent.id desc',
+					),
+					'limit' => 10
+			);
+		
+			if(!empty($this->request->data['Reagent']['keyword'])){
+				$conditions[] = array ('Reagent.name like ' => '%'.$this->request->data['Reagent']['keyword'].'%' );
+				$conditions[] = array ('Reagent.id like ' => '%'.$this->request->data['Reagent']['keyword'].'%' );
+				
+			}
+			if(isset($conditions)){
+				$settings['conditions']['OR'] = $conditions;
+			}
+			$this->Session->write('Reagents.ReagentList.paginate',$settings);
+		}		
 		$this->set ( 'status', $this->Formfunc->status () );
-		$this->set ( 'items', $this->paginate ( 'Reagent' ) );
+
+		$this->Paginator->settings = $settings;
+		$this->set ( 'items', $this->Paginator->paginate ( 'Reagent' ) );		
 	}
 	public function reagent_edit($id = null) {
 		if ($id != null) {
 			$this->Reagent->id = $id;
 		} else {
-			$this->request->data ['Reagent'] ['create_time'] = date ( 'Y-m-d 
-		H:
-		i:s' );
+			$this->request->data ['Reagent']['create_time'] = date ( 'Y-m-d H:i:s' );
 		}
 		if ($this->request->is ( 'get' )) {
 			$this->request->data = $this->Reagent->read ();

@@ -1,3 +1,35 @@
+ <script>
+
+
+    function open_name_window() { 
+        $.blockUI({ message: $('#query_name_window') }); 
+    }; 
+    function close_name_window(){
+		$.unblockUI();
+    }
+   		
+	function search_chemical_name() {
+		doc_topic = $("#doc_topic")[0].value;
+		$.ajax(
+				{	
+					url:'<?php echo $this->html->url(array('controller'=>'reagents', 'action' => 'chemical_name_search'));?>', 
+					data:{ name: doc_topic }, 
+					type: "post", 
+					success: function(response){
+						$("#select_doc_tbl")[0].innerHTML = response;
+						$('tr[name=chemical_item]').click(function(){
+							$('#ReagentChemicalId').val($(this).attr('chemical_id'));
+							$('#edit_chemical_name').val($(this).attr('chemical_name'));
+							
+							close_name_window();
+						});
+					}
+				}
+			);
+		return false;
+//		$.unblockUI();						
+	}    
+</script>
 <style>
 .input_label {
 	width: 120px;
@@ -26,7 +58,14 @@
 			<td class="input_label">試藥名稱</td><td><?php echo $this->Form->input('name', array('size'=>20, 'maxlength'=>20));?></td>
 		</tr>		
 		<tr>
-			<td class="input_label">化學名稱</td><td><?php echo $this->Form->select('chemical_id', $chemicals, array('empty'=>false));?></td>
+			<td class="input_label">化學名稱</td>
+				
+			<td>
+				<input id="edit_chemical_name" type="text" readonly value='<?php echo $this->request->data['Chemical']['name']?>' "/>
+				<?php
+				 echo $this->Form->hidden('chemical_id');
+				 echo $this->Html->link('選擇試藥', 'javascript:open_name_window()',array('onclick'=>''));
+			?></td>
 		</tr>
 		<tr>
 			<td class="input_label">等級</td><td><?php echo $this->Form->select('reagent_level_id', $reagent_levels, array('empty'=>false));?></td>
@@ -48,3 +87,11 @@
 		</tr>
 	</table>
 <?php echo $this->Form->end(); ?>		
+
+<div id="query_name_window" style="display: none; cursor: default"> 
+	關鍵字：
+	<?php echo $this->Form->text('doc_topic', array('size'=>8, 'style'=>'width:150px') );?>
+    <?php echo $this->Html->link('搜尋', 'javascript:void(0);',array('onclick'=>'search_chemical_name();'));?>
+    <div id="select_doc_tbl"></div>
+    <?php echo $this->Html->link('取消', 'javascript:void(0);',array('onclick'=>'close_name_window();'));?>
+</div>

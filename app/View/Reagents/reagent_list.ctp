@@ -4,6 +4,12 @@
 ?></div>
 <div class="pagebtn_div">
 <?php echo $this->Html->link('新增', array('action' => 'reagent_edit'), array('class' => 'button')); ?>
+<?php
+    echo $this->Form->create('Reagent', array('div'=>false, 'inputDefaults' => array('label' => false,'div' => false))); 
+    echo "代號或名稱";
+    echo $this->Form->text('keyword');
+    echo $this->Form->submit('查詢', array('div'=>false));
+?>
 </div>
 <table>
     <tr>
