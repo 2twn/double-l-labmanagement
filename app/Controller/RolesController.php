@@ -45,6 +45,7 @@ class RolesController extends AppController {
     		$this->RoleMenu->deleteAll(array('RoleMenu.role_id'=>$id));
     		$this->UserRole->deleteAll(array('UserRole.role_id'=>$id));
     	}
+    	$this->Session->setFlash('刪除成功.');
     	$this->redirect(array('action' => 'index'));
     }
     
