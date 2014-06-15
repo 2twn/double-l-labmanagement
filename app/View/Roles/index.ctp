@@ -16,6 +16,11 @@
         <td>
             <?php 
 				echo $this->Html->link('修改', array('action' => 'edit', $item['Role']['id']), array('class' => 'button'));
+                echo $this->Html->link(
+                    '刪除', array('action' => 'delete', $item['Role']['id']), 
+                    array('class' => 'button'),
+                    '你確定要刪除['.$item['Role']['name'].']角色'
+                );
             ?>
         </td>
     </tr>

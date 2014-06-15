@@ -1,6 +1,6 @@
 <?php
 class RolesController extends AppController {
-	public $uses = array('Role','RoleMenu', 'User','Menu');
+	public $uses = array('Role','RoleMenu', 'User','Menu', 'UserRole');
     public $helpers = array('Html', 'Form', 'Session');
     public $components = array('Session', 'Formfunc', 'Userfunc','Util');
     
@@ -39,6 +39,15 @@ class RolesController extends AppController {
     	$this->set('menus',$this->_getMenus());
     }    
  
+    public function delete($id=null){
+    	if($id!==null){
+    		$this->Role->deleteAll(array('Role.id'=>$id));
+    		$this->RoleMenu->deleteAll(array('RoleMenu.role_id'=>$id));
+    		$this->UserRole->deleteAll(array('UserRole.role_id'=>$id));
+    	}
+    	$this->redirect(array('action' => 'index'));
+    }
+    
     private function _save($data){
     	$result = false;
     	if($data['Role']['id'] == ''){
