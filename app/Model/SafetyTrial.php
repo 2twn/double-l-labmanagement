@@ -31,6 +31,12 @@ class SafetyTrial extends AppModel {
     						'message' => '請選擇溫濕度'
     				)
     		),
+    		'remark' => array(
+    				'required' => array(
+    						'rule' => array('notEmpty'),
+    						'message' => '請填寫說明'
+    				)
+    		),
     );    
 }
 ?>

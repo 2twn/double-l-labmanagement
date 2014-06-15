@@ -47,6 +47,8 @@
         <th>狀態</th>
         <th>樣品時間</th>
         <th>儲存位置</th>
+        <th>溫濕度</th>
+        <th>說明</th>
         <th></th>
     </tr>
     <?php foreach ($items as $item): ?>
@@ -67,6 +69,12 @@
         <td>
             <?php echo $item['SafetyTrial']['location'];  ?>
         </td>   
+        <td>
+            <?php echo $humitures[$item['SafetyTrial']['humiture']];  ?>
+        </td>                 
+        <td>
+            <?php echo $item['SafetyTrial']['remark'];  ?>
+        </td>          
         <td>
             <?php echo $this->Html->link('修改', array('action' => 'edit', $item['SafetyTrial']['id']), array('class' => 'button'));?>    
         </td>

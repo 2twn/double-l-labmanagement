@@ -47,6 +47,7 @@ class SafetytrialsController extends AppController {
 			$items = $this->SafetyTrial->find('all', $options);
 		}
 		$this->set('trial_status', $this->Formfunc->safety_trial_status());
+		$this->set('humitures', $this->Formfunc->safety_trial_humitures());
 		$this->set('items', $items);
 	}
 	public function edit($id = null) {
