@@ -28,6 +28,8 @@ body {
 	font-family:'lucida grande',verdana,helvetica,arial,sans-serif;
 	font-size:90%;
 	margin: 0;
+	width: 1366px;
+	height: 768px;
 }
 a {
 	color: #003d4c;
