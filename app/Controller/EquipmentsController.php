@@ -206,14 +206,18 @@ class EquipmentsController extends AppController {
 		$this->set('months', array('01'=>'01','02'=>'02','03'=>'03','04'=>'04','05'=>'05','06'=>'06',
 		                          '07'=>'07','08'=>'08','09'=>'09','10'=>'10','11'=>'11','12'=>'12'));
 		$this->set('search_month', date('m'));
-        $this->set('items', $this->EquipBooking->query("Select *
+		$YM = date('Y-m'); 
+        $items= $this->EquipBooking->query("Select *
 		                                        from equip_bookings EquipBooking,
 												     equips Equip,
 													 projects Project
 											   where EquipBooking.equip_id = Equip.id
 											     and EquipBooking.project_id = Project.id
 											     and EquipBooking.valid = 1
-											   order by Equip.equip_name, EquipBooking.book_start_time desc;"));
+        		                                 and ((substring(EquipBooking.book_start_time,1,6) = '$YM')
+        		                                      or (substring(EquipBooking.book_start_time,1,6) = '$YM'));
+											   order by Equip.equip_name, EquipBooking.book_start_time desc;");
+        $this->set('items', $items);
     }
 	
 	public function genYears($count_f = 2, $count_p =5) {
@@ -264,15 +268,61 @@ class EquipmentsController extends AppController {
 			$cur_day++;
 			$line_date = date('Y-m-d', mktime(0, 0, 0, $s_month, $cur_day, $s_year));
 		}
+// 		var_dump($week_table);
 		$this->set('week_table', $week_table);
 	}
 	
 	public function get_book_by_date($equip_id, $start_date) {
+		$start_periods= $this->Formfunc->book_periods();
+		$end_periods = $this->Formfunc->book_periods(1);
 		$result = array();
 		$booking = $this->EquipBooking->find('all', array('conditions' => array('EquipBooking.valid' => 1, 
 																				'EquipBooking.equip_id' => $equip_id,
-																				'substr(EquipBooking.book_start_time,1,10)' => $start_date)));
-		return $booking;
+																				"substr(EquipBooking.book_start_time,1,10) <= '".$start_date."'",
+		                                                                        "substr(EquipBooking.book_end_time,1,10) >= '".$start_date."'")));
+		for($i=0; $i<sizeof($booking);$i++) {
+			if ((substr($booking[$i]["EquipBooking"]["book_start_time"],0,10) == $start_date) &&
+			   (substr($booking[$i]["EquipBooking"]["book_end_time"],0,10) == $start_date)) {
+				$result[] = $booking[$i];
+			}
+			else if (substr($booking[$i]["EquipBooking"]["book_start_time"],0,10) == $start_date) {
+				$booking[$i]["EquipBooking"]["book_end_time"] = substr($booking[$i]["EquipBooking"]["book_start_time"],0,10).' 24:00:00';
+				$result[] = $booking[$i];
+			}
+			else if (substr($booking[$i]["EquipBooking"]["book_end_time"],0,10) == $start_date) {
+				$booking[$i]["EquipBooking"]["book_start_time"] = substr($booking[$i]["EquipBooking"]["book_end_time"],0,10).' 00:00:00';
+				$result[] = $booking[$i];
+			}
+			else {
+				$booking[$i]["EquipBooking"]["book_start_time"] = $start_date.' 00:00:00';
+				$booking[$i]["EquipBooking"]["book_end_time"] = $start_date.' 24:00:00';
+				$result[] = $booking[$i];
+			}
+		}
+		$booking = $result;
+		$result = array();
+		for($i=0; $i<sizeof($booking);$i++) {
+			$s_periods = array();			
+			foreach ($start_periods as $start_period) {
+				if ((substr($booking[$i]["EquipBooking"]["book_start_time"],11,5) <= $start_period) 
+				 	&& (substr($booking[$i]["EquipBooking"]["book_end_time"],11,5) > $start_period)) {
+					$s_periods[]=  $start_period;
+				}
+			}
+			$e_periods = array();
+			foreach ($end_periods as $end_period) {
+				if ((substr($booking[$i]["EquipBooking"]["book_start_time"],11,5) < $end_period)
+				&& (substr($booking[$i]["EquipBooking"]["book_end_time"],11,5) >= $end_period)) {
+					$e_periods[]=  $end_period;
+				}
+			}
+			for ($j=0;$j<sizeof($s_periods);$j++) {
+				$booking[$i]["EquipBooking"]["book_start_time"] = $start_date." ".$s_periods[$j].":00";
+				$booking[$i]["EquipBooking"]["book_end_time"] = $start_date." ".$e_periods[$j].":00";
+				$result[] = $booking[$i];
+			}
+		}
+		return $result;
 	}
 	
 	public function equip_booking_day_table($sel_date='') {

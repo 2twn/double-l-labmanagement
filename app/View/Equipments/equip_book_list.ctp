@@ -9,9 +9,9 @@
     <tr>
         <th>預約代號</th>
         <th>儀器名稱</th>
-        <th>儀器位置</th>
-        <th>專案代號</th>
-		<th>開始時間</th>
+        <th>專案代碼</th>
+        <th width="300px">說明</th>
+        <th>開始時間</th>
 		<th>結束時間</th>
         <th>建立時間</th>
         <th></th>
@@ -23,10 +23,10 @@
             <?php echo $item['Equip']['equip_name']; ?>
         </td>
         <td>
-            <?php echo $item['Equip']['location']; ?>
-        </td>
-        <td>
             <?php echo $item['Project']['prj_name']; ?>
+        </td>
+        <td width="300px">
+            <?php echo $item['EquipBooking']['booking_desc']; ?>
         </td>
         <td>
             <?php echo $item['EquipBooking']['book_start_time']; ?>
