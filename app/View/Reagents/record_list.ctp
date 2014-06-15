@@ -1,9 +1,15 @@
-<div class="pageheader_div"><h1 id="pageheader">試藥登錄</h1></div>
+<div class="pageheader_div"><h1 id="pageheader">試藥登入及查詢</h1></div>
 <div class="pagemenu_div"><?php 
   	echo $this->Html->link('回上一頁', "javascript:history.back();", array('class' => 'button')); 
 ?></div>
 <div class="pagebtn_div">
 <?php echo $this->Html->link('新增', array('action' => 'record_edit'), array('class' => 'button')); ?>
+<?php
+    echo $this->Form->create('ReagentRecord', array('div'=>false, 'inputDefaults' => array('label' => false,'div' => false))); 
+    echo "試藥或廠商";
+    echo $this->Form->text('keyword');
+    echo $this->Form->submit('查詢', array('div'=>false));
+?>
 </div>
 <table>
     <tr>

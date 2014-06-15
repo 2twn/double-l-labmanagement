@@ -44,8 +44,7 @@
         <th>登錄日期</th>
         <th>有效日期</th>
         <th>開封日期</th>
-        <th>使用期限</th>
-        <th>建立時間</th>        
+        <th>使用期限</th>     
     </tr>
     <?php foreach ($items as $item): ?>
     <tr>
@@ -58,8 +57,7 @@
         <td><?php echo $item['ReagentRecord']['record_date']; ?></td>
         <td><?php echo $item['ReagentRecord']['valid_date']; ?></td>
         <td><?php echo $item['ReagentRecord']['open_date']; ?></td>
-        <td><?php echo $item['ReagentRecord']['usage']; ?></td>
-        <td><?php echo $item['ReagentRecord']['create_time']; ?></td>        
+        <td><?php echo $item['ReagentRecord']['usage']; ?></td>     
     </tr>
     <?php endforeach; ?>
 	<tr>

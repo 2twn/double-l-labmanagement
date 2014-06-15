@@ -52,11 +52,5 @@
         </td>
     </tr>
     <?php endforeach; ?>
-	<tr>
-	    <td colspan="7">
-			<?php echo $this->Paginator->first('<<'); ?>
-			<?php echo $this->Paginator->numbers(array('first' => 2, 'last' => 2)); ?>
-			<?php echo $this->Paginator->last('>>'); ?>
-		</td>
-    </tr>
+
 </table>

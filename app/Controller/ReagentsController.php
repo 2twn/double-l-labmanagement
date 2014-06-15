@@ -27,16 +27,10 @@ class ReagentsController extends AppController {
 			'limit' => 10 
 	);
 	public function chemical_list() {
-		$this->paginate = array (
-				'conditions' => array (),
-				'order' => array (
-						'valid desc',
-						'id asc' 
-				),
-				'limit' => 4 
-		);
+
 		$this->set ( 'status', $this->Formfunc->status () );
-		$this->set ( 'items', $this->paginate ( 'Chemical' ) );
+		$this->set( 'items', $this->Chemical->find('all', array('order' => 'Chemical.id')));
+
 	}
 	public function chemical_edit($id = null) {
 		if ($id != null) {
@@ -73,7 +67,9 @@ class ReagentsController extends AppController {
 		if ($id != null) {
 			$this->Company->id = $id;
 		} else {
-			$this->request->data ['Company'] ['create_time'] = date ( 'Y-m-d H:i:s' );
+			$this->request->data ['Company'] ['create_time'] = date ( 'Y-m-d 
+		H:
+		i:s' );
 		}
 		if ($this->request->is ( 'get' )) {
 			$this->request->data = $this->Company->read ();
@@ -105,7 +101,9 @@ class ReagentsController extends AppController {
 		if ($id != null) {
 			$this->ReagentLevel->id = $id;
 		} else {
-			$this->request->data ['ReagentLevel'] ['create_time'] = date ( 'Y-m-d H:i:s' );
+			$this->request->data ['ReagentLevel'] ['create_time'] = date ( 'Y-m-d 
+		H:
+		i:s' );
 		}
 		if ($this->request->is ( 'get' )) {
 			$this->request->data = $this->ReagentLevel->read ();
@@ -137,7 +135,9 @@ class ReagentsController extends AppController {
 		if ($id != null) {
 			$this->ReagentLocation->id = $id;
 		} else {
-			$this->request->data ['ReagentLocation'] ['create_time'] = date ( 'Y-m-d H:i:s' );
+			$this->request->data ['ReagentLocation'] ['create_time'] = date ( 'Y-m-d 
+		H:
+		i:s' );
 		}
 		if ($this->request->is ( 'get' )) {
 			$this->request->data = $this->ReagentLocation->read ();
@@ -169,7 +169,9 @@ class ReagentsController extends AppController {
 		if ($id != null) {
 			$this->Reagent->id = $id;
 		} else {
-			$this->request->data ['Reagent'] ['create_time'] = date ( 'Y-m-d H:i:s' );
+			$this->request->data ['Reagent'] ['create_time'] = date ( 'Y-m-d 
+		H:
+		i:s' );
 		}
 		if ($this->request->is ( 'get' )) {
 			$this->request->data = $this->Reagent->read ();
@@ -212,16 +214,62 @@ class ReagentsController extends AppController {
 		$this->set ( 'status', $this->Formfunc->status () );
 	}
 	public function record_list() {
-		$this->Paginator->settings = array (
-				'conditions' => array (),
-				'order' => array (
-						'valid desc',
-						'id asc' 
-				),
-				'limit' => 10
-		);
+		unset($conditions);
+		unset($settings);		
+		if(($settings=$this->Session->read('Reagents.RecordList.paginate')) == null){
+			$settings = array (
+					'paramType' => 'querystring',
+					'conditions' => array ('1 = 1'),
+					'order' => array (
+							'ReagentRecord.usage desc',
+					),
+					'limit' => 10
+			);
+			$this->Session->write('Reagents.RecordList.paginate',$settings);
+		}		
+		if($this->request->is ('post' )){
+			$settings = array (
+					'paramType' => 'querystring',
+					'conditions' => array ('1 = 1'),
+					'order' => array (
+							'ReagentRecord.usage desc',
+					),
+					'limit' => 10
+			);			
+
+			if(!empty($this->request->data['ReagentRecord']['keyword'])){
+				$conditions[] = array ('ReagentRecord.name like ' => '%'.$this->request->data['ReagentRecord']['keyword'].'%' );
+				$company_query = $this->_buildCompanySubQuery($this->request->data['ReagentRecord']['keyword']);
+				if($company_query !=null){
+					$conditions[] = $company_query;
+				}
+			}
+			if(isset($conditions)){
+				$settings['conditions']['OR'] = $conditions;
+			}
+			$this->Session->write('Reagents.RecordList.paginate',$settings);
+		}		
 		$this->_initRecordPara();
+		$this->Paginator->settings = $settings;
 		$this->set ( 'items', $this->Paginator->paginate ( 'ReagentRecord' ) );
+	}
+	
+	private function _buildCompanySubQuery($keyword = null){
+		if($keyword==null || trim($keyword)=='') return null;
+		unset($conditionsSubQuery);
+		$conditionsSubQuery[] = array('Company.name like'=> '%'.$keyword.'%');
+		$db = $this->ReagentRecord->getDataSource();
+		$subquery = $db->buildStatement(
+			array(
+				'fields' => array("Company.id"),
+				'table'  =>  $db->fullTableName($this->Company),
+				'alias'      => 'Company',
+				'conditions' => $conditionsSubQuery,
+			), 
+			$this->Company			
+		);
+		$subquery = 'ReagentRecord.company_id in ('.$subquery.')';
+		return $db->expression($subquery);
 	}
 	
 	public function reagent_name_search() {
@@ -312,7 +360,9 @@ class ReagentsController extends AppController {
 		if ($id != null) {
 			$this->ReagentRecord->id = $id;
 		} else {
-			$this->request->data ['ReagentRecord'] ['create_time'] = date ( 'Y-m-d H:i:s' );
+			$this->request->data ['ReagentRecord'] ['create_time'] = date ( 'Y-m-d 
+		H:
+		i:s' );
 			$this->request->data ['ReagentRecord'] ['id'] =$this->Reagentfunc->create_record_id();
 		}
 		if ($this->request->is ( 'get' )) {
@@ -352,12 +402,12 @@ class ReagentsController extends AppController {
 						'name'
 				)
 		) ) );
-		$this->set ( 'status', $this->Formfunc->status () );
-	}	
-	public function test(){
-		
-		$id =$this->Reagentfunc->create_record_id();
-		var_dump($id);
+		$this->set ( 'status', $this->Formfunc->status () )
+		;
+	}
+	public function test() {
+		$id = $this->Reagentfunc->create_record_id ();
+		var_dump ( $id );
 	}
 }
 ?>
