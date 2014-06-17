@@ -41,7 +41,7 @@ class ReagentsController extends AppController {
 					"Chemical.name like '%".$this->request->data["name"]."%'");
 		}
 	
-		$items = $this->Chemical->find('all', array('options'=> $filter_array,'order'=>array('name desc')));
+		$items = $this->Chemical->find('all', array('conditions'=> $filter_array,'order'=>array('name desc')));
 		$this->set('items',$items);
 	}	
 	
