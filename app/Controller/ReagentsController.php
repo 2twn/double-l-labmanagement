@@ -41,12 +41,8 @@ class ReagentsController extends AppController {
 					"Chemical.name like '%".$this->request->data["name"]."%'");
 		}
 	
-		$this->Paginator->settings= array(
-				'conditions' => $filter_array,
-				'order' => array('name desc'),
-				'limit' => 10
-		);
-		$this->set('items', $this->Paginator->paginate('Chemical'));
+		$items = $this->Chemical->find('all', array('options'=> $filter_array,'order'=>array('name desc')));
+		$this->set('items',$items);
 	}	
 	
 	public function chemical_edit($id = null) {
@@ -327,7 +323,7 @@ class ReagentsController extends AppController {
 		$this->Paginator->settings= array(
 				'conditions' => $filter_array,
 				'order' => array('name desc'),
-				'limit' => 10
+				'limit' => 5
 		);
 		$this->set('items', $this->Paginator->paginate('Reagent'));
 	}	

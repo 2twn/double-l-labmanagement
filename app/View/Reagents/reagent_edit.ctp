@@ -2,7 +2,7 @@
 
 
     function open_name_window() { 
-        $.blockUI({ message: $('#query_name_window') }); 
+        $.blockUI({ css:{width:'700px',height:'300px'}, message: $('#query_name_window') }); 
     }; 
     function close_name_window(){
 		$.unblockUI();
@@ -64,7 +64,7 @@
 				<input id="edit_chemical_name" type="text" readonly value='<?php echo $this->request->data['Chemical']['name']?>' "/>
 				<?php
 				 echo $this->Form->hidden('chemical_id');
-				 echo $this->Html->link('選擇試藥', 'javascript:open_name_window()',array('onclick'=>''));
+				 echo $this->Html->link('選擇化學名稱', 'javascript:open_name_window()',array('onclick'=>''));
 			?></td>
 		</tr>
 		<tr>
@@ -88,10 +88,11 @@
 	</table>
 <?php echo $this->Form->end(); ?>		
 
-<div id="query_name_window" style="display: none; cursor: default"> 
+<div id="query_name_window" style="display: none; cursor: default;"> 
 	關鍵字：
 	<?php echo $this->Form->text('doc_topic', array('size'=>8, 'style'=>'width:150px') );?>
     <?php echo $this->Html->link('搜尋', 'javascript:void(0);',array('onclick'=>'search_chemical_name();'));?>
-    <div id="select_doc_tbl"></div>
-    <?php echo $this->Html->link('取消', 'javascript:void(0);',array('onclick'=>'close_name_window();'));?>
+     <?php echo $this->Html->link('取消', 'javascript:void(0);',array('onclick'=>'close_name_window();'));?>
+    <div id="select_doc_tbl" style="width:700px;height:270px;overflow:auto;"></div>
+   
 </div>
