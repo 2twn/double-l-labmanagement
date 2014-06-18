@@ -523,6 +523,9 @@ ALTER TABLE `equip_bookings` CHANGE `project_id` `project_id` INT NOT NULL;
 ALTER TABLE `equip_maintains` CHANGE `equip_id` `equip_id` INT NOT NULL;
 ALTER TABLE `training_w_documents` CHANGE `training_document_id` `training_document_id` INT NOT NULL;
 
+
+ALTER TABLE `reagents` CHANGE `chemical_id` `chemical_id` VARCHAR( 20 ) NOT NULL ;
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
