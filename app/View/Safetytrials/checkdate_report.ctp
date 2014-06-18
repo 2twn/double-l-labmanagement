@@ -47,6 +47,7 @@
         <th>樣品時間</th>
         <th>儲存位置</th>
         <th>檢核週期</th>
+        <th>提醒時間</th>
         <th>檢核時間</th>
     </tr>
     <?php foreach ($items as $item): ?>
@@ -70,6 +71,9 @@
         <td>
             <?php echo $item['SafetyTrialCheckdate']['check_mode'];  ?>
         </td>  
+        <td>
+            <?php echo $item['SafetyTrialCheckdate']['remind_date'];  ?>
+        </td>          
         <td>
             <?php echo $item['SafetyTrialCheckdate']['check_date'];  ?>
         </td>                  

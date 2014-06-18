@@ -28,11 +28,11 @@ class SafetyfuncComponent extends Component {
 				'order' => 'SafetyTrialCheckdate.check_date'
 		);
 		$conditions = array (
-				'SafetyTrial.status' => 1,
-				'AND'=> array(
-					'SafetyTrialCheckdate.check_date >= ' => $start_date,
-        			'SafetyTrialCheckdate.check_date <= ' => $end_date,
-				)
+			'SafetyTrial.status' => 1,
+			'OR'=> array(
+				"SafetyTrialCheckdate.check_date between ? and ?" => array($start_date,$end_date),
+				"SafetyTrialCheckdate.remind_date between ? and ?" => array($start_date,$end_date),
+			)
 		);
 		$options['conditions'] = $conditions;
 		return $model->find('all', $options);

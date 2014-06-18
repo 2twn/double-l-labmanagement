@@ -1,4 +1,4 @@
-<div class="pageheader_div"><h1 id="pageheader">試藥登入及查詢</h1></div>
+<div class="pageheader_div"><h1 id="pageheader">試藥登錄及查詢</h1></div>
 <div class="pagemenu_div"><?php 
   	echo $this->Html->link('回上一頁', "javascript:history.back();", array('class' => 'button')); 
 ?></div>
@@ -19,12 +19,12 @@
         <th>製造商</th>
         <th>包裝</th>
         <th>原廠批號</th>
-        <th>登錄日期</th>
-        <th>有效日期</th>
-        <th>開封日期</th>
-        <th>使用期限</th>
-        <th>建立時間</th>        
-        <th></th>
+        <th width="80px">登錄日期</th>
+        <th width="80px">有效日期</th>
+        <th width="80px">開封日期</th>
+        <th width="80px">使用期限</th>
+        <th width="150px">建立時間</th>        
+        <th width="75px"></th>
     </tr>
     <?php foreach ($items as $item): ?>
     <tr>
