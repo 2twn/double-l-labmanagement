@@ -523,7 +523,7 @@ ALTER TABLE `equip_bookings` CHANGE `project_id` `project_id` INT NOT NULL;
 ALTER TABLE `equip_maintains` CHANGE `equip_id` `equip_id` INT NOT NULL;
 ALTER TABLE `training_w_documents` CHANGE `training_document_id` `training_document_id` INT NOT NULL;
 
-
+ALTER TABLE  `training_documents` CHANGE  `doc_code`  `doc_code` VARCHAR( 16 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
 ALTER TABLE `reagents` CHANGE `chemical_id` `chemical_id` VARCHAR( 20 ) NOT NULL ;
 
 /*!40101 SET character_set_client = @saved_cs_client */;
