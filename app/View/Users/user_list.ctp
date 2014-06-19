@@ -7,15 +7,15 @@
 </div>
 <table>
     <tr>
-        <th>員工編號</th>
-        <th>人員姓名</th>
-        <th>登入名稱</th>
-        <th>電子郵件</th>
-        <th>部門</th>
-        <th>群組</th>
-        <th>有效</th>
-        <th>建立時間</th>
-        <th></th>
+        <th class="text20">員工編號</th>
+        <th class="text20">人員姓名</th>
+        <th class="text30">登入名稱</th>
+        <th class="text40">電子郵件</th>
+        <th class="text20">部門</th>
+        <th class="text20">群組</th>
+        <th class="state1">有效</th>
+        <th class="timestamp">建立時間</th>
+        <th class="command2"></th>
     </tr>
     <?php foreach ($items as $item): ?>
     <tr>

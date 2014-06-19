@@ -20,6 +20,7 @@
 		echo $this->Html->css('cupertino/jquery-ui-1.10.3.custom');
 		echo $this->Html->css('menu');	
 		echo $this->Html->css('application');
+		echo $this->Html->css('report.table');
 	?>
 </head>
 <body>

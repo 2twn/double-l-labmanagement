@@ -40,15 +40,15 @@
 </div>
 <table>
     <tr>
-        <th>樣品批號</th>
-        <th>樣品名稱</th>
+        <th class="text20">樣品批號</th>
+        <th class="text20">樣品名稱</th>
         <th>所屬專案</th>
-        <th>狀態</th>
-        <th>樣品時間</th>
-        <th>儲存位置</th>
-        <th>檢核週期</th>
-        <th>提醒時間</th>
-        <th>檢核時間</th>
+        <th class="state">狀態</th>
+        <th class="date">樣品時間</th>
+        <th class="text20">儲存位置</th>
+        <th class="text10">檢核週期</th>
+        <th class="date">提醒時間</th>
+        <th class="date">檢核時間</th>
     </tr>
     <?php foreach ($items as $item): ?>
     <tr>

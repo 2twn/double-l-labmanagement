@@ -1,0 +1,35 @@
+@CHARSET "UTF-8";
+th.command{
+	width: 160px;
+}
+th.command2{
+	width: 120px;
+}
+
+th.date  {
+	width: 80px;
+}
+
+th.timestamp{
+	width: 160px;
+}
+
+th.state{
+	width: 80px;
+}
+th.state1{
+	width: 30px;
+}
+
+th.text10{
+	width: 60px;	
+}
+th.text20{
+	width: 120px;	
+}
+th.text30{
+	width: 160px;
+}
+th.text40{
+	width: 240px;	
+}
