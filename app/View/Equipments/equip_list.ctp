@@ -7,13 +7,13 @@
 </div>
 <table>
     <tr>
-        <th>儀器代號</th>
-        <th>儀器名稱</th>
-		<th>下次校正日期</th>
+        <th class="text10">儀器代號</th>
+        <th class="text10">儀器名稱</th>
+		<th class="timestamp2">下次校正日期</th>
 		<th>位置說明</th>
-        <th>建立時間</th>
-        <th>使用狀態</th>
-        <th></th>
+        <th class="timestamp">建立時間</th>
+        <th class="state">使用狀態</th>
+        <th class="command"></th>
     </tr>
     <?php foreach ($items as $item): ?>
     <tr>

@@ -7,14 +7,14 @@
 </div>
 <table>
     <tr>
-        <th>預約代號</th>
-        <th>儀器名稱</th>
-        <th>專案代碼</th>
-        <th width="300px">說明</th>
-        <th>開始時間</th>
-		<th>結束時間</th>
-        <th>建立時間</th>
-        <th></th>
+        <th class="text10">預約代號</th>
+        <th class="text20">儀器名稱</th>
+        <th class="text10">專案代碼</th>
+        <th>說明</th>
+        <th class="timestamp2">開始時間</th>
+		<th class="timestamp2">結束時間</th>
+        <th class="timestamp2">建立時間</th>
+        <th class="command2"></th>
     </tr>
     <?php foreach ($items as $item): ?>
     <tr>

@@ -1,13 +1,13 @@
 <h2>教育訓練列表（日期：<?php echo $sel_date;?>）</h2>
 <table>
     <tr>
-        <th>代號</th>
-        <th>上課日期</th>
-        <th>開始時間</th>
-        <th>結束時間</th>
-        <th>上課地點</th>
-        <th>授課人員</th>
-        <th>上課人數</th>
+        <th class="text10">代號</th>
+        <th class="date">上課日期</th>
+        <th class="text10">開始時間</th>
+        <th class="text10">結束時間</th>
+        <th class="text20">上課地點</th>
+        <th class="text20">授課人員</th>
+        <th class="text10">上課人數</th>
     </tr>
     <?php foreach ($items as $item): ?>
     <tr>

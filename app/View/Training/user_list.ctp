@@ -1,6 +1,6 @@
 <div class="pageheader_div"><h1 id="pageheader">人員資料列表</h1></div>
 <div class="pagemenu_div"><?php 
-  	echo $this->Html->link('文件列表', "documsnt_list", array('class' => 'button')); 
+  	echo $this->Html->link('文件列表', "document_list", array('class' => 'button')); 
   	echo "&nbsp";
   	echo $this->Html->link('訓練列表', "training_list", array('class' => 'button')); 
 ?></div>
@@ -18,11 +18,11 @@
         </th>
     </tr>
     <tr>
-        <th>員工編號</th>
-        <th>人員姓名</th>
-        <th>登入名稱</th>
-        <th>電子郵件</th>
-        <th></th>
+        <th class="text10">員工編號</th>
+        <th class="text20">人員姓名</th>
+        <th class="text20">登入名稱</th>
+        <th class="text30">電子郵件</th>
+        <th class="command"></th>
     </tr>
     <?php foreach ($items as $item): ?>
     <tr>

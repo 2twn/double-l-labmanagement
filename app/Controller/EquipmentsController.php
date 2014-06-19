@@ -215,7 +215,7 @@ class EquipmentsController extends AppController {
 											     and EquipBooking.project_id = Project.id
 											     and EquipBooking.valid = 1
         		                                 and ((substring(EquipBooking.book_start_time,1,6) = '$YM')
-        		                                      or (substring(EquipBooking.book_start_time,1,6) = '$YM'));
+        		                                      or (substring(EquipBooking.book_start_time,1,6) = '$YM'))
 											   order by Equip.equip_name, EquipBooking.book_start_time desc;");
         $this->set('items', $items);
     }

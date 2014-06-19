@@ -5,6 +5,9 @@ th.command{
 th.command2{
 	width: 120px;
 }
+th.command3{
+	width: 180px;
+}
 
 th.date  {
 	width: 80px;
@@ -12,6 +15,10 @@ th.date  {
 
 th.timestamp{
 	width: 160px;
+}
+
+th.timestamp2{
+	width: 100px;
 }
 
 th.state{

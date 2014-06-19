@@ -11,11 +11,11 @@
 </table>
 <table>
 	<tr>
-        <th>文件編號</th>
-        <th>文件名稱</th>
-		<th>文件版本</th>
-        <th>建立時間</th>
-        <th>狀態</th>
+        <th class="text10">文件編號</th>
+        <th class="text30">文件名稱</th>
+		<th class="text10">文件版本</th>
+        <th class="timestamp">建立時間</th>
+        <th class="state">狀態</th>
     </tr>
     <?php foreach ($items as $item): ?>
     <tr>
