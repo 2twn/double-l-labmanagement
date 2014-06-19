@@ -7,15 +7,15 @@
 </div>
 <table>
     <tr>
-        <th>代號</th>
-        <th>名稱</th>
-		<th>CAS#</th>
+        <th class="text20">代號</th>
+        <th class="text40">名稱</th>
+		<th class="text20">CAS#</th>
 		<th>別名一</th>
         <th>別名二</th>
         <th>別名三</th>
         <th>別名四</th>
-        <th>有效</th>
-        <th>建立時間</th>        
+        <th class="state1">有效</th>
+        <th class="timestamp">建立時間</th>        
         <th></th>
     </tr>
     <?php foreach ($items as $item): ?>

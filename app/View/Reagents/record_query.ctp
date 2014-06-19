@@ -33,18 +33,18 @@
     echo $this->Form->submit('查詢', array('div'=>false));
 ?>
 </div>
-<table>
+<table class="fixreport">
     <tr>
-        <th>試藥編號</th>
-        <th>試藥名稱</th>
-        <th>儲存位置</th>
-        <th>製造商</th>
-        <th>包裝</th>
-        <th>原廠批號</th>
-        <th>登錄日期</th>
-        <th>有效日期</th>
-        <th>開封日期</th>
-        <th>使用期限</th>     
+        <th class="text20">試藥編號</th>
+        <th class="text20">試藥名稱</th>
+        <th class="text20">儲存位置</th>
+        <th class="text20">製造商</th>
+        <th class="text20">包裝</th>
+        <th class="text20">原廠批號</th>
+        <th class="date">登錄日期</th>
+        <th class="date">有效日期</th>
+        <th class="date">開封日期</th>
+        <th class="date">使用期限</th>      
     </tr>
     <?php foreach ($items as $item): ?>
     <tr>

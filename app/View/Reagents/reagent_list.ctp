@@ -11,16 +11,16 @@
     echo $this->Form->submit('查詢', array('div'=>false));
 ?>
 </div>
-<table>
+<table class="fixreport">
     <tr>
-        <th>試藥代號</th>
-        <th>試藥名稱</th>
-        <th>化學名稱</th>
-        <th>等級</th>
+        <th class="text20">試藥代號</th>
+        <th class="text20">試藥名稱</th>
+        <th class="text20">化學名稱</th>
+        <th class="text20">等級</th>
         <th>說明</th>
-        <th>有效</th>
-        <th>建立時間</th>        
-        <th></th>
+        <th class="state">有效</th>
+        <th class="timestamp">建立時間</th>        
+        <th class="command"></th>
     </tr>
     <?php foreach ($items as $item): ?>
     <tr>

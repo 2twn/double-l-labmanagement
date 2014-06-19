@@ -5,13 +5,13 @@
 <div class="pagebtn_div">
 <?php echo $this->Html->link('新增專案', array('action' => 'prj_edit'), array('class' => 'button')); ?>
 </div>
-<table>
+<table class="fixreport">
     <tr>
-        <th>專案代號</th>
-        <th>專案名稱</th>
-        <th>有效</th>
-        <th>建立時間</th>
-        <th></th>
+        <th class="text20">專案代號</th>
+        <th class="text40">專案名稱</th>
+        <th class="state">有效</th>
+        <th class="timestamp">建立時間</th>
+        <th class="command2"></th>
     </tr>
     <?php foreach ($items as $item): ?>
     <tr>
@@ -22,7 +22,7 @@
         <td>
             <?php if ($item['Project']['valid']) { echo 'Y'; } else {echo 'N';}; ?>
         </td>
-        <td>
+        <td class="timestamp">
             <?php echo $item['Project']['create_time']; ?>
         </td>
         <td>

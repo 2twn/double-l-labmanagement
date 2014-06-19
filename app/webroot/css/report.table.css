@@ -1,6 +1,15 @@
 @CHARSET "UTF-8";
+table.fixreport {
+	table-layout:fixed;
+    word-break:break-all;
+    word-wrap:break-word;
+}
+
 th.command{
 	width: 160px;
+}
+th.command1{
+	width: 60px;
 }
 th.command2{
 	width: 120px;

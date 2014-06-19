@@ -5,13 +5,13 @@
 <div class="pagebtn_div">
 <?php echo $this->Html->link('新增', array('action' => 'level_edit'), array('class' => 'button')); ?>
 </div>
-<table>
+<table class="fixreport">
     <tr>
-        <th>等級</th>
+        <th class="text20">等級</th>
         <th>說明</th>
-        <th>有效</th>
-        <th>建立時間</th>        
-        <th></th>
+        <th class="state">有效</th>
+        <th class="timestamp">建立時間</th>        
+        <th class="command2"></th>
     </tr>
     <?php foreach ($items as $item): ?>
     <tr>
