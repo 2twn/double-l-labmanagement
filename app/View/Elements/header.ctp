@@ -24,13 +24,9 @@
 	?>
 </head>
 <body>
-	<div id="container" style="background: #FFFFFF;">
+	<div id="container" style="background: #FFFFFF; width: 1366px; 	height: 768px;">
 		<div id="header" sytle="clear:left; float:left; background: #6494CD; ">
-		<table style="border: 0px;padding=0px;margin:0px">
-		<tr><td>
-		
-		</td><td>
-		<?php
+				<?php
 			if($this->Session->read('Auth.User'))	{
 				echo $this->Html->link(
 					$this->Html->image('TLC_Chinese_H_Color.jpg', array('alt' => 'TLC Lab Management', 'border' => '0','width'=>'200'))
@@ -38,11 +34,23 @@
 				echo '<br>';
 				//echo $this->element($this->Session->read('Auth.User.group_id').'_menu');
 				echo $this->element('menu');
-				echo '<div style="position: absolute; top : 10px; right : 10px;"><ul id="menu"><li>';
+				//echo '<div style="text-align">';
+				echo '<div style="position: absolute; top : 10px; right : 10px;">';
+				echo '<ul id="menu"><li style="background: #FFFFFF">';
+				echo $this->html->tag('span',$this->Session->read('Auth.User.name'), 
+					array('style'=>'
+						font-size: 16px;
+						font-weight: 700;
+						color: #000000; 
+						height: 23px;
+						padding: 8px 5px 0;
+						text-align: center;
+						margin-right: 8px;
+						display: block;'));
+				echo '</li><li>';
 				echo $this->html->link('登出', array('controller' => 'users', 'action' => 'logout')); 
 				echo '</li></ul></div>';
 			}
-		?>
-		</td></tr>
-		</table>
+		?>		
+
 		</div>
