@@ -18,9 +18,9 @@
 </style>
 <table border=1>
 	<tr>
-		<th>時間</th>
+		<th class="date">時間</th>
 		<?php foreach($equips as $equip):?>
-			<th><?php echo $equip;?></th>
+			<th class="text10"><?php echo $equip;?></th>
 		<?php endforeach; ?>
 	</tr>
 	<?php for($i=0; $i<sizeof($start_periods);$i++): ?>
