@@ -9,7 +9,7 @@ class EquipmentsController extends AppController {
 		$this->set('equip_status', $this->Formfunc->equip_status());
 		$this->paginate = array(
 			'conditions' => array(),
-			'order' => array('Equip.valid'=>'desc','Equip.equip_code'=>'asc'),
+			'order' => array('Equip.equip_code'=>'asc', 'Equip.valid'=>'desc'),
 			'limit' => 10
 		);
         $this->set('items', $this->paginate('Equip'));
@@ -70,7 +70,7 @@ class EquipmentsController extends AppController {
 		$this->set('equips', $this->genValidEquip());
 		$this->set('start_periods', $this->Formfunc->book_periods());
 		$this->set('end_periods', $this->Formfunc->book_periods(1));
-		$this->set('projects', $this->Project->find('list', array('conditions' => array('valid' => 1), 'fields' => array('id','prj_name'))));
+		$this->set('projects', $this->Project->find('list', array('conditions' => array('valid' => 1), 'fields' => array('id','prj_code'))));
 		$this->EquipBooking->id = $id;
 		// $this->set('equip_status', $this->Formfunc->equip_status());
 		if ($this->request->is('get')) {

@@ -15,7 +15,24 @@
 	$(document).ready(function() {
         GetTable();
     });
+  	$(function() {
+  	    $( document ).tooltip({
+  	      items: "[title]",
+  	      content: function() {
+  	        var element = $( this );
+  	        if ( element.is( "[title]" ) ) {
+  	          return element.attr( "title" );
+  	        }
+  	      }
+  	    });
+  	});
 </script>
+<style>
+  label {
+    display: inline-block;
+    width: 10em;
+  }
+  </style>
 <div class="pageheader_div"><h1 id="pageheader">儀器預約紀錄查詢</h1></div>
 <div class="pagemenu_div"><?php 
   	echo $this->Html->link('回上一頁', "javascript:history.back();", array('class' => 'button')); 

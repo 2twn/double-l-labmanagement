@@ -8,6 +8,7 @@
 <table>
     <tr>
         <th class="text10">預約代號</th>
+        <th class="text10">儀器代號</th>
         <th class="text20">儀器名稱</th>
         <th class="text10">專案代碼</th>
         <th>說明</th>
@@ -20,10 +21,13 @@
     <tr>
         <td><?php echo $item['EquipBooking']['id']; ?></td>
         <td>
+            <?php echo $item['Equip']['equip_code']; ?>
+        </td>
+        <td>
             <?php echo $item['Equip']['equip_name']; ?>
         </td>
         <td>
-            <?php echo $item['Project']['prj_name']; ?>
+            <?php echo $item['Project']['prj_code']; ?>
         </td>
         <td width="300px">
             <?php echo $item['EquipBooking']['booking_desc']; ?>

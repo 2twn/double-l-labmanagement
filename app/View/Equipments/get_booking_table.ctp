@@ -27,9 +27,9 @@
 					<tr><td><?php echo $book_date;?></td><tr>
 					<?php foreach($book_info['booking'] as $booking): ?>
 						<tr>
-							<td>
-								<?php echo substr($booking['EquipBooking']['book_start_time'],11,5)."-"
-								          .substr($booking['EquipBooking']['book_end_time'],11,5);?>
+							<td title="<?php echo "專案代碼：".$booking['Project']['prj_code']."<br/>說明：".$booking['EquipBooking']['booking_desc'];?>">
+								<a href="equip_booking_action/<?php echo $booking['EquipBooking']['id']; ?>"><?php echo substr($booking['EquipBooking']['book_start_time'],11,5)."-"
+								          .substr($booking['EquipBooking']['book_end_time'],11,5);?></a>
 							</td>
 						<tr>
 					<?php endforeach;?>
