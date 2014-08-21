@@ -173,9 +173,9 @@ class ReagentsController extends AppController {
 			$settings = array (
 					'paramType' => 'querystring',
 					'conditions' => array ('1 = 1'),
-					'order' => array (
-							'Reagent.id desc',
-					),
+// 					'order' => array (
+// 							'Reagents.name desc',
+// 					),
 					'limit' => 10
 			);
 			$this->Session->write('Reagents.RecordList.paginate',$settings);
@@ -184,9 +184,9 @@ class ReagentsController extends AppController {
 			$settings = array (
 					'paramType' => 'querystring',
 					'conditions' => array ('1 = 1'),
-					'order' => array (
-							'Reagent.id desc',
-					),
+// 					'order' => array (
+// 							'Reagents.name desc',
+// 					),
 					'limit' => 10
 			);
 		
@@ -198,6 +198,7 @@ class ReagentsController extends AppController {
 			if(isset($conditions)){
 				$settings['conditions']['OR'] = $conditions;
 			}
+			$settings['order'] = 'Reagent.id desc';
 			$this->Session->write('Reagents.ReagentList.paginate',$settings);
 		}		
 		$this->set ( 'status', $this->Formfunc->status () );

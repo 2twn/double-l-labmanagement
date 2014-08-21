@@ -12,8 +12,6 @@
 		<th class="text20">CAS#</th>
 		<th>別名一</th>
         <th>別名二</th>
-        <th>別名三</th>
-        <th>別名四</th>
         <th class="state1">有效</th>
         <th class="timestamp">建立時間</th>        
         <th></th>
@@ -33,12 +31,6 @@
         <td>
             <?php echo $item['Chemical']['alias_name2']; ?>
         </td>    
-        <td>
-            <?php echo $item['Chemical']['alias_name3']; ?>
-        </td>     
-        <td>
-            <?php echo $item['Chemical']['alias_name4']; ?>
-        </td>               
         <td>
             <?php echo $status[$item['Chemical']['status']]; ?>
         </td>

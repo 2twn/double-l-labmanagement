@@ -33,12 +33,7 @@
 		<tr>
 			<td class="input_label">別名二</td><td><?php echo $this->Form->input('alias_name2');?></td>
 		</tr>	
-		<tr>
-			<td class="input_label">別名三</td><td><?php echo $this->Form->input('alias_name3');?></td>
-		</tr>	
-		<tr>
-			<td class="input_label">別名四</td><td><?php echo $this->Form->input('alias_name4');?></td>
-		</tr>	
+
 		<tr>
 			<td class="input_label">狀態</td><td><?php echo $this->Form->select('status', $status, array('empty'=>false));?></td>
 		</tr>
