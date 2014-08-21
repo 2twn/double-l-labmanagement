@@ -1,4 +1,4 @@
-<div class="pageheader_div"><h1 id="pageheader">人員資料列表</h1></div>
+<div class="pageheader_div"><h1 id="pageheader">使用者文件查詢</h1></div>
 <div class="pagemenu_div"><?php 
   	echo $this->Html->link('文件列表', "document_list", array('class' => 'button')); 
   	echo "&nbsp";

@@ -45,7 +45,7 @@
     </tr>
 </table>
 <table style="width:800px;">
-    <tr>
+    <tr style="height:30px">
         <th style="width:100px" class="tb_border">部門</th>
         <th style="width:100px" class="tb_border">員工編號</th>
         <th style="width:150px" class="tb_border">姓名</th>
@@ -54,7 +54,7 @@
     </tr>
     <?php $i=0; ?>
     <?php foreach ($items as $item): ?>
-    <tr>
+    <tr style="height:30px">
         <td class="tb_border">
             <?php echo $item['Department']['dep_name']; ?>
         </td>
