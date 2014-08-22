@@ -13,7 +13,7 @@
 ?>
 	<table>
 		<tr>
-			<td class="input_label">試藥儲存位置</td><td><?php echo $this->Form->input('name');?></td>
+			<td class="input_label">試藥儲存位置</td><td><?php echo $this->Form->input('name',array('maxlength'=>20,'size'=>21));?></td>
 		</tr>		
 		<tr>
 			<td class="input_label">狀態</td><td><?php echo $this->Form->select('status', $status, array('empty'=>false));?></td>

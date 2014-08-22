@@ -13,7 +13,7 @@
 ?>
 	<table>
 		<tr>
-			<td class="input_label">名稱</td><td><?php echo $this->Form->input('name');?></td>
+			<td class="input_label">名稱</td><td><?php echo $this->Form->input('name',array('maxlength'=>20,'size'=>21));?></td>
 		</tr>						
 		<tr>
 			<td class="input_label">選單</td>

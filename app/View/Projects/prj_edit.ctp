@@ -9,20 +9,20 @@
 			<td>
 				<?php 
 					if($this->request->data['Project']['id'] == null) {
-						echo $this->Form->input('prj_code', array('type'=>'text'));
+						echo $this->Form->input('prj_code', array('type'=>'text','maxlength'=>8,'size'=>9));
 					}
 					else {
 						echo $this->Form->hidden('id');
-						echo $this->Form->input('prj_code', array('type'=>'text','readonly'=>true));
+						echo $this->Form->input('prj_code', array('type'=>'text','readonly'=>true,'size'=>9));
 					}
 				?>
 			</td>
 		</tr>	
 		<tr>
-			<td>專案名稱</td><td><?php echo $this->Form->input('prj_name');?></td>
+			<td>專案名稱</td><td><?php echo $this->Form->input('prj_name', array('type'=>'text','maxlength'=>30,'size'=>31));?></td>
 		</tr>
 		<tr>
-			<td>專案簡述</td><td><?php echo $this->Form->text('prj_desc');?></td>
+			<td>專案簡述</td><td><?php echo $this->Form->input('prj_desc', array('type'=>'text','maxlength'=>60,'size'=>61));?></td>
 		</tr>
 		<tr>
 			<td colspan=2><?php echo $this->Form->submit('儲存');?></td>

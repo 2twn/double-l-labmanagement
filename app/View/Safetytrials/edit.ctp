@@ -51,16 +51,16 @@ label {
 ?>
 	<table>
 		<tr>
-			<td class="input_label">樣品批號</td><td><?php echo $this->Form->input('trial_lot');?></td>
+			<td class="input_label">樣品批號</td><td><?php echo $this->Form->input('trial_lot',array('maxlength'=>12,'size'=>'13'));?></td>
 		</tr>
 		<tr>
-			<td class="input_label">樣品名稱</td><td><?php echo $this->Form->input('trial_name');?></td>
+			<td class="input_label">樣品名稱</td><td><?php echo $this->Form->input('trial_name',array('maxlength'=>16,'size'=>'17	'));?></td>
 		</tr>		
 		<tr>
 			<td class="input_label">所屬專案</td><td><?php echo $this->Form->select('project_id', $projects, array('empty'=>false));?></td>
 		</tr>		
 		<tr>
-			<td class="input_label">儲存位置</td><td><?php echo $this->Form->input('location');?></td>
+			<td class="input_label">儲存位置</td><td><?php echo $this->Form->input('location',array('maxlength'=>20,'size'=>'21'));?></td>
 		</tr>
 
 		<tr>

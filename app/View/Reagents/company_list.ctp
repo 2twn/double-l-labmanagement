@@ -5,9 +5,9 @@
 <div class="pagebtn_div">
 <?php echo $this->Html->link('新增', array('action' => 'company_edit'), array('class' => 'button')); ?>
 </div>
-<table>
+<table class="fixreport">
     <tr>
-        <th class="text20">製造商名稱</th>
+        <th class="text30">製造商名稱</th>
         <th>說明</th>
         <th class="state">有效</th>
         <th class="timestamp">建立時間</th>        

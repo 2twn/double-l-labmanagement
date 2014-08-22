@@ -5,12 +5,12 @@
 <div class="pagebtn_div">
 <?php echo $this->Html->link('新增儀器', array('action' => 'equip_edit'), array('class' => 'button')); ?>
 </div>
-<table>
+<table class="fixreport">
     <tr>
         <th class="text10">儀器代號</th>
-        <th class="text10">儀器名稱</th>
+        <th class="text30">儀器名稱</th>
 		<th class="timestamp2">下次校正日期</th>
-		<th>位置說明</th>
+		<th class="text30">位置說明</th>
         <th class="timestamp">建立時間</th>
         <th class="state">使用狀態</th>
         <th class="command"></th>

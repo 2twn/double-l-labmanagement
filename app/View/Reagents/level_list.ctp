@@ -7,7 +7,7 @@
 </div>
 <table class="fixreport">
     <tr>
-        <th class="text20">等級</th>
+        <th class="text30">等級</th>
         <th>說明</th>
         <th class="state">有效</th>
         <th class="timestamp">建立時間</th>        

@@ -5,10 +5,10 @@
 <div class="pagebtn_div">
 <?php echo $this->Html->link('新增部門', array('action' => 'dep_edit'), array('class' => 'button')); ?>
 </div>
-<table>
+<table class="fixreport">
     <tr>
-        <th class="text20">部門代號</th>
-        <th>部門名稱</th>
+        <th class="text10">部門代號</th>
+        <th class="text20">部門名稱</th>
         <th class="state">有效</th>
         <th class="timestamp">建立時間</th>
         <th class="command2"></th>

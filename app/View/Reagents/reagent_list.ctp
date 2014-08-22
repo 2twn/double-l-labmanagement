@@ -14,8 +14,8 @@
 <table class="fixreport">
     <tr>
         <th class="text20">試藥代號</th>
-        <th class="text20">試藥名稱</th>
-        <th class="text20">化學名稱</th>
+        <th class="text50">試藥名稱</th>
+        <th class="text30">化學名稱</th>
         <th class="text20">等級</th>
         <th>說明</th>
         <th class="state">有效</th>

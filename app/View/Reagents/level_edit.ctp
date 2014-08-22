@@ -16,9 +16,9 @@
 			<td class="input_label">等級</td>
 			<td><?php 
 				if($this->request->data['ReagentLevel']['id'] == null)
-					echo $this->Form->text('id', array('size'=>8, 'style'=>'width:150px'));
+					echo $this->Form->text('id', array('maxlength'=>20, 'size'=>'21'));
 				else
-					echo $this->Form->text('id', array('readonly'=>true, 'size'=>8, 'style'=>'width:150px'));
+					echo $this->Form->text('id', array('readonly'=>true, 'size'=>21));
 			?></td>
 		</tr>		
 		<tr>

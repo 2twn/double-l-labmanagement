@@ -59,10 +59,10 @@
 			<td class="input_label">製造商</td><td><?php echo $this->Form->select('company_id', $companys, array('empty'=>false));?></td>
 		</tr>	
 		<tr>
-			<td class="input_label">包裝</td><td><?php echo $this->Form->input('package');?></td>
+			<td class="input_label">包裝</td><td><?php echo $this->Form->input('package',array('maxlength'=>10,'size'=>11));?></td>
 		</tr>	
 		<tr>
-			<td class="input_label">原廠批號</td><td><?php echo $this->Form->input('lot');?></td>
+			<td class="input_label">原廠批號</td><td><?php echo $this->Form->input('lot',array('maxlength'=>20,'size'=>21));?></td>
 		</tr>
 		<tr>
 			<td class="input_label">登錄日期</td>

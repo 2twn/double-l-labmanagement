@@ -5,13 +5,13 @@
 <div class="pagebtn_div">
 <?php echo $this->Html->link('新增', array('action' => 'chemical_edit'), array('class' => 'button')); ?>
 </div>
-<table>
+<table class="fixreport">
     <tr>
-        <th class="text20">代號</th>
+        <th class="text10">代號</th>
         <th class="text40">名稱</th>
 		<th class="text20">CAS#</th>
-		<th>別名一</th>
-        <th>別名二</th>
+		<th lass="text20">別名一</th>
+        <th lass="text20">別名二</th>
         <th class="state1">有效</th>
         <th class="timestamp">建立時間</th>        
         <th></th>

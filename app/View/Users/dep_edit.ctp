@@ -7,11 +7,11 @@
 	<table>
 		<tr>
 			<td>部門代碼</td>
-			<td><?php echo $this->Form->input('dep_code');?></td>
+			<td><?php echo $this->Form->input('dep_code',array('maxlength'=>6,'size'=>7));?></td>
 		</tr>	
 		<tr>
 			<td>部門名稱</td>
-			<td><?php echo $this->Form->input('dep_name');?></td>
+			<td><?php echo $this->Form->input('dep_name',array('maxlength'=>20,'size'=>21));?></td>
 		</tr>
 		<tr>
 			<td colspan=2><?php echo $this->Form->submit('儲存');?></td>

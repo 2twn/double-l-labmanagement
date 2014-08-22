@@ -5,15 +5,15 @@
 <div class="pagebtn_div">
 <?php echo $this->Html->link('新增', array('action' => 'edit'), array('class' => 'button')); ?>
 </div>
-<table>
+<table class="fixreport">
     <tr>
-        <th>名稱</th>   
-        <th></th>
+        <th class="text20">名稱</th>   
+        <th class="command2"></th>
     </tr>
     <?php foreach ($items as $item): ?>
     <tr>
         <td><?php echo $item['Role']['name']; ?></td>
-        <td>
+        <td class="command2">
             <?php 
 				echo $this->Html->link('修改', array('action' => 'edit', $item['Role']['id']), array('class' => 'button'));
                 echo $this->Html->link(
@@ -25,10 +25,12 @@
         </td>
     </tr>
     <?php endforeach; ?>
-
-</table>
-<div align="center">
+    <tr>
+        <th colspan="2">
             <?php echo $this->Paginator->first('<<'); ?>
             <?php echo $this->Paginator->numbers(array('first' => 2, 'last' => 2)); ?>
             <?php echo $this->Paginator->last('>>'); ?>
-</div>
+        </th>
+    </tr>
+</table>
+

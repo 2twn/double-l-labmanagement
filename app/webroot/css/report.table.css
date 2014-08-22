@@ -17,13 +17,16 @@ th.command2{
 th.command3{
 	width: 180px;
 }
+th.command4{
+	width: 240px;
+}
 
 th.date  {
 	width: 80px;
 }
 
 th.timestamp{
-	width: 160px;
+	width: 140px;
 }
 
 th.timestamp2{
@@ -38,14 +41,20 @@ th.state1{
 }
 
 th.text10{
-	width: 60px;	
+	width: 80px;	
 }
-th.text20{
+th.text15{
 	width: 120px;	
 }
+th.text20{
+	width: 160px;	
+}
 th.text30{
-	width: 160px;
+	width: 240px;
 }
 th.text40{
-	width: 240px;	
+	width: 320px;	
+}
+th.text50{
+	width: 400px;	
 }

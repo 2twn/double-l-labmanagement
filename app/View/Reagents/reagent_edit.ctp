@@ -48,14 +48,14 @@
 			<td class="input_label">試藥代號</td>
 			<td><?php 
 				if($this->request->data['Reagent']['id'] == null)
-					echo $this->Form->text('id', array('size'=>20, 'maxlength'=>20));
+					echo $this->Form->text('id', array('size'=>21, 'maxlength'=>20));
 				else
-					echo $this->Form->text('id', array('readonly'=>true, 'size'=>20, 'maxlength'=>20));
+					echo $this->Form->text('id', array('readonly'=>true, 'size'=>21, 'maxlength'=>20));
 
 			?></td>
 		</tr>
 		<tr>
-			<td class="input_label">試藥名稱</td><td><?php echo $this->Form->input('name', array('size'=>20, 'maxlength'=>20));?></td>
+			<td class="input_label">試藥名稱</td><td><?php echo $this->Form->input('name', array('size'=>51, 'maxlength'=>50));?></td>
 		</tr>		
 		<tr>
 			<td class="input_label">化學名稱</td>
