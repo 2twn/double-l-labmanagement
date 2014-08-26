@@ -34,12 +34,14 @@ th.timestamp2{
 }
 
 th.state{
-	width: 80px;
+	width: 60px;
 }
 th.state1{
 	width: 30px;
 }
-
+th.text5{
+	width: 40px;
+}
 th.text10{
 	width: 80px;	
 }

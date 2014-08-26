@@ -16,8 +16,8 @@
         <th class="text20">試藥代號</th>
         <th class="text50">試藥名稱</th>
         <th class="text30">化學名稱</th>
-        <th class="text20">等級</th>
-        <th>說明</th>
+        <th class="text5">等級</th>
+        <th class="text40">說明</th>
         <th class="state">有效</th>
         <th class="timestamp">建立時間</th>        
         <th class="command"></th>
