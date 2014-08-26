@@ -13,13 +13,13 @@
 			<td>儀器編號：
 				<?php 
 					echo $this->Form->hidden('id');
-					echo $this->Form->text('equip_code', array('size'=>8, 'style'=>'width:150px'));
+					echo $this->Form->text('equip_code', array('maxlength'=>8,'size'=>8));
 				?>
 				(最多8碼英文字母或數字)
 			</td>
 		</tr>			
 		<tr>
-			<td>儀器名稱：<?php echo $this->Form->input('equip_name', array('size'=>30, 'style'=>'width:150px'));?>(最多30碼英文字母或數字)</td>
+			<td>儀器名稱：<?php echo $this->Form->input('equip_name', array('maxlength'=>30,'size'=>30));?>(最多30碼英文字母或數字)</td>
 		</tr>
 		<tr>
 			<td>下次校正日期：<?php echo $this->Form->text('maintain_time', array('dateFormat' => 'Y-M-D', 'class' =>'jquery_date', 'readonly'=>true, 'size'=>8, 'style'=>'width:150px'));?></td>
@@ -28,7 +28,7 @@
 			<td>位置說明：(最多30個中文字)</td>
 		</tr>
 		<tr>
-			<td><?php echo $this->Form->text('location', array('style'=>'width:450px'));?></td>
+			<td><?php echo $this->Form->text('location', array('maxlength'=>30,'size'=>30));?></td>
 		</tr>
 		<tr>
 			<td>使用狀態：<?php echo $this->Form->select('status', $equip_status, array('empty'=>false));?></td>
@@ -37,7 +37,7 @@
 			<td>說明：(最多30個中文字)</td>
 		</tr>
 		<tr>
-			<td><?php echo $this->Form->text('equip_desc', array('style'=>'width:450px'));?></td>
+			<td><?php echo $this->Form->text('equip_desc', array('maxlength'=>30,'size'=>30));?></td>
 		</tr>
 		<tr>
 			<td colspan=2><?php echo $this->Form->submit('儲存');?></td>

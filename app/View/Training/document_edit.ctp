@@ -8,15 +8,15 @@
 			<td>文件編號：
 				<?php 
 					echo $this->Form->hidden('id');
-					echo $this->Form->text('doc_code', array('style'=>'width:150px'));
+					echo $this->Form->text('doc_code', array('maxlength'=>14,'size'=>15));
 				?>
 			</td>
 		</tr>			
 		<tr>
-			<td>文件名稱：<?php echo $this->Form->input('document_name', array('style'=>'width:150px'));?></td>
+			<td>文件名稱：<?php echo $this->Form->input('document_name', array('maxlength'=>60,'size'=>61));?></td>
 		</tr>
 		<tr>
-			<td>文件版本：<?php echo $this->Form->text('document_version', array('style'=>'width:50px'));?></td>
+			<td>文件版本：<?php echo $this->Form->text('document_version', array('maxlength'=>3,'size'=>3));?></td>
 		</tr>
 		<tr>
 			<td>說明：(最多30個中文字)</td>

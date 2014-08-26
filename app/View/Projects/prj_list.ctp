@@ -5,7 +5,7 @@
 <div class="pagebtn_div">
 <?php echo $this->Html->link('新增專案', array('action' => 'prj_edit'), array('class' => 'button')); ?>
 </div>
-<table>
+<table class="fixreport">
     <tr>
         <th class="text20">專案代碼</th>
         <th class="text40">專案名稱</th>

@@ -7,20 +7,22 @@
 </div>
 <?php echo $this->Form->create('TrainingDocument', array('div'=>false, 'inputDefaults' => array('label' => false,'div' => false))); ?>
 <table>
-    <tr>
+   <tr>
         <th>
-       	<?php echo $this->Form->text('search_doc_code', array('style'=>'width:150px'));?>
-       	</th>
-       	<th>
-        	<?php echo $this->Form->submit('搜尋');?>
+        <?php echo $this->Form->text('search_doc_code', array('style'=>'width:150px'));?>
+        </th>
+        <th>
+            <?php echo $this->Form->submit('搜尋');?>
         </th>
     </tr>
+</table>
+<table class="fixreport">
 	<tr>
         <th class="text10">文件編號</th>
         <th class="text40">文件名稱</th>
 		<th class="text10">文件版本</th>
         <th class="timestamp">建立時間</th>
-        <th class="state">狀態</th>
+        <th class="state1">狀態</th>
         <th class="command3"></th>
     </tr>
     <?php foreach ($items as $item): ?>

@@ -5,17 +5,17 @@
 <div class="pagebtn_div">
 <?php echo $this->Html->link('新增人員', array('action' => 'user_edit'), array('class' => 'button')); ?>
 </div>
-<table>
+<table  class="fixreport">
     <tr>
-        <th class="text20">員工編號</th>
-        <th class="text20">人員姓名</th>
-        <th class="text30">登入名稱</th>
-        <th class="text40">電子郵件</th>
-        <th class="text20">部門</th>
-        <th class="text20">群組</th>
+        <th class="text10">員工編號</th>
+        <th class="text15">人員姓名</th>
+        <th class="text20">登入名稱</th>
+        <th class="text30">電子郵件</th>
+        <th class="text15">部門</th>
+        <th class="text15">群組</th>
         <th class="state1">有效</th>
         <th class="timestamp">建立時間</th>
-        <th class="command2"></th>
+        <th class="command3"></th>
     </tr>
     <?php foreach ($items as $item): ?>
     <tr>
