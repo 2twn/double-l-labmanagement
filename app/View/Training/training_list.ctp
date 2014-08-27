@@ -56,25 +56,36 @@
         <td>
             <?php if ($item['Training']['valid']) { echo 'Y'; } else {echo 'N';}; ?>
         </td>
-        <td>
+        <td><div style="width:130px;margin:0px;padding:0px;clear:none">
             <?php 
 				$delbtn = '生效';
 				if ($item['Training']['valid']) {
-					echo $this->Html->link('修改', array('action' => 'training_edit', $item['Training']['id']), array('class' => 'button'));
-					echo '&nbsp';
-					echo $this->Html->link('通知', array('action' => 'training_checkin_send', $item['Training']['id']), array('class' => 'button'));
-					echo '&nbsp';
-					echo $this->Html->link('列印', array('action' => 'training_checkin_print', $item['Training']['id']), array('class' => 'button'));
-					echo '&nbsp';
-					echo $this->Html->link('出席', array('action' => 'training_checkin', $item['Training']['id']), array('class' => 'button'));
-					echo '&nbsp';
+					echo '<div style="float:left;width:50px;margin:0px;padding:6px;clear:none">'
+                                             .$this->Html->link('修改', array('action' => 'training_edit', $item['Training']['id']), array('class' => 'button'))
+                                             .'</div>';
+					//echo '&nbsp';
+					echo '<div style="float:left;width:50px;margin:0px;padding:6px;clear:none">'
+                                             .$this->Html->link('通知', array('action' => 'training_checkin_send', $item['Training']['id']), array('class' => 'button'))
+                                             .'</div>';
+					//echo '&nbsp';
+					echo '<div style="float:left;width:50px;margin:0px;padding:6px;clear:none">'
+                                             .$this->Html->link('列印', array('action' => 'training_checkin_print', $item['Training']['id']), array('class' => 'button'))
+                                             .'</div>';;
+					//echo '&nbsp';
+					echo '<div style="float:left;width:50px;margin:0px;padding:6px;clear:none">'
+                                             .$this->Html->link('出席', array('action' => 'training_checkin', $item['Training']['id']), array('class' => 'button'))
+                                             .'</div>';;
+					//echo '&nbsp';
 					$delbtn = '失效';
 				}
-				echo $this->Form->postLink(
-				$delbtn,
-				array('action' => 'training_del', $item['Training']['id']),
-				array('class'=>'button','confirm' => '確認變更?'));
+				echo '<div style="float:left;width:50px;margin:0px;padding:6px;clear:none">'
+                                     .$this->Html->link(
+							$delbtn,
+							array('action' => 'training_del', $item['Training']['id']),
+							array('class'=>'button'),'確認變更?')
+                                     .'</div>';;
             ?>
+	</div>
         </td>
     </tr>
     <?php endforeach; ?>
