@@ -155,9 +155,9 @@ class TrainingController extends AppController {
 		$this->Training->id = $id;
 		$this->request->data = $this->Training->read();
 		$this->request->data['Training']['valid'] = ($this->request->data['Training']['valid'] + 1)%2;
-		if ($this->request->is('get')) {
-			throw new MethodNotAllowedException();
-		}
+// 		if ($this->request->is('get')) {
+// 			throw new MethodNotAllowedException();
+// 		}
 		if ($this->Training->save($this->request->data)) {
 			$this->Session->setFlash('訓練狀態已變更.');
 			$this->redirect(array('action' => 'training_list'));
@@ -247,18 +247,17 @@ class TrainingController extends AppController {
     	$this->set('items', $this->paginate('TrainingDocument'));
     }
     
-    public function user_search() {
+    public function user_search($page=1) {
     	$this->layout = 'ajax';
     	$filter_array = array();
     	if (isset($this->data["user_pattern"])) {
     		$filter_array = array("name like '%".$this->data["user_pattern"]."%'", 'User.valid'=>1);
     	}
-    	$this->paginate = array(
-    			'conditions' => $filter_array,
-    			'order' => array('User.valid'=>'desc','User.id'=>'asc'),
-    			'limit' => 10
-    	);
-    	$this->set('items', $this->paginate('User'));
+    	$items = $this->User->find('all', array('conditions' =>array($filter_array), 'limit' => 10, 'page' => $page));
+    	$item_cnt = $this->User->find('count', array('conditions' =>array($filter_array)));
+    	$this->set('items', $items);
+    	$this->set('item_cnt', $item_cnt);
+    	$this->set('page', $page);
     }
     
     public function training_result_by_docid($doc_id=0) {

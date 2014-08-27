@@ -13,4 +13,13 @@
 	</td>
 </tr>
 <?php endforeach;?>
+<tr>
+	<td colspan="2">
+	<?php for($i =1; $i<=$item_cnt;$i++): ?>
+		<?php if ($page == $i)  { echo $page; }
+		      else { echo $this->Html->link($i, 'javascript:void(0);',array('onclick'=>'search_document('.$i.');'));}
+		 ?>
+	<?php endfor;?>
+	</td>
+</tr>
 </table>

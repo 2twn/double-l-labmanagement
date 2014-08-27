@@ -20,11 +20,12 @@
 		$.unblockUI();						
 	}
 
-	function search_document() {
+	function search_document(page_num) {
 		doc_topic = $("#doc_topic")[0].value;
+		post_url = '<?php echo $this->html->url(array('controller'=>'training', 'action' => 'document_search'))."/";?>'+page_num;
 		$.ajax(
 				{	
-					url:'<?php echo $this->html->url(array('controller'=>'training', 'action' => 'document_search'));?>', 
+					url: post_url, 
 					data:{ doc_topic: doc_topic }, 
 					type: "post", 
 					success: function(response){
@@ -36,11 +37,12 @@
 //		$.unblockUI();						
 	}
 
-	function search_user() {
+	function search_user(page_num) {
 		user_pattern = $("#user_pattern")[0].value;
+		post_url = '<?php echo $this->html->url(array('controller'=>'training', 'action' => 'user_search'))."/";?>'+page_num;
 		$.ajax(
 				{	
-					url:'<?php echo $this->html->url(array('controller'=>'training', 'action' => 'user_search'));?>', 
+					url: post_url, 
 					data:{ user_pattern: user_pattern }, 
 					type: "post", 
 					success: function(response){
@@ -93,11 +95,31 @@
 	}
 
     function open_document() { 
-        $.blockUI({ message: $('#document_list') }); 
+        $.blockUI({ message: $('#document_list'),
+            css: { 
+                padding:        0, 
+                margin:         0, 
+                width:          '400px', 
+                height:         '500px', 
+                top:            '20px', 
+                left:           '35%', 
+                textAlign:      'center', 
+                }  
+             }); 
     }; 
 
     function open_user() { 
-        $.blockUI({ message: $('#user_list') }); 
+        $.blockUI({ message: $('#user_list'),
+            css: { 
+            padding:        0, 
+            margin:         0, 
+            width:          '400px', 
+            height:         '500px', 
+            top:            '20px', 
+            left:           '35%', 
+            textAlign:      'center', 
+            }  
+        }); 
     }; 
 
     function close_ui() {
@@ -184,18 +206,18 @@ echo $this->Html->link ( '回教育訓練列表', array (
 	</tr>
 </table>
 <?php echo $this->Form->end(); ?>
-<div id="document_list" style="display: none; cursor: default"> 
+<div id="document_list" style="display: none; cursor: default;height:400px"> 
 	關鍵字：
 	<?php echo $this->Form->text('doc_topic', array('size'=>8, 'style'=>'width:150px') );?>
-    <?php echo $this->Html->link('搜尋', 'javascript:void(0);',array('onclick'=>'search_document();'));?>
-    <div id="select_doc_tbl"></div>
+    <?php echo $this->Html->link('搜尋', 'javascript:void(0);',array('onclick'=>'search_document(1);'));?>
+    <div id="select_doc_tbl" style="overflow:auto"></div>
     <?php echo $this->Html->link('加入', 'javascript:void(0);',array('onclick'=>'add_document();'));?>
     <?php echo $this->Html->link('取消', 'javascript:void(0);',array('onclick'=>'close_ui();'));?>
     </div>
-<div id="user_list" style="display: none; cursor: default"> 
+<div id="user_list" style="display: none; cursor: default;height:400px"> 
 	關鍵字：
 	<?php echo $this->Form->text('user_pattern', array('size'=>8, 'style'=>'width:150px') );?>
-    <?php echo $this->Html->link('搜尋', 'javascript:void(0);',array('onclick'=>'search_user();'));?>
+    <?php echo $this->Html->link('搜尋', 'javascript:void(0);',array('onclick'=>'search_user(1);'));?>
     <div id="select_user_tbl"></div>
     <?php echo $this->Html->link('加入', 'javascript:void(0);',array('onclick'=>'add_user();'));?>
     <?php echo $this->Html->link('取消', 'javascript:void(0);',array('onclick'=>'close_ui();'));?>
