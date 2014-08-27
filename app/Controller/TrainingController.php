@@ -37,6 +37,7 @@ class TrainingController extends AppController {
 				$doc_existed = $this->TrainingDocument->find('count', array('conditions' => array('doc_code' => $this->request->data['TrainingDocument']['doc_code'], 'id != '.$this->request->data['TrainingDocument']['id'])));
 			}
 			if ($doc_existed == 0){
+				$this->request->data['TrainingDocument']['doc_code'] = strtoupper($this->request->data['TrainingDocument']['doc_code']);
 				if ($this->TrainingDocument->save($this->request->data)) {
 					$this->Session->setFlash('儲存成功.');
 					$this->redirect(array('action' => 'document_list'));

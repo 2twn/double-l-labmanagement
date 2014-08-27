@@ -18,7 +18,7 @@
 </table>
 <table class="fixreport">
 	<tr>
-        <th class="text10">文件編號</th>
+        <th class="text20">文件編號</th>
         <th class="text40">文件名稱</th>
 		<th class="text10">文件版本</th>
         <th class="timestamp">建立時間</th>
