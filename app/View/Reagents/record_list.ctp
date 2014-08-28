@@ -7,15 +7,15 @@
 <?php
     echo $this->Form->create('ReagentRecord', array('div'=>false, 'inputDefaults' => array('label' => false,'div' => false))); 
     echo "試藥或廠商";
-    echo $this->Form->text('keyword');
+    echo $this->Form->text('keyword',array('value'=>$keyword));
     echo $this->Form->submit('查詢', array('div'=>false));
 ?>
 </div>
 <table class="fixreport">
     <tr>
-        <th class="text20">試藥編號</th>
+        <th class="text10">試藥編號</th>
         <th class="text20">試藥名稱</th>
-        <th class="text20">儲存位置</th>
+        <th class="text10">儲存位置</th>
         <th class="text20">製造商</th>
         <th class="text20">包裝</th>
         <th class="text20">原廠批號</th>
@@ -47,9 +47,9 @@
     </tr>
     <?php endforeach; ?>
 	<tr>
-	    <td colspan="13">
+	    <td colspan="11">
 			<?php echo $this->Paginator->first('<<'); ?>
-			<?php echo $this->Paginator->numbers(array('first' => 2, 'last' => 2)); ?>
+			<?php echo $this->Paginator->numbers(array('first' => 1, 'last' => 2)); ?>
 			<?php echo $this->Paginator->last('>>'); ?>
 		</td>
     </tr>

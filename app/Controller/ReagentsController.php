@@ -168,40 +168,42 @@ class ReagentsController extends AppController {
 	}
 	public function reagent_list() {
 		unset($conditions);
-		unset($settings);
-		if(($settings=$this->Session->read('Reagents.ReagentList.paginate')) == null){
-			$settings = array (
+		unset($queryCache);
+		$keyword='';
+		$settings = array (
 					'paramType' => 'querystring',
 					'conditions' => array ('1 = 1'),
 					'order' => 'Reagent.id',
 					'limit' => 10
-			);
-// 			$settings['order'] = 'Reagent.id';
-			$this->Session->write('Reagents.RecordList.paginate',$settings);
-		}
+		);
 		if($this->request->is ('post' )){
-			$settings = array (
-					'paramType' => 'querystring',
-					'conditions' => array ('1 = 1'),
-					'order' => 'Reagent.id',
-					'limit' => 10
-			);
-		
+			
 			if(!empty($this->request->data['Reagent']['keyword'])){
-				$conditions[] = array ('Reagent.name like ' => '%'.$this->request->data['Reagent']['keyword'].'%' );
-				$conditions[] = array ('Reagent.id like ' => '%'.$this->request->data['Reagent']['keyword'].'%' );
-				
+				$keyword = $this->request->data['Reagent']['keyword'];
+				$conditions[] = array ('Reagent.name like ' => '%'.$keyword.'%' );
+				$conditions[] = array ('Reagent.id like ' => '%'.$keyword.'%' );
 			}
+			
 			if(isset($conditions)){
 				$settings['conditions']['OR'] = $conditions;
+				$queryCache['keyword'] = $keyword;
+				$queryCache['conditions'] = $conditions;
+				$this->Session->write('Reagents.ReagentList.queryCache',$queryCache);				
 			}
-// 			$settings['order'] = 'Reagent.id desc';
-			$this->Session->write('Reagents.ReagentList.paginate',$settings);
-		}		
-		$this->set ( 'status', $this->Formfunc->status () );
+
+		} else {		
+			if(($queryCache=$this->Session->read('Reagents.ReagentList.queryCache')) != null){
+				$keyword = $queryCache['keyword'];
+				$conditions = $queryCache['conditions'];
+				$settings['conditions']['OR'] = $conditions;
+			}
+		}
+		
 
 		$this->Paginator->settings = $settings;
-		$this->set ( 'items', $this->Paginator->paginate ( 'Reagent' ) );		
+		$this->set ( 'items', $this->Paginator->paginate ( 'Reagent' ) );	
+		$this->set ( 'status', $this->Formfunc->status () );
+		$this->set ( 'keyword', $keyword);	
 	}
 	public function reagent_edit($id = null) {
 		if ($id != null) {
@@ -251,43 +253,42 @@ class ReagentsController extends AppController {
 	}
 	public function record_list() {
 		unset($conditions);
-		unset($settings);		
-		if(($settings=$this->Session->read('Reagents.RecordList.paginate')) == null){
-			$settings = array (
-					'paramType' => 'querystring',
-					'conditions' => array ('1 = 1'),
-					'order' => array (
-							'ReagentRecord.usage desc',
-					),
-					'limit' => 10
-			);
-			$this->Session->write('Reagents.RecordList.paginate',$settings);
-		}		
-		if($this->request->is ('post' )){
-			$settings = array (
-					'paramType' => 'querystring',
-					'conditions' => array ('1 = 1'),
-					'order' => array (
-							'ReagentRecord.usage desc',
-					),
-					'limit' => 10
-			);			
-
+		unset($queryCache);
+		$keyword='';
+		$settings = array (
+				'paramType' => 'querystring',
+				'conditions' => array ('1 = 1'),
+				'order' => 'ReagentRecord.id',
+				'limit' => 10
+		);		
+		if($this->request->is('post')){
 			if(!empty($this->request->data['ReagentRecord']['keyword'])){
-				$conditions[] = array ('ReagentRecord.name like ' => '%'.$this->request->data['ReagentRecord']['keyword'].'%' );
-				$company_query = $this->_buildCompanySubQuery($this->request->data['ReagentRecord']['keyword']);
+				$keyword = $this->request->data['ReagentRecord']['keyword'];
+				$conditions[] = array ('ReagentRecord.name like ' => '%'.$keyword.'%' );
+				$company_query = $this->_buildCompanySubQuery($keyword);
 				if($company_query !=null){
 					$conditions[] = $company_query;
 				}
 			}
 			if(isset($conditions)){
 				$settings['conditions']['OR'] = $conditions;
+				$queryCache['keyword'] = $keyword;
+				$queryCache['conditions'] = $conditions;
+				$this->Session->write('Reagents.RecordList.queryCache',$queryCache);
 			}
-			$this->Session->write('Reagents.RecordList.paginate',$settings);
-		}		
+			
+		} else {		
+			if(($queryCache=$this->Session->read('Reagents.RecordList.queryCache')) != null){
+				$keyword = $queryCache['keyword'];
+				$conditions = $queryCache['conditions'];
+				$settings['conditions']['OR'] = $conditions;
+			}		
+		}
+		
 		$this->_initRecordPara();
 		$this->Paginator->settings = $settings;
 		$this->set ( 'items', $this->Paginator->paginate ( 'ReagentRecord' ) );
+		$this->set ( 'keyword',$keyword);
 	}
 	
 	private function _buildCompanySubQuery($keyword = null){

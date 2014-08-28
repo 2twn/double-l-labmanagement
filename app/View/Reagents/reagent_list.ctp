@@ -7,7 +7,7 @@
 <?php
     echo $this->Form->create('Reagent', array('div'=>false, 'inputDefaults' => array('label' => false,'div' => false))); 
     echo "代號或名稱";
-    echo $this->Form->text('keyword');
+    echo $this->Form->text('keyword',array('value'=>$keyword));
     echo $this->Form->submit('查詢', array('div'=>false));
 ?>
 </div>
@@ -41,7 +41,7 @@
 	<tr>
 	    <td colspan="7">
 			<?php echo $this->Paginator->first('<<'); ?>
-			<?php echo $this->Paginator->numbers(array('first' => 2, 'last' => 2)); ?>
+			<?php echo $this->Paginator->numbers(array('first' => 1, 'last'=>1)); ?>
 			<?php echo $this->Paginator->last('>>'); ?>
 		</td>
     </tr>
