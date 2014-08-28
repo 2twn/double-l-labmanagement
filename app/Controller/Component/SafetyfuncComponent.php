@@ -45,7 +45,7 @@ class SafetyfuncComponent extends Component {
  		if($start_date <> ''){
 			$many_conditions[] = array ($mname.'.check_date >= ' => $start_date );
 		}
-		if($end_date){
+		if($end_date <> ''){
 			$many_conditions[] = array ($mname.'.check_date <= ' => $end_date );
 		}
 		

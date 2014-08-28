@@ -39,8 +39,10 @@ class SafetytrialsController extends AppController {
 		if ($this->request->is('post')) {
 			$items = $this->Safetyfunc->search ( 
 					$this->request->data ['SafetyTrial'] ['status'], 
-					$this->request->data ['SafetyTrial'] ['check_start'], 
-					$this->request->data ['SafetyTrial'] ['check_end']
+					'',
+					''
+// 					$this->request->data ['SafetyTrial'] ['check_start']), 
+// 					$this->request->data ['SafetyTrial'] ['check_end']
 			 );
 
 		} else {
