@@ -1,6 +1,6 @@
 <table>
 <tr>
-	<th>選擇</th><th>文件名稱</th>
+	<th class="command1">選擇</th><th class="text40">文件名稱</th>
 </tr>
 <?php foreach ($items as $item): ?>
 <tr>
@@ -13,4 +13,13 @@
 	</td>
 </tr>
 <?php endforeach;?>
+<tr>
+	<td colspan="2" id="select_page_doc">
+	<?php for($i =1; $i<=$item_cnt;$i++): ?>
+		<?php if ($page == $i)  { echo $page; }
+		      else { echo $this->Html->link($i, 'javascript:void(0);',array('onclick'=>'search_document('.$i.');'));}
+		 ?>
+	<?php endfor;?>
+	</td>
+</tr>
 </table>

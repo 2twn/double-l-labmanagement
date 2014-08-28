@@ -233,30 +233,31 @@ class TrainingController extends AppController {
     	$this->set('items', $items);
     }
     
-    public function document_search() {
+    public function document_search($page=1) {
     	$this->layout = 'ajax';
+	$page_size = 10;
     	$filter_array = array();
     	if (isset($this->data["doc_topic"])) {
     		$filter_array = array("document_name like '%".$this->data["doc_topic"]."%'", 'TrainingDocument.valid'=>1);
     	}
-    	$this->paginate = array(
-    			'conditions' => $filter_array,
-    			'order' => array('TrainingDocument.valid'=>'desc','TrainingDocument.id'=>'asc'),
-    			'limit' => 10
-    	);
-    	$this->set('items', $this->paginate('TrainingDocument'));
+    	$items = $this->TrainingDocument->find('all', array('conditions' =>array($filter_array), 'limit' => $page_size, 'page' => $page));
+    	$item_cnt = $this->TrainingDocument->find('count', array('conditions' =>array($filter_array)));
+    	$this->set('items', $items);
+   	$this->set('item_cnt', ceil($item_cnt/$page_size));
+    	$this->set('page', $page);
     }
     
     public function user_search($page=1) {
     	$this->layout = 'ajax';
+	$page_size = 10;
     	$filter_array = array();
     	if (isset($this->data["user_pattern"])) {
     		$filter_array = array("name like '%".$this->data["user_pattern"]."%'", 'User.valid'=>1);
     	}
-    	$items = $this->User->find('all', array('conditions' =>array($filter_array), 'limit' => 10, 'page' => $page));
+    	$items = $this->User->find('all', array('conditions' =>array($filter_array), 'limit' => $page_size, 'page' => $page));
     	$item_cnt = $this->User->find('count', array('conditions' =>array($filter_array)));
     	$this->set('items', $items);
-    	$this->set('item_cnt', $item_cnt);
+    	$this->set('item_cnt', ceil($item_cnt/$page_size));
     	$this->set('page', $page);
     }
     

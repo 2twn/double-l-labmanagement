@@ -30,6 +30,10 @@
 					type: "post", 
 					success: function(response){
 						$("#select_doc_tbl")[0].innerHTML = response;
+						a_obj = $("#select_page_doc > a");
+                                                for (i = 0; i < a_obj.length; i++) { 
+						    $(a_obj[i]).bind();
+						}
 					}
 				}
 			);
@@ -47,6 +51,10 @@
 					type: "post", 
 					success: function(response){
 						$("#select_user_tbl")[0].innerHTML = response;
+						a_obj = $("#select_page_user > a");
+                                                for (i = 0; i < a_obj.length; i++) { 
+						    $(a_obj[i]).bind();
+						}
 					}
 				}
 			);
@@ -99,7 +107,7 @@
             css: { 
                 padding:        0, 
                 margin:         0, 
-                width:          '400px', 
+                width:          '600px', 
                 height:         '500px', 
                 top:            '20px', 
                 left:           '35%', 
@@ -113,7 +121,7 @@
             css: { 
             padding:        0, 
             margin:         0, 
-            width:          '400px', 
+            width:          '600px', 
             height:         '500px', 
             top:            '20px', 
             left:           '35%', 

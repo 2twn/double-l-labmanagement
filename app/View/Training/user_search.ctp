@@ -1,6 +1,6 @@
 <table>
 <tr>
-	<th>選擇</th><th>人員</th>
+	<th class="command1">選擇</th><th class="text40">人員</th>
 </tr>
 <?php foreach ($items as $item): ?>
 <tr>
@@ -14,10 +14,10 @@
 </tr>
 <?php endforeach;?>
 <tr>
-	<td colspan="2">
+	<td colspan="2" id="select_page_user">
 	<?php for($i =1; $i<=$item_cnt;$i++): ?>
 		<?php if ($page == $i)  { echo $page; }
-		      else { echo $this->Html->link($i, 'javascript:void(0);',array('onclick'=>'search_document('.$i.');'));}
+		      else { echo $this->Html->link($i, 'javascript:void(0);',array('onclick'=>'search_user('.$i.');'));}
 		 ?>
 	<?php endfor;?>
 	</td>
