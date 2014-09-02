@@ -249,7 +249,7 @@ class TrainingController extends AppController {
     
     public function user_search($page=1) {
     	$this->layout = 'ajax';
-	$page_size = 10;
+	    $page_size = 10;
     	$filter_array = array();
     	if (isset($this->data["user_pattern"])) {
     		$filter_array = array("name like '%".$this->data["user_pattern"]."%'", 'User.valid'=>1);

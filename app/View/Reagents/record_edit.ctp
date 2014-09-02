@@ -10,12 +10,13 @@
 		$.unblockUI();
     }
    		
-	function search_reagent_name() {
+	function search_reagent_name(page_num) {
 		doc_topic = $("#doc_topic")[0].value;
+		post_url = '<?php echo $this->html->url(array('controller'=>'reagents', 'action' => 'reagent_name_search'))."/";?>'+page_num;
 		$.ajax(
 				{	
-					url:'<?php echo $this->html->url(array('controller'=>'reagents', 'action' => 'reagent_name_search'));?>', 
-					data:{ name: doc_topic }, 
+					url: post_url, 
+					data: { name: doc_topic }, 
 					type: "post", 
 					success: function(response){
 						$("#select_doc_tbl")[0].innerHTML = response;
@@ -93,7 +94,7 @@
 <div id="query_name_window" style="display: none; cursor: default"> 
 	關鍵字：
 	<?php echo $this->Form->text('doc_topic', array('size'=>8, 'style'=>'width:150px') );?>
-    <?php echo $this->Html->link('搜尋', 'javascript:void(0);',array('onclick'=>'search_reagent_name();'));?>
+    <?php echo $this->Html->link('搜尋', 'javascript:void(0);',array('onclick'=>'search_reagent_name(1);'));?>
     <div id="select_doc_tbl"></div>
     <?php echo $this->Html->link('取消', 'javascript:void(0);',array('onclick'=>'close_name_window();'));?>
 </div>

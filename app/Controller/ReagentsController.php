@@ -309,8 +309,9 @@ class ReagentsController extends AppController {
 		return $db->expression($subquery);
 	}
 	
-	public function reagent_name_search() {
+	public function reagent_name_search($page=1) {
 		$this->layout = 'ajax';
+		$page_size = 5;
 		unset($filter_array);
 		$filter_array[] = array("Reagent.status"=>1);
 		if (isset($this->request->data["name"])) {			
@@ -318,13 +319,11 @@ class ReagentsController extends AppController {
 					"Reagent.name like '%".$this->request->data["name"]."%'");
 
 		}
-
-		$this->Paginator->settings= array(
-				'conditions' => $filter_array,
-				'order' => array('name desc'),
-				'limit' => 5
-		);
-		$this->set('items', $this->Paginator->paginate('Reagent'));
+		$items = $this->Reagent->find('all', array('conditions' =>array($filter_array), 'limit' => $page_size, 'page' => $page));
+		$item_cnt = $this->Reagent->find('count', array('conditions' =>array($filter_array)));
+		$this->set('items', $items);
+		$this->set('item_cnt', ceil($item_cnt/$page_size));
+		$this->set('page', $page);
 	}	
 	
 	
