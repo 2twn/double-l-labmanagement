@@ -19,8 +19,8 @@ class Reagent extends AppModel {
     						'message' => '試藥名稱請勿空白'
     				),
     				'maxLength' => array(
-    						'rule'    => array('maxLength', '20'),
-    						'message' => '試藥名稱不可超過20字元'
+    						'rule'    => array('maxLength', '40'),
+    						'message' => '試藥名稱不可超過40字元'
     				),
     		),    		
     		'memo' => array(

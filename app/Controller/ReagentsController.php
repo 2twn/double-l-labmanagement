@@ -80,9 +80,7 @@ class ReagentsController extends AppController {
 		if ($id != null) {
 			$this->Company->id = $id;
 		} else {
-			$this->request->data ['Company'] ['create_time'] = date ( 'Y-m-d 
-		H:
-		i:s' );
+			$this->request->data ['Company'] ['create_time'] = date ( 'Y-m-d H:i:s' );
 		}
 		if ($this->request->is ( 'get' )) {
 			$this->request->data = $this->Company->read ();
@@ -114,9 +112,7 @@ class ReagentsController extends AppController {
 		if ($id != null) {
 			$this->ReagentLevel->id = $id;
 		} else {
-			$this->request->data ['ReagentLevel'] ['create_time'] = date ( 'Y-m-d 
-		H:
-		i:s' );
+			$this->request->data ['ReagentLevel'] ['create_time'] = date ( 'Y-m-d H:i:s' );
 		}
 		if ($this->request->is ( 'get' )) {
 			$this->request->data = $this->ReagentLevel->read ();
@@ -148,9 +144,7 @@ class ReagentsController extends AppController {
 		if ($id != null) {
 			$this->ReagentLocation->id = $id;
 		} else {
-			$this->request->data ['ReagentLocation'] ['create_time'] = date ( 'Y-m-d 
-		H:
-		i:s' );
+			$this->request->data ['ReagentLocation'] ['create_time'] = date ( 'Y-m-d H:i:s' );
 		}
 		if ($this->request->is ( 'get' )) {
 			$this->request->data = $this->ReagentLocation->read ();

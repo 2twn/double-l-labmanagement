@@ -425,7 +425,7 @@ CREATE TABLE IF NOT EXISTS `companies` (
 DROP TABLE IF EXISTS `reagents`;
 CREATE TABLE IF NOT EXISTS `reagents` (
   `id` varchar(20) NOT NULL,
-  `name` varchar(20) NOT NULL,
+  `name` varchar(40) NOT NULL,
   `chemical_id` int(11) NOT NULL,
   `reagent_level_id` varchar(20) NOT NULL,
   `memo` varchar(60) NOT NULL,
