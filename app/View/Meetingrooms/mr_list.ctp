@@ -11,7 +11,7 @@
         <th class="text10">容納人數</th>
         <th class="state">有效</th>
         <th class="timestamp">建立時間</th>
-        <th class="command1"></th>
+        <th class="command2"></th>
     </tr>
     <?php foreach ($items as $item): ?>
     <tr>

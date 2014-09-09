@@ -17,7 +17,7 @@ class TrainingController extends AppController {
 		$this->set('document_status', $this->Formfunc->document_status());
 		$this->paginate = array(
 			'conditions' => $search_condition,
-			'order' => array('TrainingDocument.valid'=>'desc','TrainingDocument.id'=>'asc'),
+			'order' => array('TrainingDocument.doc_code'=>'asc', 'TrainingDocument.valid'=>'desc'),
 			'limit' => 10
 		);
         $this->set('items', $this->paginate('TrainingDocument'));

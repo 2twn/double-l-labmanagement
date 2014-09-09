@@ -8,8 +8,8 @@ class MeetingroomsController extends AppController {
     public function mr_list() {
 		$this->paginate = array(
 			'conditions' => array(),
-			'order' => array('valid desc','id asc'),
-			'limit' => 4
+			'order' => array('MeetingRoom.mr_name' => 'asc', 'valid' => 'desc','id' => 'asc'),
+			'limit' => 10
 		);
         $this->set('items', $this->paginate('MeetingRoom'));
     }

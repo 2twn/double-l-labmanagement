@@ -28,8 +28,8 @@ class Equip extends AppModel {
 //                 'message'  => '儀器名稱必須是英數字元'
 //             ),
 			'maxLength' => array(
-                'rule'    => array('maxLength', '30'),
-                'message' => '儀器名稱不可超過30字元'
+                'rule'    => array('maxLength', '40'),
+                'message' => '儀器名稱不可超過40字元'
             )
         ),
 		'maintain_time' => array(

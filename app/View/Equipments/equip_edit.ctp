@@ -19,7 +19,7 @@
 			</td>
 		</tr>			
 		<tr>
-			<td>儀器名稱：<?php echo $this->Form->input('equip_name', array('maxlength'=>30,'size'=>30));?>(最多30碼英文字母或數字)</td>
+			<td>儀器名稱：<?php echo $this->Form->input('equip_name', array('maxlength'=>40,'size'=>40));?>(最多40碼英文字母或數字)</td>
 		</tr>
 		<tr>
 			<td>下次校正日期：<?php echo $this->Form->text('maintain_time', array('dateFormat' => 'Y-M-D', 'class' =>'jquery_date', 'readonly'=>true, 'size'=>8, 'style'=>'width:150px'));?></td>

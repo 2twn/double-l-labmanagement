@@ -8,7 +8,7 @@ class ProjectsController extends AppController {
  	public function prj_list() {
 		$this->paginate = array(
 			'conditions' => array(),
-			'order' => array('valid desc','id asc'),
+			'order' => array('prj_code' =>'asc', 'valid desc','id asc'),
 			'limit' => 10
 		);
         $this->set('items', $this->paginate('Project'));
