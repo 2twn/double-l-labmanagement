@@ -15,8 +15,6 @@
     <tr>
         <th class="text20">試藥代號</th>
         <th class="text50">試藥名稱</th>
-        <th class="text30">化學名稱</th>
-        <th class="text5">等級</th>
         <th class="text40">說明</th>
         <th class="state">有效</th>
         <th class="timestamp">建立時間</th>        
@@ -26,8 +24,6 @@
     <tr>
         <td><?php echo $item['Reagent']['id']; ?></td>
         <td><?php echo $item['Reagent']['name']; ?></td>
-        <td><?php echo $item['Chemical']['name']; ?></td>
-        <td><?php echo $item['Reagent']['reagent_level_id']; ?></td>
         <td><?php echo $item['Reagent']['memo']; ?></td>
         <td><?php echo $status[$item['Reagent']['status']]; ?></td>
         <td><?php echo $item['Reagent']['create_time']; ?></td>        

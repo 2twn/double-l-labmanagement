@@ -11,7 +11,6 @@
         <th class="text30">儀器名稱</th>
 		<th class="timestamp2">下次校正日期</th>
 		<th class="text30">位置說明</th>
-        <th class="timestamp">建立時間</th>
         <th class="state">使用狀態</th>
         <th class="command"></th>
     </tr>
@@ -26,9 +25,6 @@
         </td>
         <td>
             <?php echo $item['Equip']['location']; ?>
-        </td>
-        <td>
-            <?php echo $item['Equip']['create_time']; ?>
         </td>
         <td>
             <?php echo $equip_status[$item['Equip']['status']]; ?>
