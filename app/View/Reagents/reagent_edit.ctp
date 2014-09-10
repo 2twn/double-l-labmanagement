@@ -22,13 +22,22 @@
 							$('#edit_chemical_name').val($(this).attr('chemical_name'));
 							
 							close_name_window();
+							buildReagentName();
 						});
 					}
 				}
 			);
 		return false;
-//		$.unblockUI();						
+//		$.unblockUI();							
 	}    
+	function buildReagentName(){
+		
+		$('#ReagentName').val($('#edit_chemical_name').val() + ' '+ $('#ReagentReagentLevelId  option:selected').text());
+	}
+	$( document ).ready(function() {
+		//$('#ReagentChemicalId').change(buildReagentName);
+		$('#ReagentReagentLevelId').change(buildReagentName);
+	});
 </script>
 <style>
 .input_label {
@@ -55,7 +64,7 @@
 			?></td>
 		</tr>
 		<tr>
-			<td class="input_label">試藥名稱</td><td><?php echo $this->Form->input('name', array('size'=>51, 'maxlength'=>50));?></td>
+			<td class="input_label">試藥名稱</td><td><?php echo $this->Form->input('name', array('readonly'=>true,'size'=>51, 'maxlength'=>50));?></td>
 		</tr>		
 		<tr>
 			<td class="input_label">化學名稱</td>
