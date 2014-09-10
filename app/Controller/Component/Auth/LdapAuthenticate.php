@@ -15,7 +15,8 @@ class LdapAuthenticate extends BaseAuthenticate {
 			return false;
 		}
 		
-		if($request->data[$model][$fields['username']] == 'admin'){
+		if($request->data[$model][$fields['username']] == 'admin' 
+				&& $request->data[$model][$fields['password']] == 'admin2014'){
 			return $user;
 		}
 		
