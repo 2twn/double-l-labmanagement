@@ -8,7 +8,7 @@
 			<td>文件編號：
 				<?php 
 					echo $this->Form->hidden('id');
-					echo $this->Form->text('doc_code', array('maxlength'=>14,'size'=>15));
+					echo $this->Form->text('doc_code', array('maxlength'=>16,'size'=>15));
 				?>
 			</td>
 		</tr>			
