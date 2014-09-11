@@ -1,7 +1,7 @@
 <h2>安定性樣品檢驗時間到期清單（<?php echo $sel_date;?>）</h2>
 <table class="fixreport">
     <tr>
-        <th class="text20">樣品批號</th>
+        <th class="text20">樣品編號</th>
         <th class="text20">樣品名稱</th>
         <th class="text30">所屬專案</th>
         <th class="state">狀態</th>

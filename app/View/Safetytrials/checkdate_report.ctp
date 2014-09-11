@@ -40,7 +40,7 @@
 </div>
 <table>
     <tr>
-        <th class="text20">樣品批號</th>
+        <th class="text20">樣品編號</th>
         <th class="text20">樣品名稱</th>
         <th>所屬專案</th>
         <th class="state">狀態</th>

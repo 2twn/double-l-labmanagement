@@ -51,7 +51,7 @@ label {
 ?>
 	<table>
 		<tr>
-			<td class="input_label">樣品批號</td><td><?php echo $this->Form->input('trial_lot',array('maxlength'=>12,'size'=>'13'));?></td>
+			<td class="input_label">樣品編號</td><td><?php echo $this->Form->input('trial_lot',array('maxlength'=>12,'size'=>'13'));?></td>
 		</tr>
 		<tr>
 			<td class="input_label">樣品名稱</td><td><?php echo $this->Form->input('trial_name',array('maxlength'=>16,'size'=>'17	'));?></td>
@@ -123,7 +123,7 @@ label {
 			</td>
 		</tr>
 		<tr>
-			<td class="input_label">說明：(最多30個中文字)</td>
+			<td class="input_label">批號：(最多30個中文字)</td>
 			<td><?php echo $this->Form->textarea('remark',array('cols'=>'30','rows'=>'3'));?></td>
 		</tr>									
 		<tr>
