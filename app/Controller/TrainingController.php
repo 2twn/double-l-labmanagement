@@ -228,6 +228,14 @@ class TrainingController extends AppController {
     		$this->Emailfunc->to = array(array('email'=> $items[$i]['User']['email'], 'name'=> $items[$i]['User']['name']));
     		$this->Emailfunc->html_body = str_replace('{#NAME#}',$items[$i]['User']['name'],$this->Emailfunc->html_body);
  			$ret = $this->Emailfunc->send();
+ 			$email_update = array();
+ 			$email_update['id'] = $items[$i]['TrainingUser']['id'];
+ 			$email_update['mail_time'] = date('Y-m-d H:i:s');
+ 			$email_update['mail_result'] = '寄送失敗';
+ 			if ($ret) {
+ 				$email_update['mail_result'] = '寄送成功';
+ 			}
+ 			$save_rec = $this->TrainingUser->save($email_update);
  			$items[$i]['User']['email_result'] = $ret;
     	}
     	$this->set('items', $items);
