@@ -57,7 +57,7 @@ label {
 			<td class="input_label">樣品名稱</td><td><?php echo $this->Form->input('trial_name',array('maxlength'=>16,'size'=>'17	'));?></td>
 		</tr>		
 		<tr>
-			<td class="input_label">所屬專案</td><td><?php echo $this->Form->select('project_id', $projects, array('empty'=>false));?></td>
+			<td class="input_label">專案代碼</td><td><?php echo $this->Form->select('project_id', $projects, array('empty'=>false));?></td>
 		</tr>		
 		<tr>
 			<td class="input_label">儲存位置</td><td><?php echo $this->Form->input('location',array('maxlength'=>20,'size'=>'21'));?></td>

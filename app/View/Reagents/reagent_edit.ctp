@@ -56,7 +56,8 @@
 		<tr>
 			<td class="input_label">試藥代號</td>
 			<td><?php 
-				if($this->request->data['Reagent']['id'] == null)
+				//if($this->request->data['Reagent']['id'] == null)
+				if($isedit == false)
 					echo $this->Form->text('id', array('size'=>21, 'maxlength'=>20));
 				else
 					echo $this->Form->text('id', array('readonly'=>true, 'size'=>21, 'maxlength'=>20));
@@ -70,7 +71,7 @@
 			<td class="input_label">化學名稱</td>
 				
 			<td>
-				<input id="edit_chemical_name" type="text" readonly value='<?php echo $this->request->data['Chemical']['name']?>' "/>
+				<input id="edit_chemical_name" name="data[Chemical][name]" type="text" readonly value='<?php echo $this->request->data['Chemical']['name']?>' "/>
 				<?php
 				 echo $this->Form->hidden('chemical_id');
 				 echo $this->Html->link('選擇化學名稱', 'javascript:open_name_window()',array('onclick'=>''));

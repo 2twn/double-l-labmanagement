@@ -200,23 +200,37 @@ class ReagentsController extends AppController {
 		$this->set ( 'keyword', $keyword);	
 	}
 	public function reagent_edit($id = null) {
-		if ($id != null) {
-			$this->Reagent->id = $id;
-		} else {
-			$this->request->data ['Reagent']['create_time'] = date ( 'Y-m-d H:i:s' );
-		}
+		$isEdit = false;
 		if ($this->request->is ( 'get' )) {
-			$this->request->data = $this->Reagent->read ();
-		} else {
-			if ($this->Reagent->save ( $this->request->data )) {
-				$this->Session->setFlash ( '儲存成功.' );
-				$this->redirect ( array (
-						'action' => 'reagent_list' 
-				) );
+			if ($id != null) {
+				$this->Reagent->id = $id;
+				$this->request->data = $this->Reagent->read ();
+				$isEdit = true;
 			} else {
-				$errors = $this->Reagent->validationErrors;
-				$this->set('errors',$errors);
-				$this->Session->setFlash ( '儲存失敗. ' );
+				$this->request->data ['Reagent']['create_time'] = date ( 'Y-m-d H:i:s' );
+				$this->request->data ['Chemical']['name'] = '';
+				$isEdit = false;
+			}
+		} else {
+			unset($testID);
+			if($id == null){
+				$testID = $this->Reagent->findAllById($this->request->data['Reagent']['id']);
+			}
+			if(isset($testID)){
+				$this->Session->setFlash ( '試藥代號不可重複. ' );
+				$isEdit = false;
+			} else {
+				$isEdit = true;
+				if ($this->Reagent->save ( $this->request->data )) {
+					$this->Session->setFlash ( '儲存成功.' );
+					$this->redirect ( array (
+						'action' => 'reagent_list' 
+					) );
+				} else {
+					$errors = $this->Reagent->validationErrors;
+					$this->set('errors',$errors);
+					$this->Session->setFlash ( '儲存失敗. ' );
+				}
 			}
 		}
 		$this->set ( 'chemicals', $this->Chemical->find ( 'list', array (
@@ -244,6 +258,7 @@ class ReagentsController extends AppController {
 				)
 		) ) );		
 		$this->set ( 'status', $this->Formfunc->status () );
+		$this->set ( 'isedit', $isEdit );
 	}
 	public function record_list() {
 		unset($conditions);

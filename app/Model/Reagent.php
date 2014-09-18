@@ -12,6 +12,10 @@ class Reagent extends AppModel {
                 		'rule'    => array('maxLength', '20'),
                 		'message' => '試藥代號不可超過20字元'
             		),
+    				'unique' => array(
+    					'rule'    => 'isUnique',
+    					'message' => '試藥代號不可重複'
+    				),
     		),
     		'name' => array(
     				'required' => array(
@@ -23,12 +27,7 @@ class Reagent extends AppModel {
     						'message' => '試藥名稱不可超過40字元'
     				),
     		),    		
-    		'memo' => array(
-    				'maxLength' => array(
-    						'rule'    => array('maxLength', '60'),
-    						'message' => '不可超過30中文字'
-    				),
-    		),
+
     );    
 	public function beforeSave($options = array()) {
 		parent::beforeSave();
