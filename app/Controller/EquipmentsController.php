@@ -141,6 +141,7 @@ class EquipmentsController extends AppController {
 		$book_data['book_end_time'] = $book_data['end_date']." ".$book_data['end_time'].":00";
 		$book_data['book_end_time'] = date('Y-m-d H:i:s', strtotime($book_data['book_end_time']));
 		$book_data['book_start_time'] = $book_data['start_date']." ".$book_data['start_time'].":00";
+		$book_data['user_id'] =$this->Auth->user()['id'];
 		if (($book_data['id'] == null) || ($book_data['id'] == "")){
 			$book_data['create_time'] = date('Y-m-d H:i:s');
 			$book_id = 0;

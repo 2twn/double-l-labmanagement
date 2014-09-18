@@ -1,7 +1,7 @@
 <?php
 class EquipBooking extends AppModel {
     public $name = 'EquipBooking';
-	public $belongsTo = array('Equip','Project');
+	public $belongsTo = array('Equip','Project','User');
     public $validate = array(
         'equip_id' => array(
             'required' => array(

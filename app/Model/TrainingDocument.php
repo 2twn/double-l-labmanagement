@@ -22,11 +22,11 @@ class TrainingDocument extends AppModel {
                 'rule' => array('notEmpty'),
                 'message' => '名稱不可空白'
             ),
-			'alphaNumeric' => array(
-                'rule'     => 'alphaNumeric',
-                'required' => true,
-                'message'  => '名稱必須是英數字元'
-            ),
+// 			'alphaNumeric' => array(
+//                 'rule'     => 'alphaNumeric',
+//                 'required' => true,
+//                 'message'  => '名稱必須是英數字元'
+//             ),
 			'maxLength' => array(
                 'rule'    => array('maxLength', '30'),
                 'message' => '名稱不可超過30字元'

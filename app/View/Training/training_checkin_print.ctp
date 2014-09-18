@@ -54,7 +54,7 @@
     </tr>
     <?php $i=0; ?>
     <?php foreach ($items as $item): ?>
-    <tr style="height:30px">
+    <tr style="height:60px">
         <td class="tb_border">
             <?php echo $item['Department']['dep_name']; ?>
         </td>
