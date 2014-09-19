@@ -216,7 +216,7 @@ class ReagentsController extends AppController {
 			if($id == null){
 				$testID = $this->Reagent->findAllById($this->request->data['Reagent']['id']);
 			}
-			if(isset($testID)){
+			if(!empty($testID)){
 				$this->Session->setFlash ( '試藥代號不可重複. ' );
 				$isEdit = false;
 			} else {

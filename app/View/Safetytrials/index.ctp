@@ -58,7 +58,7 @@
             <?php echo $item['SafetyTrial']['trial_name']; ?>
         </td>
         <td>
-            <?php echo $item['Project']['prj_name'];  ?>
+            <?php echo $item['Project']['prj_code'];  ?>
         </td>
         <td>
             <?php echo $trial_status[$item['SafetyTrial']['status']];  ?>
