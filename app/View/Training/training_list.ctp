@@ -56,7 +56,7 @@
         <td>
             <?php if ($item['Training']['valid']) { echo 'Y'; } else {echo 'N';}; ?>
         </td>
-        <td><div style="width:130px;margin:0px;padding:0px;clear:none">
+        <td><div style="margin:0px;padding:0px;clear:none">
             <?php 
 				$delbtn = '生效';
 				if ($item['Training']['valid']) {
