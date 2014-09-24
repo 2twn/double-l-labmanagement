@@ -215,6 +215,7 @@ class ReagentsController extends AppController {
 			unset($testID);
 			if($id == null){
 				$testID = $this->Reagent->findAllById($this->request->data['Reagent']['id']);
+				$this->request->data ['Reagent']['create_time'] = date ( 'Y-m-d H:i:s' );
 			}
 			if(!empty($testID)){
 				$this->Session->setFlash ( '試藥代號不可重複. ' );
