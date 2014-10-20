@@ -54,23 +54,39 @@ class SafetytrialsController extends AppController {
 	}
 	public function edit($id = null) {
 		$this->set('trial_status', $this->Formfunc->safety_trial_status());		
-		$this->set('projects', $this->Project->find('list', array('conditions' => array('valid' => 1), 'fields' => array('id','prj_name'))));
+		$this->set('projects', $this->Project->find('list', array('conditions' => array('valid' => 1), 'fields' => array('id','prj_code'))));
 		$this->set('check_modes', $this->Util->array_column(array_values($this->check_modes), 'label', 'id'));
 		$this->set('humitures', $this->Formfunc->safety_trial_humitures());
 		$this->set('checktypes',$this->Formfunc->safety_trial_checktypes());
 		
-		$this->SafetyTrial->id = $id;
+		$isEdit = false;
+		
 		if ($this->request->is('get')) {
-			$this->request->data = $this->SafetyTrial->read();
-			$this->request->data['check_modes'] = $this->_getCheckModes($id);
- 		} else {
-			
-			if ($this->_save($this->request->data)) {
-				$this->Session->setFlash('儲存成功.');
-				$this->redirect(array('action' => 'index'));
+			if ($id != null) {
+				$this->SafetyTrial->id = $id;
+				$this->request->data = $this->SafetyTrial->read();
+				$this->request->data['check_modes'] = $this->_getCheckModes($id);
+				$isEdit = true;
 			} else {
-				$this->Session->setFlash('儲存失敗.');
-			}
+				$isEdit = false;
+			}			
+ 		} else {
+ 			unset($testID);
+ 			if($id == null){
+ 				$testID = $this->SafetyTrial->findAllByTrialLot($this->request->data['SafetyTrial']['trial_lot']);
+ 			}
+ 			if(!empty($testID)){
+ 				$this->Session->setFlash ( '樣品編號不可重複. ' );
+ 				$isEdit = false;
+ 			} else {
+ 				$isEdit = true;
+ 				if ($this->_save($this->request->data)) {
+ 					$this->Session->setFlash ( '儲存成功.' );
+					$this->redirect(array('action' => 'index'));
+ 				} else {
+					$this->Session->setFlash('儲存失敗.');
+ 				}
+ 			}			
 		}
 	}
 	

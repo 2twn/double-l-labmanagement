@@ -51,7 +51,7 @@ label {
 ?>
 	<table>
 		<tr>
-			<td class="input_label">樣品編號</td><td><?php echo $this->Form->input('trial_lot',array('maxlength'=>12,'size'=>'13'));?></td>
+			<td class="input_label">表單編號</td><td><?php echo $this->Form->input('trial_lot',array('maxlength'=>12,'size'=>'13'));?></td>
 		</tr>
 		<tr>
 			<td class="input_label">樣品名稱</td><td><?php echo $this->Form->input('trial_name',array('maxlength'=>16,'size'=>'17	'));?></td>

@@ -41,11 +41,11 @@
 </div>
 <table>
     <tr>
-        <th class="text20">樣品編號</th>
+        <th class="text20">表單編號</th>
         <th class="text20">樣品名稱</th>
         <th class="text30">專案代碼</th>
         <th class="state">狀態</th>
-        <th class="date">樣品時間</th>
+        <th class="date">開始時間</th>
         <th class="text20">儲存位置</th>
         <th class="text20">溫濕度</th>
         <th>批號</th>

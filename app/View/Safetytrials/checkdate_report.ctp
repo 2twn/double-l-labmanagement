@@ -40,11 +40,11 @@
 </div>
 <table>
     <tr>
-        <th class="text20">樣品編號</th>
+        <th class="text20">表單編號</th>
         <th class="text20">樣品名稱</th>
         <th>所屬專案</th>
         <th class="state">狀態</th>
-        <th class="date">樣品時間</th>
+        <th class="date">開始時間</th>
         <th class="text20">儲存位置</th>
         <th class="text10">檢核週期</th>
         <th class="date">提醒時間</th>
