@@ -236,10 +236,10 @@ class EquipmentsController extends AppController {
 	
 	public function genValidEquip($etype=0) {
 		if ($etype=1) {
-			return $this->Equip->find('list', array('conditions' => array('valid' => 1, 'status' => 1), 'fields' => array('id','equip_code')));
+			return $this->Equip->find('list', array('conditions' => array('valid' => 1, 'status' => 1), 'fields' => array('id','equip_code'), 'order'=> array('equip_code asc')));
 		}
 		else {
-			return $this->Equip->find('list', array('conditions' => array('valid' => 1, 'status' => 1), 'fields' => array('id','equip_name')));
+			return $this->Equip->find('list', array('conditions' => array('valid' => 1, 'status' => 1), 'fields' => array('id','equip_name'), 'order'=> array('equip_code asc')));
 		}
 	}
 	

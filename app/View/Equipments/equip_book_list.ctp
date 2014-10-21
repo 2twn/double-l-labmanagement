@@ -44,13 +44,16 @@
         <td>
             <?php 
 				echo $this->Html->link('修改', array('action' => 'equip_booking_action', $item['EquipBooking']['id']), array('class' => 'button'));
-				echo $this->Html->link('刪除', array('action' => 'equip_booking_delete', $item['EquipBooking']['id']), array('class' => 'button'));
+				echo $this->Form->postLink(
+						'刪除',
+						array('action' => 'equip_booking_delete', $item['EquipBooking']['id']),
+						array('class'=>'button','confirm' => '確認刪除?'));
 				?>
         </td>
     </tr>
     <?php endforeach; ?>
 	<tr>
-	    <td colspan="8">
+	    <td colspan="9">
 			<?php echo $this->Paginator->first('<<'); ?>
 			<?php echo $this->Paginator->numbers(array('first' => 2, 'last' => 2)); ?>
 			<?php echo $this->Paginator->last('>>'); ?>

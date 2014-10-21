@@ -29,6 +29,7 @@
 	.tb_border { 
 		border: 1px solid;
 		padding: 0px; 
+		height:30px
 	}
 	</STYLE> 
 <table style="width:800px;">
@@ -43,7 +44,24 @@
         <td class="tb_border">日期:<?php echo substr($training['Training']['start_time'],0,10); ?></td>
         <td class="tb_border">時間:<?php echo substr($training['Training']['start_time'],11,5); ?>~<?php echo substr($training['Training']['end_time'],11,5); ?></td>
     </tr>
-</table>
+    <tr class="tb_border">
+        <td class="tb_border" colspan=3>文件列表</td>
+    </tr>
+    <?php 
+    	$introw = 0;
+    	foreach ($doc_items as $doc_item): ?>
+    <tr class="tb_border">
+        <td class="tb_border" colspan=3 > <?php echo $doc_item["TrainingDocument"]["TrainingDocument"]["doc_code"]."-".$doc_item["TrainingDocument"]["TrainingDocument"]["document_name"]; ?></td>
+    </tr>
+    <?php 
+    	$introw++;
+    	endforeach; ?>
+    	<?php for($i=$introw;$i<30;$i++): ?>
+    	    <tr class="tb_border">
+        		<td class="tb_border" colspan=3 > </td>
+    		</tr>
+    	<?php  endfor;?>
+    </table>
 <table style="width:800px;">
     <tr style="height:30px">
         <th style="width:100px" class="tb_border">部門</th>

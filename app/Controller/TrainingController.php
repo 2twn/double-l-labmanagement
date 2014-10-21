@@ -190,6 +190,11 @@ class TrainingController extends AppController {
     public function training_checkin_print($training_id) {
     	$training = $this->Training->find('all',array('conditions'=>array('Training.id'=>$training_id)));
     	$this->set('training', $training[0]);
+    	for($i=0;$i < sizeof($training[0]["TrainingWDocument"]);$i++) {
+    		$doc = $this->TrainingDocument->find('first',array('conditions'=>array('TrainingDocument.id'=>$training[0]["TrainingWDocument"][$i]["training_document_id"])));
+    		$training[0]["TrainingWDocument"][$i]["TrainingDocument"]= $doc;
+    	}
+    	$this->set('doc_items', $training[0]["TrainingWDocument"]);
     	$str_sql = "Select *
     				  from training_users TrainingUser, users User, departments Department
     				 where user_id = User.id
