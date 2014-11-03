@@ -84,38 +84,54 @@ class EquipmentsController extends AppController {
 					$this->request->data['EquipBooking']['start_date'] = date('Y-m-d');
 					$this->request->data['EquipBooking']['end_date'] = date('Y-m-d');
 				}
+				$this->set('can_edit', true);
 			}
 			else {
+				$user_info = $this->Auth->user();
+				$can_edit = $this->Userfunc->can_modify($this->request->data['EquipBooking']['user_id'] , $user_info);
 				$this->request->data['EquipBooking']['start_time'] = date('H:i',strtotime($this->request->data['EquipBooking']['book_start_time']));
 				$this->request->data['EquipBooking']['end_time'] = date('H:i', strtotime($this->request->data['EquipBooking']['book_end_time']));
 				$this->request->data['EquipBooking']['start_date'] = date('Y-m-d',strtotime($this->request->data['EquipBooking']['book_start_time']));
 				$this->request->data['EquipBooking']['end_date'] = date('Y-m-d',strtotime($this->request->data['EquipBooking']['book_end_time']));
+				$this->set('can_edit', $can_edit);
 			}
 		} else {
-			$error_msg = $this->insert_book_record($this->request->data['EquipBooking']);
-			if ($error_msg == ''){
-				$this->Session->setFlash('儲存成功.');
-				$this->redirect(array('action' => 'equip_book_list'));
+			if (($this->Userfunc->is_book_admin($this->Auth->user())) || ($this->request->data['EquipBooking']['start_date']." ".$this->request->data['EquipBooking']['start_time'].":00")>= date("Y-m-d H:i:s")) {
+				$error_msg = $this->insert_book_record($this->request->data['EquipBooking']);
+				if ($error_msg == ''){
+					$this->Session->setFlash('儲存成功.');
+					$this->redirect(array('action' => 'equip_book_list'));
+				}
+				else {
+					$this->Session->setFlash($error_msg);
+				}
 			}
 			else {
-				$this->Session->setFlash($error_msg);
+				$this->Session->setFlash('不能預約過期時間.');
+				$this->redirect(array('action' => 'equip_book_list'));
 			}
 		}
 	}
 	
 	public function equip_booking_delete($id = null) {
+		$user_info = $this->Auth->user();
  		$this->EquipBooking->id = $id;
  		$this->request->data = $this->EquipBooking->read();
- 		$this->request->data['EquipBooking']['valid'] = ($this->request->data['EquipBooking']['valid'] + 1)%2;
-//  		if ($this->request->is('get')) {
-//  			throw new MethodNotAllowedException();
-//  		}
- 		if ($this->EquipBooking->save($this->request->data)) {
- 			$this->Session->setFlash('儀器預約已取消.');
- 			$this->redirect(array('action' => 'equip_book_list'));
- 		} else {
-			$this->Session->setFlash('作業失敗.');
-		}
+ 		if ($this->Userfunc->can_modify($this->request->data['EquipBooking']['user_id'] , $user_info)) {
+	 		$this->request->data['EquipBooking']['valid'] = ($this->request->data['EquipBooking']['valid'] + 1)%2;
+	//  		if ($this->request->is('get')) {
+	//  			throw new MethodNotAllowedException();
+	//  		}
+	 		if ($this->EquipBooking->save($this->request->data)) {
+	 			$this->Session->setFlash('儀器預約已取消.');
+	 			$this->redirect(array('action' => 'equip_book_list', ));
+	 		} else {
+				$this->Session->setFlash('作業失敗.');
+			}
+ 		}
+ 		else {
+ 			$this->Session->setFlash('無權限刪除.');
+ 		}
 	}
 	
  	public function equip_book_list() {
