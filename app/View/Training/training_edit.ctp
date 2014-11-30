@@ -149,6 +149,11 @@ echo $this->Html->link ( '回教育訓練列表', array (
 <table>
 	<tr>
 		<td>
+			課程編號：<?php if(isset($this->request["data"]["Training"]["id"])) {echo $this->request["data"]["Training"]["id"];}?>
+		</td>
+	</tr>
+	<tr>
+		<td>
 			文件編號：<?php echo $this->Html->link('選擇文件', 'javascript:open_document()',array('onclick'=>''));?>
 			<table style="padding: 0px; margin: 0px" border=0 id="docs_tbl">
 				<?php $doc_num =1; ?>
