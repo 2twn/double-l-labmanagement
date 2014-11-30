@@ -4,9 +4,9 @@
 ?></div>
 <div class="pagebtn_div">
 </div>
-<table>
+<table style="width:400px">
 	<tr>
-		<td>人員姓名</td><td><?php if (!empty($items)) { echo $items[0]['User']['name'];  }?></td>
+		<td style="width: 100px">人員姓名</td><td><?php if (!empty($items)) { echo $items[0]['User']['name'];  }?></td>
 	</tr>
 </table>
 <table>
@@ -14,8 +14,7 @@
         <th class="text10">文件編號</th>
         <th class="text30">文件名稱</th>
 		<th class="text10">文件版本</th>
-        <th class="timestamp">建立時間</th>
-        <th class="state">狀態</th>
+        <th class="state">評核結果</th>
     </tr>
     <?php foreach ($items as $item): ?>
     <tr>
@@ -25,9 +24,6 @@
         </td>
         <td>
             <?php echo $item['Doc_Info']['document_version']; ?>
-        </td>
-        <td>
-            <?php echo $item['Doc_Info']['create_time']; ?>
         </td>
         <td>
             <?php echo $checkins[$item['TrainingUser']['checkin']]; ?>

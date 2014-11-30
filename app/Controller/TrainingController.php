@@ -8,8 +8,20 @@ class TrainingController extends AppController {
  	public function document_list() {
  		$search_condition = array();
  		if (isset($this->data["TrainingDocument"]["search_doc_code"])) {
- 			$search_condition = array("doc_code like '".$this->data["TrainingDocument"]["search_doc_code"]."%'");
+ 			$search_condition = array_merge($search_condition, array("doc_code like '%".$this->data["TrainingDocument"]["search_doc_code"]."%'"));
  			$this->Session->write("document_list_filter",$search_condition);
+ 		}
+ 		if (isset($this->data["TrainingDocument"]["search_doc_name"])) {
+ 			$search_condition = array_merge($search_condition, array("document_name like '%".$this->data["TrainingDocument"]["search_doc_name"]."%'"));
+ 			$this->Session->write("document_list_filter",$search_condition);
+ 		}
+ 		if ((isset($this->data["TrainingDocument"]["search_doc_status"])) && ($this->data["TrainingDocument"]["search_doc_status"] != 'A')){
+ 			$search_condition = array_merge($search_condition, array("valid = '".$this->data["TrainingDocument"]["search_doc_status"]."'"));
+ 			$this->Session->write("document_list_filter",$search_condition);
+ 		}
+ 		else 
+ 		{
+ 			$this->request->data["TrainingDocument"]["search_doc_status"] = 'A';
  		}
  		if ($this->Session->check("document_list_filter")) {
  			$search_condition = $this->Session->read("document_list_filter");

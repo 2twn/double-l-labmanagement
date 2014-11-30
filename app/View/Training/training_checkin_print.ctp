@@ -51,7 +51,7 @@ echo $this->Html->link ( '列印', 'javascript:printDiv("print_area");', array (
 </STYLE>
 	<table style="width: 800px;">
 		<tr>
-			<td colspan="3" class="tb_border">代號:<?php echo $training['Training']['id']; ?></td>
+			<td colspan="3" class="tb_border">課程編號:<?php echo $training['Training']['id']; ?></td>
 		</tr>
 		<tr class="tb_border">
 			<td colspan="3" class="tb_border">授課人員：<?php echo $training['Training']['instructor']; ?>

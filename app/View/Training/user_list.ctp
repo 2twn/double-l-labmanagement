@@ -7,9 +7,9 @@
 <div class="pagebtn_div">
 </div>
 <?php echo $this->Form->create('User', array('div'=>false, 'inputDefaults' => array('label' => false,'div' => false))); ?>
-<table>
+<table style="width:400px">
     <tr>
-    	<th></th>
+    	<th>人員姓名</th>
         <th>
        	<?php echo $this->Form->text('search_name', array('style'=>'width:150px'));?>
        	</th>
@@ -17,6 +17,8 @@
         	<?php echo $this->Form->submit('搜尋');?>
         </th>
     </tr>
+</table>
+<table>
     <tr>
         <th class="text10">員工編號</th>
         <th class="text20">人員姓名</th>

@@ -76,7 +76,7 @@
 				if ($item['TrainingUser']['checkin']) {
 					echo $this->Form->select($i.'.checkin', $checkins, array('value'=>$item['TrainingUser']['checkin'], 'empty'=>false));
 				} else {
-					echo $this->Form->select($i.'.checkin', $checkins, array('empty'=>false));
+					echo $this->Form->select($i.'.checkin', $checkins, array('value'=>0, 'empty'=>false));
 				}
 			?>
 		</td>

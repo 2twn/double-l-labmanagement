@@ -33,17 +33,23 @@
 	</STYLE> 
 <?php foreach($results as $result): ?>
 <table style="width:800px;">
+    <tr>
+        <th class="tb_border">文件編號</th>
+        <th class="tb_border">文件名稱</th>
+        <th class="tb_border">版本</th>
+    </tr>
     <?php foreach ($result['doc'] as $doc): ?>
     <tr>
-        <td class="tb_border">代號:<?php echo $doc['Doc']['id']; ?></td>
-        <td class="tb_border">文件名稱：<?php echo $doc['Doc']['document_name']." (version:".$doc['Doc']['document_version'].")"; ?></th>
-    </tr>
+        <td class="tb_border"><?php echo $doc['Doc']['doc_code']; ?></td>
+        <td class="tb_border"><?php echo $doc['Doc']['document_name']; ?></th>
+        <td class="tb_border"><?php echo $doc['Doc']['document_version']; ?></th>
+        </tr>
     <?php endforeach;?>
 </table>
 <?php $training = $result['training'];?>
 <table style="width:800px;">
     <tr>
-        <td colspan="3" class="tb_border">代號:<?php echo $training['Training']['id']; ?></td>
+        <td colspan="3" class="tb_border">課程編號:<?php echo $training['Training']['id']; ?></td>
     </tr>
     <tr class="tb_border">
         <td colspan="3" class="tb_border">授課人員：<?php echo $training['Training']['instructor']; ?></th>

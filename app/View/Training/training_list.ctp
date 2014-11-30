@@ -22,7 +22,7 @@
         </th>
     </tr>
     <tr>
-        <th class="text10">代號</th>
+        <th class="text10">課程編號</th>
         <th class="date">上課日期</th>
         <th class="text10">開始時間</th>
         <th class="text10">結束時間</th>

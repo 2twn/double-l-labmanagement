@@ -6,14 +6,35 @@
 <?php echo $this->Html->link('新增文件', array('action' => 'document_edit'), array('class' => 'button')); ?>
 </div>
 <?php echo $this->Form->create('TrainingDocument', array('div'=>false, 'inputDefaults' => array('label' => false,'div' => false))); ?>
-<table>
+<table style="width:400px">
    <tr>
-        <th>
+        <td>
+        文件編號
+        </td>
+        <td>
         <?php echo $this->Form->text('search_doc_code', array('style'=>'width:150px'));?>
-        </th>
-        <th>
+        </td>
+        <td></td>
+   </tr>
+   <tr>
+        <td>
+        文件名稱
+        </td>
+        <td>
+        <?php echo $this->Form->text('search_doc_name', array('style'=>'width:150px'));?>
+        </td>
+        <td></td>
+        </tr>
+   <tr>
+        <td>
+        文件狀態
+        </td>
+        <td>
+        <?php echo $this->Form->radio('search_doc_status', array('A'=>'全部', '1'=>'生效', '0'=>'失效'), array('legend'=>false, 'clear' =>'none'));?>
+        </td>
+        <td>
             <?php echo $this->Form->submit('搜尋');?>
-        </th>
+        </td>
     </tr>
 </table>
 <table class="fixreport">
