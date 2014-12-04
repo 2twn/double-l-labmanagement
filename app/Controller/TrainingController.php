@@ -115,7 +115,12 @@ class TrainingController extends AppController {
     
 	public function training_edit($id = null) {
 		$this->set('users', $this->User->find('list', array('conditions' => array(), 'fields' => array('id','name'))));
-		$this->set('documents', $this->TrainingDocument->find('list', array('conditions' => array('valid' => 1), 'fields' => array('id','document_name'))));
+		$doc_list =  $this->TrainingDocument->find('all', array('conditions' => array('valid' => 1)));
+		$doc_items = array();
+		foreach ($doc_list as $doc_item) {
+			$doc_items[$doc_item['TrainingDocument']['id']] = '('.$doc_item['TrainingDocument']['doc_code'].')'.$doc_item['TrainingDocument']['document_name'];	
+		}
+		$this->set('documents', $doc_items);
 		$this->set('meeting_rooms', $this->MeetingRoom->find('list', array('conditions' => array('valid' => 1), 'fields' => array('id','mr_name'))));
 		if ($id != null) { $this->Training->id = $id; } else {$this->request->data['Training']['create_time'] = date('Y-m-d H:i:s');}
 		if ($this->request->is('get')) {

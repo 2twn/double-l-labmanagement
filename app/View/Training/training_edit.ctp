@@ -9,9 +9,10 @@
  		sel_vals = $(".docs_select:checked");
  		for ($i=0;$i<sel_vals.length;$i++) {
 	 		sel_docs = $("#doc_name_"+sel_vals[$i].value);
+	 		sel_docs_code = $("#doc_code_"+sel_vals[$i].value);
 			$("#docs_tbl")[0].innerHTML = $("#docs_tbl")[0].innerHTML + "<tr id=\"tr_doc_"+doc_num+"\"><td>"
 										+ "<a href='javascript:del_document(\"tr_doc_"+doc_num+"\")'>刪除</a> "
-			                            + sel_docs[0].value
+			                            + "(" + sel_docs_code[0].value +")" +sel_docs[0].value
 			                            + "<input type=\"hidden\" name=\"data[Training][docs_id][]\" value=\""+sel_vals[$i].value
 										+ "\" id=\"TrainingDocsId\"/>"
 										+ "</td></tr>"
