@@ -225,7 +225,7 @@ class TrainingController extends AppController {
     	$training = $this->Training->find('all',array('conditions'=>array('Training.id'=>$training_id)));
     	$this->set('training', $training[0]);
     	$this->Emailfunc->subject ="教育訓練通知 (".date('m/d/Y', strtotime($training[0]['Training']['start_time'])).")";
-    	$this->Emailfunc->html_body ="<html><body>
+    	$str_html_body ="<html><body>
     									<p>主旨: 教育訓練通知 (".date('m/d/Y', strtotime($training[0]['Training']['start_time'])).")</p>
  										<p></p>
 										<p>內容:</p>
@@ -248,7 +248,7 @@ class TrainingController extends AppController {
     	$items = $this->TrainingUser->query($str_sql);
     	for($i = 0; $i<sizeof($items);$i++) {
     		$this->Emailfunc->to = array(array('email'=> $items[$i]['User']['email'], 'name'=> $items[$i]['User']['name']));
-    		$this->Emailfunc->html_body = str_replace('{#NAME#}',$items[$i]['User']['name'],$this->Emailfunc->html_body);
+    		$this->Emailfunc->html_body = str_replace('{#NAME#}',$items[$i]['User']['name'],$str_html_body);
  			$ret = $this->Emailfunc->send();
  			$sys_log = array();
  			$sys_log['id'] =  null;
@@ -257,7 +257,6 @@ class TrainingController extends AppController {
  			if ($ret) {
  				$sys_log['log'] = $items[$i]['User']['email'].'寄送成功';
  			}
- 			var_dump($sys_log);
  			$save_rec = $this->SystemLog->save($sys_log);
  			$items[$i]['User']['email_result'] = $ret;
     	}
