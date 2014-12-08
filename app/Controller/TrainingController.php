@@ -307,7 +307,7 @@ class TrainingController extends AppController {
 	    					  from training_documents Doc,
 	    						   training_w_documents TDoc
 	    					 where Doc.id = TDoc.training_document_id
-	    		               and TDoc.training_id = '".$items[0]["TrainingUser"]["training_id"]."'; ";
+	    		               and TDoc.training_id = '".$item["TrainingUser"]["training_id"]."'; ";
 	   	    	$doc = $this->TrainingDocument->query($str_sql);
 	    		$result[$item["TrainingUser"]["training_id"]]['doc'] = $doc;
 		    	$str_sql = "Select *
