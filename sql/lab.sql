@@ -540,6 +540,8 @@ ALTER TABLE `training_w_documents` CHANGE `training_document_id` `training_docum
 ALTER TABLE  `training_documents` CHANGE  `doc_code`  `doc_code` VARCHAR( 16 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
 ALTER TABLE `reagents` CHANGE `chemical_id` `chemical_id` VARCHAR( 20 ) NOT NULL ;
 
+ALTER TABLE  `training_documents` CHANGE  `document_name`  `document_name` VARCHAR( 200 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ;
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

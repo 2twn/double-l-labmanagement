@@ -126,7 +126,7 @@ class UserfuncComponent extends Component {
 		) );
 		foreach ( $items as $user_role ) {
 			if (! empty ( $user_role )) {
-				if (($user_role ["user_roles"] ["role_id"] == 1) || ($user_role ["user_roles"] ["role_id"] == 3)) {
+				if (($user_role ["user_roles"] ["role_id"] == 1) || ($user_role ["user_roles"] ["role_id"] == 7)) {
 					$result = true;
 				}
 			}

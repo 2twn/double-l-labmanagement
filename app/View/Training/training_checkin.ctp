@@ -54,7 +54,7 @@
 <table>
     <tr>
         <th>部門</th>
-        <th>工號</th>
+        <th>員工編號</th>
         <th>姓名</th>
         <th>評核結果</th>
     </tr>
@@ -65,7 +65,7 @@
             <?php echo $item['Department']['dep_name']; ?>
         </td>
         <td>
-            <?php echo $item['User']['username']; ?>
+            <?php echo $item['User']['employee_id']; ?>
         </td>
         <td>
             <?php echo $item['User']['name']; ?>

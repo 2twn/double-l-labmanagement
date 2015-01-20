@@ -11,6 +11,7 @@
         <th class="text10">儀器代號</th>
         <th class="text20">儀器名稱</th>
         <th class="text10">專案代碼</th>
+        <th class="text10">預約人員</th>
         <th>說明</th>
         <th class="timestamp2">開始時間</th>
 		<th class="timestamp2">結束時間</th>
@@ -28,6 +29,9 @@
         </td>
         <td>
             <?php echo $item['Project']['prj_code']; ?>
+        </td>
+        <td>
+            <?php echo $item['User']['name']; ?>
         </td>
         <td width="300px">
             <?php echo $item['EquipBooking']['booking_desc']; ?>
