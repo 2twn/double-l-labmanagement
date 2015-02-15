@@ -2,7 +2,7 @@
 class SafetytrialsController extends AppController {
 	public $uses = array('SafetyTrial', 'SafetyTrialCheckdate', 'Project', 'User');
 	public $helpers = array('Html', 'Form', 'Session');
-	public $components = array('Session', 'Formfunc', 'Userfunc','Util','Safetyfunc');
+	public $components = array('Session', 'Formfunc', 'Userfunc','Util','Safetyfunc', 'Emailfunc');
 	
 	public $check_modes = array(
 		'1W'=>array('id'=>'1W','label'=>'1W(3d)','check_day'=>'+7','remind_day'=>-3),
@@ -121,6 +121,7 @@ class SafetytrialsController extends AppController {
     public function checkdate_mail_report($sel_date=null){
 		$this->layout = 'ajax';
 		if ($sel_date == null) { $sel_date = date('Y-m-d'); }
+		$sel_date ='2015-02-17';
 		$items = $this->Safetyfunc->searchByCheckdate (
 				$sel_date,
 				$sel_date
@@ -128,6 +129,22 @@ class SafetytrialsController extends AppController {
 		$this->set('sel_date', $sel_date);
 		$this->set('items', $items);
 		$this->set('trial_status', $this->Formfunc->safety_trial_status());
+		$this->Emailfunc->subject ="安定性試驗樣品到期提醒 (".$sel_date.")";
+		$email_content = new View($this, false);
+		$email_content->set('sel_date', $sel_date); // set variables
+		$email_content->set('items', $items);
+		$email_content->set('trial_status', $this->Formfunc->safety_trial_status());
+		$email_content->viewPath = 'Safetytrials'; // render an element
+		$str_html_body = $email_content->render('checkdate_mail_report_content'); // get the rendered markup
+		//var_dump($str_html_body);
+		$this->Emailfunc->to = array(array('email'=> $items['User']['email'], 'name'=> $items['User']['name']));
+		$ret = $this->Emailfunc->send();
+		$logs =array();
+		if ($ret === false)  {
+			$logs[] = $items['User']['email'] ." Sen Fail!" ;
+		} 
+		$this->set('str_html_body', $str_html_body);
+		$this->set('logs', $logs);
     }
 	private function _getCheckModes($id){
 		$options = array(
