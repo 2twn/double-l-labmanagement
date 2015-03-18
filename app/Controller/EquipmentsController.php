@@ -297,7 +297,8 @@ class EquipmentsController extends AppController {
 		$booking = $this->EquipBooking->find('all', array('conditions' => array('EquipBooking.valid' => 1, 
 																				'EquipBooking.equip_id' => $equip_id,
 																				"substr(EquipBooking.book_start_time,1,10) <= '".$start_date."'",
-		                                                                        "substr(EquipBooking.book_end_time,1,10) >= '".$start_date."'")));
+		                                                                        "substr(EquipBooking.book_end_time,1,10) >= '".$start_date."'"),
+		                                                                        'order' => array("substr(EquipBooking.book_start_time,12,8)")));
 		for($i=0; $i<sizeof($booking);$i++) {
 			if ((substr($booking[$i]["EquipBooking"]["book_start_time"],0,10) == $start_date) &&
 			   (substr($booking[$i]["EquipBooking"]["book_end_time"],0,10) == $start_date)) {

@@ -29,7 +29,7 @@
 		<?php foreach($equips as $key=>$equip):?>
 			<?php if(isset($items[$key][$start_periods[$i]])):?>
 				<td class="weekend" title="Description: <?php echo $items[$key][$start_periods[$i]]["EquipBooking"]["booking_desc"]; ?>">
-					<?php echo $items[$key][$start_periods[$i]]["Project"]["prj_name"];?></td>
+					<?php echo $items[$key][$start_periods[$i]]["Project"]["prj_code"];?>-<?php echo $items[$key][$start_periods[$i]]["Project"]["prj_name"];?></td>
 			<?php else:?>
 				<td><?php echo $start_periods[$i];?></td>
 			<?php endif;?>
