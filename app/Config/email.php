@@ -53,19 +53,20 @@ class EmailConfig {
 		//'headerCharset' => 'utf-8',
 	);
 
-public $smtp = array(
-		'transport' => 'Smtp',
-		'from' => array('site@localhost' => 'My Site'),
-		'host' => 'localhost',
-		'port' => 25,
-		'timeout' => 30,
-		'username' => 'user',
-		'password' => 'secret',
-		'client' => null,
-		'log' => false,
-		//'charset' => 'utf-8',
-		//'headerCharset' => 'utf-8',
-	);
+        public $smtp = array(
+                'transport' => 'Smtp',
+                'from' => array('lab-ad@tlcbio.com' => '實驗室管理系統'),
+                'host' => 'mail.tlcbio.com',
+                'port' => 25,
+                'timeout' => 30,
+                //'username' => 'lab-ad@tlcbio.com',
+                //'password' => 'TLCbio!@#',
+                'client' => null,
+                'log' => false,
+                'charset' => 'utf-8',
+                'headerCharset' => 'utf-8',
+        );
+	
 
 	public $fast = array(
 		'from' => 'you@localhost',
