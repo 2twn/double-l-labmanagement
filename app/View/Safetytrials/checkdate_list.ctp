@@ -3,7 +3,7 @@
     <tr>
         <th class="text20">表單編號</th>
         <th class="text20">樣品名稱</th>
-        <th class="text30">所屬專案</th>
+        <th class="text30">專案代碼</th>
         <th class="state">狀態</th>
         <th class="date">開始時間</th>
         <th class="text20">儲存位置</th>
@@ -18,7 +18,7 @@
             <?php echo $item['SafetyTrial']['trial_name']; ?>
         </td>
         <td>
-            <?php echo $item['SafetyTrial']['Project']['prj_name'];  ?>
+            <?php echo $item['SafetyTrial']['Project']['prj_code'];  ?>
         </td>
         <td>
             <?php echo $trial_status[$item['SafetyTrial']['status']];  ?>
