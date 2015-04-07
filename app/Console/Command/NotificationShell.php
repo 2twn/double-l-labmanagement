@@ -26,7 +26,7 @@ class NotificationShell extends Shell {
         $Email->emailFormat('html');
         $Email->from(array('lab@example.com.tw' => "自動警示系統"));
         $Email->subject("安定性試驗樣品到期提醒 (".$sel_date.")");
-        $Email->viewVars(array('items' =>$items, 'sel_date' => $sel_date));
+        $Email->viewVars(array('items' =>$items, 'sel_date' => $sel_date, 'humitures' => $this->Formfunc->safety_trial_humitures()));
         $userEmails = $this->getUserEmailbyRole(4);
                 foreach ($userEmails as $userEmail) {
                         $Email->AddTo (

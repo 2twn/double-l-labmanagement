@@ -62,6 +62,18 @@ th.text40{
 th.text50{
 	width: 400px;	
 }
+
+table tr:nth-child(2n) {
+	background-color:#BCBEC0;
+}
+
+th {
+	border: 1px solid;
+}
+
+td {
+	border: 1px solid;
+}
 </style>
 <p>您好：</p>
 <p></p>
@@ -93,7 +105,7 @@ th.text50{
             <?php echo $item['SafetyTrial']['trial_name']; ?>
         </td>
         <td>
-            <?php echo $item['SafetyTrial']['humiture'];  ?>
+            <?php echo $humitures[$item['SafetyTrial']['humiture']];  ?>
         </td>
         <td>
              <?php echo $item['SafetyTrial']['remark'];  ?>
