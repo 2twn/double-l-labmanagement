@@ -77,13 +77,13 @@ class SafetytrialsController extends AppController {
 			'4M' => array (
 					'id' => '4M',
 					'label' => '4M(14d)',
-					'check_day' => '+90',
+					'check_day' => '+122',
 					'remind_day' => - 14 
 			),
 			'5M' => array (
 					'id' => '5M',
 					'label' => '5M(14d)',
-					'check_day' => '+90',
+					'check_day' => '+152',
 					'remind_day' => - 14 
 			),
 			'6M' => array (
