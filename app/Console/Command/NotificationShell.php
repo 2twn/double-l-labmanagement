@@ -43,7 +43,8 @@ class NotificationShell extends Shell {
                         ."  FROM `users` , "
                                         ."       `user_roles` "
                                                         . " WHERE user_roles.role_id = '" .$roleid."' "
-                                                                ."   AND user_roles.user_id = users.id";
+                                                                ."   AND user_roles.user_id = users.id"
+                                                                ."   AND users.valid = 1; ";
         $userEmail = $this->User->query($strSql);
         return $userEmail;
     }
